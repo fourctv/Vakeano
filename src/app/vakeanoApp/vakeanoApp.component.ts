@@ -70,6 +70,8 @@ export class VakeanoAppComponent implements AfterContentInit {
 
     constructor (public router:Router, private http:Http, private modal: Modal, private hostViewRef: ViewContainerRef) {
         FourDInterface.http = http;
+//        FourDInterface.fourDUrl = 'http://localhost:8080';
+        FourDInterface.fourDUrl = 'http://54.191.46.243:8080';
         Modal.hostViewRef = this.hostViewRef;
     }
 
