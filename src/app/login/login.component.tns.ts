@@ -31,12 +31,15 @@ export class LoginComponent {
             });
     }
 
+    //
+    // log into Movie Genome
+    //
     login() {
         let md5pwd:string = MD5.md5(this.password);
         this.fourD.signIn(this.username, md5pwd.toUpperCase())
             .then((authentication) => {
                 if (FourDInterface.authentication) {
-                    this.router.navigate(['/loggedin'], { skipLocationChange: true, clearHistory:true, transition:{name:'fade' } });
+                    this.router.navigate(['/userRecommendationPage'], { skipLocationChange: true, clearHistory:true, transition:{name:'fade' } });
  
                     this.showError = '';
                 } else {
@@ -48,5 +51,21 @@ export class LoginComponent {
                 console.log(e);
                 this.showError = 'Sorry, the username and/or password was incorrect';
             });
+    }
+
+    //
+    // New user sign uo
+    //
+    signUp() {
+        console.log('go signup');
+        this.router.navigate(['/signUp'], { }); // go to the signUp page
+        
+    }
+
+    //
+    // for debugging swipe support on android
+    //
+    swipe(event) {
+        console.log('swipe:'+event.direction);
     }
 }

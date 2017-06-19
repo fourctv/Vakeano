@@ -5,9 +5,18 @@
 
 // Customize any of the theme’s variables here, for instance $btn-color: red;
 
+$accent: #106CC8;
+
+// ActionBar
+$ab-background: #3280CF;
+$ab-color: $white;
+$btn-color: $accent;
+$btn-color-secondary: darken($accent, 5%);
+
 // Import the theme’s main ruleset.
 @import '~nativescript-theme-core/scss/index';
 
+/*
 .container {
     margin:40;
 }
@@ -16,3 +25,32 @@
     font-size:32px;
     font-weight:bold;
 }
+*/
+
+.link {
+  border-width: 0;
+  background-color: transparent;
+}
+.odd {
+  background-color: #efefef;
+}
+.even {
+  background-color: $white;
+}
+
+/* @import 'nativescript-theme-core/scss/light'; */
+
+.prompt {
+  font-size: 12;
+}
+
+.icon {
+    font-family: FontAwesome, fontawesome;
+    font-size: 20;
+    color: darkred;
+    border-radius: 10;
+    border-width: 2;
+    border-color: white;
+    background-color: white;
+    margin:2; 
+    }

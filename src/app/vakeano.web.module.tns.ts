@@ -8,6 +8,9 @@ import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptRouterModule } from 'nativescript-angular';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 
+// plugins
+import { NativeScriptUISideDrawerModule } from "nativescript-telerik-ui/sidedrawer/angular";
+
 
 // libs
 import { FourDInterface } from './js44D/js44D/JSFourDInterface';
@@ -16,28 +19,32 @@ import { FourDCollection } from './js44D/js44D/JSFourDCollection';
 
 // app
 import { Config } from './common/index';
-import { FourDAdminComponent } from './fourDAdmin/fourDAdmin.component';
+import { VakeanoAppComponent } from './vakeanoApp/vakeanoApp.component';
+import { routes } from './vakeanoApp/vakeanoApp.component';
+
+// preferences side bar
+import { PreferencePanel } from './preferences/preferencesPanel';
 
 // applets
-import { BlankPage } from './fourDAdmin/blankPage';
 import { LoginComponent  } from './login/login.component';
+import { SignUpComponent  } from './login/signUp.component';
+import { UserRecommendations } from './userRecommendations/userRecommendations';
+import { UserRecommendationPage } from './userRecommendations/userRecommendationPage'; 
+import { FeatureRecommendation} from './userRecommendations/featureRecommendation';
+import { CuratedProfiles } from './userRecommendations/curatedProfile';
+import { UserRating } from './userRating/userRating';
+import { FeatureRatingPage } from './userRating/featureRatingPage'; 
+import { ProfileBuildingPage } from './userRating/profileBuildingPage'; 
 
 // feature modules
-//import { JS44DModule } from './js44D/js44D.module';
+import { MGModule } from './moviegenome/mg.module';
 
 Config.PLATFORM_TARGET = Config.PLATFORMS.MOBILE_NATIVE;
 
-const routes: Routes = [
-    {path: '', component: LoginComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'browseTable', loadChildren: 'app/browseTable/browseTable.module#BrowseTableModule'},
-    {path: 'listEditor', loadChildren: 'app/listEditor/listEditor.module#ListEditorModule'},
-    {path: '**',  component: BlankPage}
-];
 
 @NgModule({
     bootstrap: [
-        FourDAdminComponent
+        VakeanoAppComponent
     ],
     imports: [
         NativeScriptModule,
@@ -45,7 +52,8 @@ const routes: Routes = [
         NativeScriptFormsModule,
         NativeScriptRouterModule,
         NativeScriptRouterModule.forRoot(<any>routes),
-  //      JS44DModule
+        NativeScriptUISideDrawerModule,
+        MGModule
     ],
     exports: [
         NativeScriptModule,
@@ -55,8 +63,11 @@ const routes: Routes = [
         //MultilingualModule
     ],
     declarations: [
-        FourDAdminComponent, BlankPage, LoginComponent
+        VakeanoAppComponent, LoginComponent, SignUpComponent, PreferencePanel,
+        UserRating, FeatureRatingPage, ProfileBuildingPage, CuratedProfiles, 
+        UserRecommendationPage, UserRecommendations, FeatureRecommendation
         ],
+    entryComponents: [FeatureRecommendation, FeatureRatingPage],
     providers: [
         // Allows your {N} application to use lazy-loading
         { provide: NgModuleFactoryLoader, useClass: NSModuleFactoryLoader },
