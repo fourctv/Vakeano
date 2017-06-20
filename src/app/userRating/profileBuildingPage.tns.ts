@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { RouterExtensions } from 'nativescript-angular';
 
-import { openUrl } from "utils/utils";
-import { SwipeGestureEventData, SwipeDirection } from "ui/gestures";
+import { openUrl } from "tns-core-modules/utils/utils";
+import { SwipeGestureEventData, SwipeDirection } from "tns-core-modules/ui/gestures";
 
 import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
 import { FourDCollection } from '../js44D/js44D/JSFourDCollection';

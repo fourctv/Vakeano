@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, ViewContainerRef } from '@angular/core';
 
-import { openUrl } from "utils/utils";
-import { SwipeGestureEventData, SwipeDirection } from "ui/gestures";
+import { openUrl } from "tns-core-modules/utils/utils";
+import { SwipeGestureEventData, SwipeDirection } from "tns-core-modules/ui/gestures";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular";
 
 import { FeatureRatingPage} from './featureRatingPage';

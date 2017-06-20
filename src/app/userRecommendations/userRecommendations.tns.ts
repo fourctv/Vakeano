@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, ViewContainerRef } from '@angular/core';
 
-import { openUrl } from "utils/utils";
+import { openUrl } from "tns-core-modules/utils/utils";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular";
 
 import { FeatureRecommendation} from './featureRecommendation';

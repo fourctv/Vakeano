@@ -7,6 +7,18 @@ const del = require('del');
 const SRC = 'src/';
 const DEST = 'app/';
 
+const EXCLUDED = [
+    '!**/js44D/angular2-modal/**',
+    '!**/js44D/containers/*',
+    '!**/js44D/controls/*',
+    '!**/js44D/dataGrid/*',
+    '!**/js44D/dialogs/*',
+    '!**/js44D/login/*',
+    '!**/featureList/*',
+    '!**/genomeMapList/*',
+    '!**/userProfileList/*',
+];
+
 function removeTns (path) {
     path.basename = path.basename.replace('.tns', '');
 }
@@ -35,7 +47,7 @@ gulp.task('resources.Assets', () => {
 });
 
 gulp.task('project.Typescript', () => {
-    return gulp.src([`${SRC}**/*.ts`, '!**/*.tns.*', '!**/*.spec.*'], {follow: true})
+    return gulp.src([`${SRC}**/*.ts`, '!**/*.tns.*', '!**/*.spec.*', ...EXCLUDED], {follow: true})
         // .pipe(debug({title: 'project.Typescript'}))
         .pipe(gulp.dest(DEST));
 });
