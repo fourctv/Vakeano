@@ -140,6 +140,7 @@ function getPlugins(platform, env) {
             { from: mainSheet },
             { from: "css/**" },
             { from: "fonts/**" },
+            { from: "assets/**" },
             { from: "**/*.jpg" },
             { from: "**/*.png" },
             { from: "**/*.xml" },
