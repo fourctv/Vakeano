@@ -140,10 +140,10 @@ function getPlugins(platform, env) {
             { from: mainSheet },
             { from: "css/**" },
             { from: "fonts/**" },
-            { from: "assets/**" },
             { from: "**/*.jpg" },
             { from: "**/*.png" },
             { from: "**/*.xml" },
+            { from: "assets/**" },
         ], { ignore: ["App_Resources/**"] }),
 
         // Generate a bundle starter script and activate it in package.json
