@@ -24,7 +24,7 @@ import { isAndroid, isIOS } from 'platform';
 
             <StackLayout class="sideStackLayout">
                 <Label text="My Recommendations" class="p-t-5" (tap)="closeDrawer();showRecommendations()"></Label>
-                <Label text="My Recommendation List" class="p-t-5" (tap)="closeDrawer();showList()"></Label>
+                <Label text="My Recommendations List" class="p-t-5" (tap)="closeDrawer();showList()"></Label>
                 <Label text="Use Curated Profile..." class="p-t-5" (tap)="closeDrawer();useCuratedProfile()"></Label>
                 <Label text="I'm In the Mood for..." class="p-t-5" style="font-style: italic;color: gray;" (tap)="closeDrawer();buildProfile()"></Label>
                 

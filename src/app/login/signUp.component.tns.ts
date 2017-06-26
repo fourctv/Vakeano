@@ -37,8 +37,8 @@ export class SignUpComponent {
             this.showError = 'Need first name';
         } else if (this.userRecord.LastName === null || this.userRecord.LastName === undefined || this.userRecord.LastName === '') {
             this.showError = 'Need last name';
-        } else if (this.userRecord.emailAddress === null || this.userRecord.emailAddress === undefined || this.userRecord.emailAddress === '') {
-            this.showError = 'Need email address';
+        /*} else if (this.userRecord.emailAddress === null || this.userRecord.emailAddress === undefined || this.userRecord.emailAddress === '') {
+            this.showError = 'Need email address';*/
         } else {
             // all good, add user to the database
             let md5pwd:string = MD5.md5('admin');

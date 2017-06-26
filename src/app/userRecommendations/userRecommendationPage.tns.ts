@@ -28,6 +28,7 @@ export class UserRecommendationPage implements OnInit {
     @Input() controlList:FourDCollection = new FourDCollection();
     @Input() currentFeature:ViewerContentEx = new ViewerContentEx();
     @Input() isLoading = false;
+    @Input() isComplete = false;
 
     // fontawesome icons
     @Input() thumbsUp:string = "\uf164";
@@ -94,6 +95,7 @@ export class UserRecommendationPage implements OnInit {
                 if (recs.length > 0) {
                     this.currentFeature = recs[0];
                     this.isLoading = false;
+                    this.isComplete = false;
                     //console.log('feature:',this.currentFeature.IMDBTitle);
                  }
              }).catch(err => {console.log('err:',err)});
@@ -131,7 +133,11 @@ export class UserRecommendationPage implements OnInit {
      }
 
     nextFeature() {
-        if (++this.currentFeatureIndex < this.controlList.models.length) this.currentFeature = this.controlList.models[this.currentFeatureIndex];
+        if (++this.currentFeatureIndex < this.controlList.models.length) {
+            this.currentFeature = this.controlList.models[this.currentFeatureIndex];
+        } else {
+            this.isComplete = true; // we are done with this list...
+        }
      }
 
     currentFeatureScore():string {

@@ -113,7 +113,12 @@ export class ProfileBuildingPage implements OnInit {
      }
 
     nextFeature() {
-        if (++this.currentFeatureIndex < this.controlList.models.length) this.currentFeature = this.controlList.models[this.currentFeatureIndex];
+        if (++this.currentFeatureIndex < this.controlList.models.length) {
+            this.currentFeature = this.controlList.models[this.currentFeatureIndex];
+        } else {
+            // done with the Rating list, now show our recommendations
+            this.router.navigate(['/userRecommendationPage'], { skipLocationChange: true, clearHistory:true, transition:{name:'fade' } });
+        }
      }
 
    fullResPosterURL(): string {
