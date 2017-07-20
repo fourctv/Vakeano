@@ -1,0 +1,147 @@
+<web-application>
+    <h2 style="padding-left: 10px;">Locations & Theaters</h2>
+
+    <div class="container-fluid" style="margin-left:10px;width:100%">
+        <div class="row">
+            <div class="col-sm-2" style="border-style: solid; border-width: thin; padding-bottom: 4px; height:450px;">
+                <h4>Select Location</h4>
+                <table class="listTable">
+                    <tbody class="listBody">
+                        <tr *ngFor='let item of locationList' (click)="selectLocation($event.target,item)">
+                            <td class="listItem">{{item.LocationName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-2" style="border-style: solid; border-width: thin; padding-bottom: 4px; height:450px;">
+                <h4 style="overflow: auto;max-height: 20px;">{{currentLocation.LocationName}} Theaters</h4>
+                <table class="listTable">
+                    <tbody class="listBody">
+                        <tr *ngFor='let item of theaterList' (click)="selectTheater($event.target,item)">
+                            <td class="listItem">{{item.TheaterName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-sm-3" style="border-style: solid; border-width: thin; padding-bottom: 4px; height:450px;">
+                <h4 style="overflow: auto;max-height: 20px;">{{currentTheater.TheaterName}} Rooms</h4>
+                <table class="listTable" style="height: 350px;">
+                    <tbody class="listBody">
+                        <tr *ngFor='let item of exhibitionRoomList' (click)="selectRoom($event.target,item)">
+                            <td class="listItem">{{item.RoomIdentification}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="padding-left: 20px;margin-top:20px;">
+                    <button class="regularButton" style="width: 80px;margin-left: 15px;" (click)="newRoom()" [disabled]="!selectedTheater">New Room</button>
+                </div>
+    </div>
+
+            <span [ngSwitch]="currentEditor()" class="col-sm-3" style="border-style: solid; border-width: thin; padding-bottom: 4px; height:450px;">
+                <div *ngSwitchCase="'location'" >
+                    <h4>Location Info</h4>
+                    <form class="form-horizontal listTable">
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
+                            <label for="field" class="control-label col-sm-2">Location Name:</label>
+                            <input name="location" type="text" class="form-control" style="width:200px;height:20px" [(ngModel)]="currentLocation.LocationName"/>
+                        </div>
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
+                            <label for="field" class="control-label col-sm-2">City:</label>
+                            <input name="city" type="text" class="form-control" style="width:200px;height:20px" [(ngModel)]="currentLocation.City"/>
+                        </div>
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
+                            <label for="field" class="control-label col-sm-2">Country:</label>
+                            <input name="country" type="text" class="form-control" style="width:200px;height:20px" [(ngModel)]="currentLocation.Country"/>
+                        </div>
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
+                            <label for="field" class="control-label col-sm-2">Geo Location:</label>
+                            <input name="geolocation" type="text" class="form-control" style="width:200px;height:20px" [(ngModel)]="currentLocation.GeoLocation"/>
+                        </div>
+
+                        <div style="padding-left: 20px;margin-top:20px;">
+                            <button class="regularButton" style="width: 50px;margin-left: 15px;" (click)="changeRecord()" [disabled]="!selectedLocation">Save</button>
+                            <button class="regularButton" style="width: 50px;margin-left: 15px;" (click)="addRecord()" [disabled]="currentLocation.LocationName === ''">Add</button>
+                            <button class="regularButton" style="width: 50px;margin-left: 15px;" (click)="deleteRecord()" [disabled]="!selectedLocation">Del</button>
+                        </div>
+                    </form>
+                </div>
+                <div *ngSwitchCase="'theater'" >
+                    <h4>Theater Info</h4>
+                    <form class="form-horizontal listTable">
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
+                            <label for="field" class="control-label col-sm-2">Theater Name:</label>
+                            <input name="theater" type="text" class="form-control" style="width:200px;height:20px" [(ngModel)]="currentTheater.TheaterName"/>
+                        </div>
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
+                            <label for="field" class="control-label col-sm-2">Description:</label>
+                            <input name="descrirption" type="text" class="form-control" style="width:200px;height:20px" [(ngModel)]="currentTheater.Description"/>
+                        </div>
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
+                            <label for="field" class="control-label col-sm-2">Address:</label>
+                            <input name="address" type="text" class="form-control" style="width:200px;height:20px" [(ngModel)]="currentTheater.Address"/>
+                        </div>
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
+                            <label for="field" class="control-label col-sm-2">Phones:</label>
+                            <input name="phones" type="text" class="form-control" style="width:200px;height:20px" [(ngModel)]="currentTheater.Phones"/>
+                        </div>
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
+                            <label for="field" class="control-label col-sm-2">Website:</label>
+                            <input name="website" type="text" class="form-control" style="width:200px;height:20px" [(ngModel)]="currentTheater.WebSite"/>
+                        </div>
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
+                            <label for="field" class="control-label col-sm-2">Schedules URL:</label>
+                            <input name="url" type="text" class="form-control" style="width:200px;height:20px" [(ngModel)]="currentTheater.ScheduleURL"/>
+                        </div>
+
+                        <div style="padding-left: 20px;margin-top:20px;">
+                            <button class="regularButton" style="width: 50px;margin-left: 15px;" (click)="changeRecord()" [disabled]="!selectedTheater">Save</button>
+                            <button class="regularButton" style="width: 50px;margin-left: 15px;" (click)="addRecord()" [disabled]="currentTheater.TheaterName === ''">Add</button>
+                            <button class="regularButton" style="width: 50px;margin-left: 15px;" (click)="deleteRoom()" [disabled]="!selectedTheater">Del</button>
+                        </div>
+                    </form>
+                </div>
+                <div *ngSwitchCase="'room'" >
+                    <h4>Exhibition Room Info</h4>
+                    <form class="form-horizontal listTable">
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
+                            <label for="field" class="control-label col-sm-2">Room ID:</label>
+                            <input name="room" type="text" class="form-control" style="width:200px;height:20px" [(ngModel)]="currentExhibitionRoom.RoomIdentification"/>
+                        </div>
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;margin-left:20px;">
+                            <span>
+                                <input type="checkbox" name="vip" class="fieldEntry" [(ngModel)]="currentExhibitionRoom.SpecialRoomFeatures['VIP']"/>
+                                VIP?
+                            </span>
+                            <span style="margin-left:20px;">
+                                <input type="checkbox" name="fourDX" class="fieldEntry" [(ngModel)]="currentExhibitionRoom.SpecialRoomFeatures['3D']"/>
+                                3D?
+                            </span>
+                        </div>
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;margin-left:20px;">
+                            <span>
+                                <input type="checkbox" name="threeD" class="fieldEntry" [(ngModel)]="currentExhibitionRoom.SpecialRoomFeatures['DBOX']"/>
+                                DBOX?
+                            </span>
+                            <span style="margin-left:20px;">
+                                <input type="checkbox" name="fourDX" class="fieldEntry" [(ngModel)]="currentExhibitionRoom.SpecialRoomFeatures['4DX']"/>
+                                4DX?
+                            </span>
+                            <span style="margin-left:20px;">
+                                <input type="checkbox" name="macroXE" class="fieldEntry" [(ngModel)]="currentExhibitionRoom.SpecialRoomFeatures['MacroXE']"/>
+                                Macro-XE?
+                            </span>
+                        </div>
+
+
+                        <div style="padding-left: 20px;margin-top:20px;">
+                            <button class="regularButton" style="width: 50px;margin-left: 15px;" (click)="changeRecord()" [disabled]="!selectedExhibitionRoom">Save</button>
+                            <button class="regularButton" style="width: 50px;margin-left: 15px;" (click)="addRecord()" [disabled]="currentExhibitionRoom.RoomIdentification === ''">Add</button>
+                            <button class="regularButton" style="width: 50px;margin-left: 15px;" (click)="deleteRecord()" [disabled]="!selectedExhibitionRoom">Del</button>
+                        </div>
+                    </form>
+                </div>
+            </span>
+        </div>
+    </div>
+</web-application>

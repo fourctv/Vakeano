@@ -17,6 +17,8 @@ export const routes: Routes = [
     {path: 'genomeMapList', loadChildren:'app/genomeMapList/genomeMapListModule#GenomeMapListModule'},
     {path: 'userRating', loadChildren:'app/userRating/userRatingModule#UserRatingModule'},
     {path: 'userRecommendations', loadChildren:'app/userRecommendations/userRecommendationsModule#UserRecommendationsModule'},
+    {path: 'userManagement', loadChildren:'app/userManagement/userManagement.module#UserManagementModule'},
+    {path: 'theaterManagement', loadChildren:'app/theaterManagement/theaterManagement.module#TheaterManagementModule'},
     {path: '**',  component: BlankPage}
 ];
 
@@ -61,6 +63,18 @@ export class VakeanoAppComponent implements AfterContentInit {
             roles: ['Admin'],
             hideMenu: false,
             title: 'Genome Map'
+        },
+        {
+            routePath: '/theaterManagement',
+            roles: ['Admin'],
+            hideMenu: false,
+            title: 'Theaters'
+        },
+        {
+            routePath: '/userManagement',
+            roles: ['Admin'],
+            hideMenu: false,
+            title: 'User Mgmt'
         }
     ];
 

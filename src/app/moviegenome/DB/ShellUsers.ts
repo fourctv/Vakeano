@@ -21,16 +21,17 @@ export class ShellUsers extends FourDModel {
 	public static kDOB:string = '_ShellUsers.DOB';
 	public static kGender:string = '_ShellUsers.Gender';
 	public static kCountry:string = '_ShellUsers.Country';
+	public static kLocationID:string = '_ShellUsers.LocationID';
 
 	tableName:string = '_ShellUsers';
 	tableNumber:number = 6;
 	primaryKey_:string = 'ID';
 	fields:Array<any> = [
-		{name:'ID', longname:'_ShellUsers.ID', type:'number', required:true, readonly:true},
+		{name:'ID', longname:'_ShellUsers.ID', type:'number', required:true, readonly:true, indexed:true, unique:true},
 		{name:'isAdmin', longname:'_ShellUsers.isAdmin', type:'boolean'},
-		{name:'UserName', longname:'_ShellUsers.UserName', type:'string', required:true},
-		{name:'StartupMenu', longname:'_ShellUsers.StartupMenu', type:'string'},
-		{name:'Password', longname:'_ShellUsers.Password', type:'string'},
+		{name:'UserName', longname:'_ShellUsers.UserName', type:'string', required:true, length:40, indexed:true},
+		{name:'StartupMenu', longname:'_ShellUsers.StartupMenu', type:'string', length:20},
+		{name:'Password', longname:'_ShellUsers.Password', type:'string', length:80},
 		{name:'nbLogins', longname:'_ShellUsers.nbLogins', type:'number'},
 		{name:'lastLogin', longname:'_ShellUsers.lastLogin', type:'Date'},
 		{name:'lastPasswordChange', longname:'_ShellUsers.lastPasswordChange', type:'Date'},
@@ -38,12 +39,13 @@ export class ShellUsers extends FourDModel {
 		{name:'CannotChange', longname:'_ShellUsers.CannotChange', type:'boolean'},
 		{name:'NeverExpires', longname:'_ShellUsers.NeverExpires', type:'boolean'},
 		{name:'AccountDisabled', longname:'_ShellUsers.AccountDisabled', type:'boolean'},
-		{name:'emailAddress', longname:'_ShellUsers.emailAddress', type:'string'},
-		{name:'FirstName', longname:'_ShellUsers.FirstName', type:'string'},
-		{name:'LastName', longname:'_ShellUsers.LastName', type:'string'},
+		{name:'emailAddress', longname:'_ShellUsers.emailAddress', type:'string', length:100},
+		{name:'FirstName', longname:'_ShellUsers.FirstName', type:'string', length:100, indexed:true},
+		{name:'LastName', longname:'_ShellUsers.LastName', type:'string', length:100, indexed:true},
 		{name:'DOB', longname:'_ShellUsers.DOB', type:'Date'},
-		{name:'Gender', longname:'_ShellUsers.Gender', type:'string'},
-		{name:'Country', longname:'_ShellUsers.Country', type:'string'}
+		{name:'Gender', longname:'_ShellUsers.Gender', type:'string', length:2},
+		{name:'Country', longname:'_ShellUsers.Country', type:'string', length:3},
+		{name:'LocationID', longname:'_ShellUsers.LocationID', type:'number', relatesTo:'Location.RecordID'}
 	];
 
 	get ID():number {return this.get('ID');}
@@ -99,6 +101,9 @@ export class ShellUsers extends FourDModel {
 
 	get Country():string {return this.get('Country');}
 	set Country(v:string) {this.set('Country',v);}
+
+	get LocationID():number {return this.get('LocationID');}
+	set LocationID(v:number) {this.set('LocationID',v);}
 
 
 }

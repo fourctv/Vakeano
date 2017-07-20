@@ -1,0 +1,51 @@
+<div class="formPanel">
+    <fieldset class="titledGroupBox">
+        <legend class="formHeaderSmall">User Details</legend>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold">User ID</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.ID"  size="12" disabled/>
+            </span>
+        </div>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold">User Name</label>
+                <input type="text" class="fieldEntry" size="30" [(ngModel)]="currentRecord.UserName"/>
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold">Password</label>
+                <input type="password" class="fieldEntry" size="30" [(ngModel)]="userPassword"/>
+            </span>
+        </div>
+        <div style="height:32px;">
+            <span>
+                <label class="fieldPromptBold">First Name</label>
+                <input type="text" class="fieldEntry" size="30" [(ngModel)]="currentRecord.FirstName" />
+            </span>
+            <span style="padding-left:10px;">
+                <label class="fieldPromptBold">Last Name</label>
+                <input type="text" class="fieldEntry" size="30" [(ngModel)]="currentRecord.LastName" />
+            </span>
+        </div>
+        <div style="height:32px;">
+            <span>
+                    <input type="checkbox" class="fieldEntry" [(ngModel)]="currentRecord.isAdmin" style="margin-left:30px;margin-right:10px;"/>
+                    is Admin?
+            </span>
+            <span style="padding-left:20px;">
+                <label class="fieldPromptBold">Location</label>
+                <select class="fieldEntry" style="width:180px;height:20px;" (change)='changeLocation($event)' [(value)]='currentRecord.LocationName'>
+                    <option></option>
+                    <option *ngFor='let item of locations' value='{{item}}' [selected]='isItemSelected(item)'>{{item}}</option>
+
+                </select>
+            </span>
+        </div>
+    </fieldset>
+
+    <div class="buttonBar">
+        <button class="regularButton" style="width:90px;" (click)="dialog.close('cancel')">Cancel</button>
+        <button class="regularButton" style="margin-left:20px;width:90px;" (click)="saveRecord()">SAVE</button>
+    </div>
+
+</div>

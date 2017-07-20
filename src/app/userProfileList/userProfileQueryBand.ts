@@ -27,7 +27,7 @@ export class UserProfileQueryBand {
     //
     public userName: string = '';
     public profileName: string = '';
-    public profileOrigin; string = '';
+    public profileOrigin: string = '';
 
     //
     // build 4C-TV query based on items from query band

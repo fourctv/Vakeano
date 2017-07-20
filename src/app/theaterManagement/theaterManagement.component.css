@@ -1,0 +1,23 @@
+.listTable {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+    height: 400px;
+}
+
+.listBody {
+    overflow: auto;
+    display: block;
+    height: 100%;
+}
+
+.listItem {
+    padding-left: 3px;
+    border-style: none;
+}
+
+.selectedItem {
+    background: brown;
+    color: white;
+}
+
