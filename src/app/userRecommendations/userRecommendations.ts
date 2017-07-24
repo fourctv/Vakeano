@@ -107,4 +107,8 @@ export class UserRecommendations implements AfterViewInit {
         this.showCuratedList = false;
         this.refreshList();
     }
+
+    public showNetflix(title) {
+        window.open('https://www.netflix.com/search?q='+encodeURIComponent(title),'_blank');
+    }
 }

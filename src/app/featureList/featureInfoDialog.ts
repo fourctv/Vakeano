@@ -27,4 +27,7 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
         this.dialog.setTitle('Program Details: '+this.currentRecord.IMDBTitle);
     }
 
+    public showNetflix() {
+        window.open('https://www.netflix.com/search?q='+encodeURIComponent(this.currentRecord.IMDBTitle),'_blank');
+    }
 }
