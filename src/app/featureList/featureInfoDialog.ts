@@ -30,4 +30,8 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
     public showNetflix() {
         window.open('https://www.netflix.com/search?q='+encodeURIComponent(this.currentRecord.IMDBTitle),'_blank');
     }
+
+    public showAmazon() {
+        window.open('https://www.primevideo.com/search/ref=dv_web_nav_search?ie=UTF8&phrase='+encodeURIComponent(this.currentRecord.IMDBTitle),'_blank');
+    }
 }

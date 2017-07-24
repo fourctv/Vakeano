@@ -10,7 +10,10 @@
             <input type="text" class="fieldEntry" size="80" [(ngModel)]="currentRecord.IMDBTitle" />
         </span>
         <span style="padding-left:10px;">
-            <a role="button" class="btn" (click)="showNetflix()"><span class="netflix-icon" title="query Netflix"></span></a>
+            <a role="button" (click)="showNetflix()"><span class="netflix-icon" title="query Netflix"></span></a>
+        </span>
+        <span>
+            <a role="button" (click)="showAmazon()"><span class="amazon-icon" title="query Amazon"></span></a>
         </span>
         <br/>
         <span>
