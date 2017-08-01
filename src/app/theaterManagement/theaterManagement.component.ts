@@ -47,7 +47,7 @@ export class TheaterManagementApp implements ICustomModalComponent, AfterContent
 
     refreshLocations() {
         let location = new Location();
-        location.getRecords({ query: ['all'] })
+        location.getRecords({ query: ['all'] },null,0,-1,'','>'+Location.kLocationName)
             .then(recs => { this.locationList = recs.models })
     }
 
@@ -69,7 +69,7 @@ export class TheaterManagementApp implements ICustomModalComponent, AfterContent
         this.currentLocation = location;
 
         let theater = new Theater();
-        theater.getRecords({ query: [Theater.kLocationID + ';=;' + this.currentLocation.RecordID] })
+        theater.getRecords({ query: [Theater.kLocationID + ';=;' + this.currentLocation.RecordID] },null,0,-1,'','>'+Theater.kTheaterName)
             .then((recs) => {
                 if (this.selectedLocation) this.selectedLocation.classList.add('selectedItem');
                 this.theaterList = recs.models;
@@ -90,7 +90,7 @@ export class TheaterManagementApp implements ICustomModalComponent, AfterContent
         this.currentTheater = theater;
 
         let room = new ExhibitionRoom();
-        room.getRecords({ query: [ExhibitionRoom.kTheaterID + ';=;' + this.currentTheater.RecordID] })
+        room.getRecords({ query: [ExhibitionRoom.kTheaterID + ';=;' + this.currentTheater.RecordID] },null,0,-1,'','>'+ExhibitionRoom.kRoomIdentification)
             .then((recs) => {
                 if (this.selectedTheater) this.selectedTheater.classList.add('selectedItem');
                 this.exhibitionRoomList = recs.models;
