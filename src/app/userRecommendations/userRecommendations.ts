@@ -76,7 +76,7 @@ export class UserRecommendations implements AfterViewInit {
         this.controlList.getRecords(query,
                                     <any>[ViewerContent.kRecordID, ViewerContent.kFeatureID, ViewerContent.kUserID,
                                     Features.kIMDBTitle,Features.kPosterURL,
-                                    Features.kJustWatchID,
+                                    {name:'JustWatchItem', formula:'FEATGetJustWatchInfo'},
                                     ViewerContent.kMGCCI, ViewerContent.kMGEQI, ViewerContent.kMGPAI, 
                                     ViewerContent.kMGPEI, ViewerContent.kMGPVR, ViewerContent.kMGNQI, 
                                     ViewerContent.kFeedback_Content, ViewerContent.kFeedback_Style, ViewerContent.kFeedback_Theme,
@@ -109,14 +109,10 @@ export class UserRecommendations implements AfterViewInit {
         this.refreshList();
     }
 
-    public showJustWatch(jwID) {
-        if (jwID && jwID != '') {
-            let jwURL = 'https://apis.justwatch.com/content/titles/movie/'+jwID+'/locale/en_US';
-            FourDInterface.http.get(jwURL)
-            .subscribe(response => {
-                let jwItem = response.json();
-                window.open('https://www.justwatch.com'+jwItem.full_path,'_blank');
-            });
+    public showJustWatch(jwData) {
+        if (jwData && jwData != '') {
+            let jwItem = JSON.parse(jwData);
+            window.open('https://www.justwatch.com'+jwItem.full_path,'_blank');
         }
      }
 }
