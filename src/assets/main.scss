@@ -444,21 +444,62 @@ div.k-window {
     display:inline-block;
 }
 
-.netflix-icon {
-    background-image: url("/assets/icons/netflix.ico");
+.jw-icon {
+    background-image: url("/assets/icons/justwatch.ico");
     border-color: transparent;
     vertical-align: middle;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
+    display:inline-block;
+}
+
+.netflix-icon {
+    background-image: url("/assets/icons/netflix.jpeg");
+    border-color: transparent;
+    vertical-align: middle;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
     display:inline-block;
 }
 
 .amazon-icon {
-    background-image: url("/assets/icons/amazon.ico");
+    background-image: url("/assets/icons/amazon.jpeg");
     border-color: transparent;
     vertical-align: middle;
-    width: 12px;
-    height: 12px;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+    display:inline-block;
+}
+
+.hbonow-icon {
+    background-image: url("/assets/icons/hbo-now.jpeg");
+    border-color: transparent;
+    vertical-align: middle;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+    display:inline-block;
+}
+
+.hbogo-icon {
+    background-image: url("/assets/icons/hbo-go.jpeg");
+    border-color: transparent;
+    vertical-align: middle;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
+    display:inline-block;
+}
+
+.fandango-icon {
+    background-image: url("/assets/icons/fandango.jpeg");
+    border-color: transparent;
+    vertical-align: middle;
+    background-size: 32px;
+    width: 32px;
+    height: 32px;
     display:inline-block;
 }
 

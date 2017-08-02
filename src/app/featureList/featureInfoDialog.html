@@ -5,15 +5,9 @@
             <label class="fieldPromptBold">IMDB ID</label>
             <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.IMDBID"  size="12"/>
         </span>
-        <span style="padding-left:10px;">
+        <span style="padding-left:16px;">
             <label class="fieldPromptBold">IMDB Title</label>
-            <input type="text" class="fieldEntry" size="80" [(ngModel)]="currentRecord.IMDBTitle" />
-        </span>
-        <span style="padding-left:10px;">
-            <a role="button" (click)="showNetflix()"><span class="netflix-icon" title="query Netflix"></span></a>
-        </span>
-        <span>
-            <a role="button" (click)="showAmazon()"><span class="amazon-icon" title="query Amazon"></span></a>
+            <input type="text" class="fieldEntry" size="60" [(ngModel)]="currentRecord.IMDBTitle" />
         </span>
         <br/>
         <span>
@@ -29,12 +23,31 @@
             <label class="fieldPromptBold" style="width:85px;">Season</label>
             <input type="text" class="fieldEntry" size="20" [(ngModel)]="currentRecord.SeasonName" disabled/>
         </span>
-        <span style="padding-left:10px;">
+        <span style="padding-left:20px;">
             <label class="fieldPromptBold">Episode</label>
             <input type="text" class="fieldEntry" size="8" [(ngModel)]="currentRecord.EpisodeNumber" />
         </span>
         <input type="checkbox" class="fieldEntry" [(ngModel)]="currentRecord.isControlFeature" style="margin-left:30px;margin-right:10px;"
         />THIS IS A CONTROL FEATURE?
+    </fieldset>
+
+    <fieldset class="titledGroupBox">
+        <legend class="formHeaderSmall">JustWatch Info</legend>
+        <span>
+            <label class="fieldPromptBold">JustWatch ID</label>
+            <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.JustWatchID"  size="12"/>
+        </span>
+        <button class="regularButton" style="margin-left:20px;width:160px;" (click)="queryJustWatch()" [disabled]="!currentRecord.IMDBTitle || currentRecord.IMDBTitle == '' || !currentRecord.ProdYear || currentRecord.ProdYear == 0">&lt;== Get JustWatch ID</button>
+        <span style="padding-left:40px;" [hidden]="!currentRecord.JustWatchID || currentRecord.JustWatchID == ''">
+            <a role="button" (click)="showJW()" (mouseenter)="showJWPoster($event)" (mouseleave)="hideJWPoster($event)"><span class="jw-icon" title="go to JustWatch"></span></a>
+        </span>
+        <span style="padding-left:20px;">
+            <a role="button" [hidden]="onNetFlixURL == ''" (click)="showNetflix()"><span class="netflix-icon" title="show Netflix"></span></a>
+            <a role="button" [hidden]="onAmazonURL == ''" (click)="showAmazon()"><span class="amazon-icon" title="show Amazon"></span></a>
+            <a role="button" [hidden]="onHBOGOURL == ''" (click)="showHBOGO()"><span class="hbogo-icon" title="show HBO GO"></span></a>
+            <a role="button" [hidden]="onHBONowURL == ''" (click)="showHBONow()"><span class="hbonow-icon" title="show HBO Now"></span></a>
+            <a role="button" [hidden]="onFandangoURL == ''" (click)="showFandango()"><span class="fandango-icon" title="show Fandango"></span></a>
+        </span>
     </fieldset>
 
     <hr style="margin:0;" />

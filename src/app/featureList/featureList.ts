@@ -56,6 +56,7 @@ export class FeatureListApp {
     // the columns for the datagrid
     public columnDefs = [
         { title: 'Feature ID', field: 'FeatureId'},
+        { title: 'JW ID', field: 'JustWatchID'},
         { title: 'IMDB ID', field: 'IMDBID'},
         { title: 'IMDB Title', field: 'IMDBTitle' },
         { title: 'Prod. Title', field: 'ProductionTitle' },

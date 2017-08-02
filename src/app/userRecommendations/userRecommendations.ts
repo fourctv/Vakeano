@@ -74,8 +74,9 @@ export class UserRecommendations implements AfterViewInit {
 
         //this.log.debug('query:'+queryType);
         this.controlList.getRecords(query,
-                                    [ViewerContent.kRecordID, ViewerContent.kFeatureID, ViewerContent.kUserID,
-                                    Features.kIMDBTitle,Features.kPosterURL, 
+                                    <any>[ViewerContent.kRecordID, ViewerContent.kFeatureID, ViewerContent.kUserID,
+                                    Features.kIMDBTitle,Features.kPosterURL,
+                                    Features.kJustWatchID,
                                     ViewerContent.kMGCCI, ViewerContent.kMGEQI, ViewerContent.kMGPAI, 
                                     ViewerContent.kMGPEI, ViewerContent.kMGPVR, ViewerContent.kMGNQI, 
                                     ViewerContent.kFeedback_Content, ViewerContent.kFeedback_Style, ViewerContent.kFeedback_Theme,
@@ -108,7 +109,14 @@ export class UserRecommendations implements AfterViewInit {
         this.refreshList();
     }
 
-    public showNetflix(title) {
-        window.open('https://www.netflix.com/search?q='+encodeURIComponent(title),'_blank');
-    }
+    public showJustWatch(jwID) {
+        if (jwID && jwID != '') {
+            let jwURL = 'https://apis.justwatch.com/content/titles/movie/'+jwID+'/locale/en_US';
+            FourDInterface.http.get(jwURL)
+            .subscribe(response => {
+                let jwItem = response.json();
+                window.open('https://www.justwatch.com'+jwItem.full_path,'_blank');
+            });
+        }
+     }
 }
