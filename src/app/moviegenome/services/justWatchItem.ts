@@ -1,0 +1,121 @@
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Headers } from '@angular/http';
+
+import { FourDInterface } from '../../js44D/js44D/JSFourDInterface';
+
+@Injectable()
+export class JustWatchItem {
+    public static NETFLIX: string = 'Netflix';
+    public static AMAZON: string = 'Amazon';
+    public static HBOGO: string = 'HBOGO';
+    public static HBONOW: string = 'HBONow';
+    public static FANDANGO: string = 'Fandango';
+
+    public jwItem: any = null;
+
+    public get justWatchID(): number { return (this.jwItem) ? this.jwItem.id : null }
+    public get posterURL(): string { return (this.jwItem) ? 'https://www.justwatch.com/images' + this.jwItem.poster.replace('{profile}', 's332') : '' }
+    public get movieURL(): string { return (this.jwItem) ? 'https://www.justwatch.com' + this.jwItem.full_path : '' }
+
+    constructor(public fourD: FourDInterface) { }
+
+    public queryJW(title: string, prodYear: number): Promise<any> {
+        const contentHeaders = new Headers();
+        contentHeaders.append('Accept', 'text/json;text/html,application/xhtml+xml,application/xml,application/json;q=0.9,image/webp,*/*;q=0.8'); // need all this crap for 4D V15!!
+        let body = { query: title.replace(' ', '+') };
+        let jwURL = 'https://apis.justwatch.com/content/titles/en_US/popular?body=' + JSON.stringify(body);
+
+        return new Promise((resolve, reject) => {
+            this.fourD.call4DRESTMethod('REST_ProxyHTTPGet', { url: jwURL })
+                .subscribe(
+                response => {
+                    this.jwItem = null;
+                    let resultJSON = response.json();
+                    if (resultJSON.items.length === 1) {
+                        this.jwItem = resultJSON.items[0];
+                    } else {
+                        for (var index = 0; index < resultJSON.items.length; index++) {
+                            var item = resultJSON.items[index];
+                            if (item.title === title && item.original_release_year.toString() === prodYear.toString()) {
+                                this.jwItem = item;
+                                break;
+                            }
+                        }
+                    }
+
+                    resolve(this.jwItem);
+
+                },
+                error => { reject(error) }
+                )
+        });
+
+    }
+
+
+    public getJustWatchItem(id: string): Promise<any> {
+        const contentHeaders = new Headers();
+        contentHeaders.append('Accept', 'text/json;text/html,application/xhtml+xml,application/xml,application/json;q=0.9,image/webp,*/*;q=0.8'); // need all this crap for 4D V15!!
+        let jwURL = 'https://apis.justwatch.com/content/titles/movie/' + id + '/locale/en_US';
+
+        return new Promise((resolve, reject) => {
+            this.fourD.call4DRESTMethod('REST_ProxyHTTPGet', { url: jwURL })
+                .subscribe(
+                response => {
+                    this.jwItem = response.json();
+                    resolve(this.jwItem);
+
+                },
+                error => {
+                    this.jwItem = null;
+                    reject(error);
+                }
+                );
+        });
+
+    }
+
+
+    public getServiceURL(service: string): string {
+        let returnURL = '';
+
+        if (this.jwItem.offers && this.jwItem.offers.length > 0) {
+            this.jwItem.offers.forEach(element => {
+                if (element.monetization_type === 'flatrate' || element.monetization_type === 'cinema') {
+                    // get the web url
+                    if (element.urls) {
+                        let url = element.urls['standard_web'];
+                        switch (element.provider_id) {
+                            case 8:
+                                if (service === JustWatchItem.NETFLIX) returnURL = url;
+                                break;
+
+                            case 7:
+                                if (service === JustWatchItem.AMAZON) returnURL = url;
+                                break;
+
+                            case 27:
+                                if (service === JustWatchItem.HBONOW) returnURL = url;
+                                break;
+
+                            case 31:
+                                if (service === JustWatchItem.HBOGO) returnURL = url;
+                                break;
+
+                            case 60:
+                                if (service === JustWatchItem.FANDANGO) returnURL = url;
+                                break;
+                        }
+                    }
+
+                }
+            });
+        }
+
+        return returnURL;
+
+    }
+
+
+}

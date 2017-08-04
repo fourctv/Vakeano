@@ -26,3 +26,6 @@ export * from './customDataModels/ViewerContentEx';
 
 // Custom controls
 export * from './controls/mgListDropDown';
+
+// Special Services
+export * from './services/justWatchItem'

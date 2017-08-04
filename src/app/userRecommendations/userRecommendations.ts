@@ -4,6 +4,7 @@ import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
 import { FourDCollection } from '../js44D/js44D/JSFourDCollection';
 
 import { ViewerContent, ViewerContentEx, Features, TasteProfiles } from '../moviegenome/index';
+import { JustWatchItem } from '../moviegenome/index';
 
 @Component({
     moduleId: module.id,
@@ -24,7 +25,7 @@ export class UserRecommendations implements AfterViewInit {
     @Input() profileName:string = '';
     @Input() showCuratedList:Boolean = false;
 
-    constructor(private fourD:FourDInterface) {
+    constructor(private fourD:FourDInterface, private justWatch:JustWatchItem) {
     }
 
     /**
@@ -75,8 +76,7 @@ export class UserRecommendations implements AfterViewInit {
         //this.log.debug('query:'+queryType);
         this.controlList.getRecords(query,
                                     <any>[ViewerContent.kRecordID, ViewerContent.kFeatureID, ViewerContent.kUserID,
-                                    Features.kIMDBTitle,Features.kPosterURL,
-                                    {name:'JustWatchItem', formula:'FEATGetJustWatchInfo'},
+                                    Features.kIMDBTitle,Features.kPosterURL,Features.kJustWatchID,
                                     ViewerContent.kMGCCI, ViewerContent.kMGEQI, ViewerContent.kMGPAI, 
                                     ViewerContent.kMGPEI, ViewerContent.kMGPVR, ViewerContent.kMGNQI, 
                                     ViewerContent.kFeedback_Content, ViewerContent.kFeedback_Style, ViewerContent.kFeedback_Theme,
@@ -109,10 +109,13 @@ export class UserRecommendations implements AfterViewInit {
         this.refreshList();
     }
 
-    public showJustWatch(jwData) {
-        if (jwData && jwData != '') {
-            let jwItem = JSON.parse(jwData);
-            window.open('https://www.justwatch.com'+jwItem.full_path,'_blank');
+    public showJustWatch(jwID) {
+        if (jwID && jwID != '') {
+            this.justWatch.getJustWatchItem(jwID)
+            .then (jw => {
+                if (this.justWatch.movieURL != '') window.open(this.justWatch.movieURL,'_blank');
+            });
         }
      }
+    
 }

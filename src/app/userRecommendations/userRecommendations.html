@@ -27,7 +27,7 @@
                     <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="3"/><label title="Meh" (click)="rateThis(currentFeature,3)">3 stars</label>
                     <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="2"/><label title="Kinda bad" (click)="rateThis(currentFeature,2)">2 stars</label>
                     <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="1"/><label title="Sucks big time" (click)="rateThis(currentFeature,1)">1 star</label>
-                    <a role="button" class="jw-icon" style="background-size: 24px; height: 24px;width: 24px;" [hidden]="!currentFeature.JustWatchItem || currentFeature.JustWatchItem == ''" (click)="showJustWatch(currentFeature.JustWatchItem)"></a>
+                    <a role="button" class="jw-icon" style="background-size: 24px; height: 24px;width: 24px;" *ngIf="currentFeature.JustWatchID != ''" (click)="showJustWatch(currentFeature.JustWatchID)"></a>
                 </div>
                 <p><span class="formHeaderSmall" style="color:red;">Predicted Score: {{currentFeature.MGPVR}}</span><br/>
                     CCI: {{currentFeature.MGCCI}}<br/>
