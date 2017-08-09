@@ -12,7 +12,7 @@
     <ListView [items]="controlList.models" marginTop='15'>
           <ng-template let-item="item" let-i="index">
               <StackLayout [class.odd]="odd" [class.even]="even" orientation="horizontal" marginTop="3" (swipe)="onSwipe($event,item)">
-                  <Image [src]='item.PosterURL' width="64" height="64" marginLeft="5" (tap)="showIMDB(item)"></Image>
+                  <Image [src]='item.PosterURL' width="64" height="64" marginLeft="5" (tap)="gotoJustWatch(item)"></Image>
                   <Label [text]='item.IMDBTitle'></Label>
               </StackLayout>
           </ng-template>

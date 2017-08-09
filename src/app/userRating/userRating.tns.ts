@@ -10,6 +10,7 @@ import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
 import { FourDCollection } from '../js44D/js44D/JSFourDCollection';
 
 import { Features } from '../moviegenome/index';
+import { JustWatchItem } from '../moviegenome/index';
 
 @Component({
     moduleId: module.id,
@@ -32,7 +33,7 @@ export class UserRating implements OnInit {
     @Input() isLoading = false;
 
 
-    constructor(private fourD:FourDInterface, private modalService: ModalDialogService, private vref:ViewContainerRef) {
+    constructor(private fourD:FourDInterface, private justWatch:JustWatchItem, private modalService: ModalDialogService, private vref:ViewContainerRef) {
     }
 
     /**
@@ -102,7 +103,7 @@ export class UserRating implements OnInit {
  
     refreshList() {
         this.controlList.getRecords(<any>{custom:"MGSEFilterViewerContent", tableName:"Features", filter:"control", userID:this.currentUser},
-            [Features.kIMDBID, Features.kIMDBTitle,Features.kPosterURL, Features.kFeatureId,
+            [Features.kIMDBID, Features.kIMDBTitle,Features.kPosterURL, Features.kFeatureId, Features.kJustWatchID,
             Features.kProdYear, Features.kFeatureCast, Features.kDirectorsList])
             .then(recs => {
                 console.log('length:'+recs.length);
@@ -112,8 +113,15 @@ export class UserRating implements OnInit {
              });
     }
 
-    showIMDB(currentFeature:any ) {
-        openUrl("http://www.imdb.com/title/"+currentFeature.IMDBID);
+
+    public gotoJustWatch(feature:Features) {
+        //openUrl("http://www.imdb.com/title/"+this.currentFeature.IMDBID);
+        if (feature.JustWatchID && feature.JustWatchID != '') {
+            this.justWatch.getJustWatchItem(feature.JustWatchID)
+            .then (jw => {
+                if (this.justWatch.movieURL != '') openUrl(this.justWatch.movieURL);
+            });
+        }
     }
 
  

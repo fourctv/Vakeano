@@ -2,6 +2,7 @@ import { ViewerContent, Features } from '../index';
 
 export class ViewerContentEx extends ViewerContent {
     fields: Array<any> = [
+        { name: 'JustWatchID', longname: Features.kJustWatchID, type: 'text', related: true },
         { name: 'IMDBID', longname: Features.kIMDBID, type: 'text', related: true },
         { name: 'IMDBTitle', longname: Features.kIMDBTitle, type: 'text', related: true },
         { name: 'PosterURL', longname: Features.kPosterURL, type: 'text', related: true },
@@ -10,6 +11,9 @@ export class ViewerContentEx extends ViewerContent {
     ].concat(new ViewerContent().fields);
 
     // related fields
+    get JustWatchID(): string { return this.get('JustWatchID'); }
+    set JustWatchID(v: string) { this.set('JustWatchID', v); }
+
     get IMDBID(): string { return this.get('IMDBID'); }
     set IMDBID(v: string) { this.set('IMDBID', v); }
 

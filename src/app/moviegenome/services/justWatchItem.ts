@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Headers } from '@angular/http';
 
 import { FourDInterface } from '../../js44D/js44D/JSFourDInterface';
+import { Config } from '../../common/index';
 
 @Injectable()
 export class JustWatchItem {
@@ -77,7 +78,7 @@ export class JustWatchItem {
     }
 
 
-    public getServiceURL(service: string): string {
+    public getServiceURL(service: string, platform=''): string {
         let returnURL = '';
 
         if (this.jwItem.offers && this.jwItem.offers.length > 0) {
@@ -86,6 +87,14 @@ export class JustWatchItem {
                     // get the web url
                     if (element.urls) {
                         let url = element.urls['standard_web'];
+                        if (Config.IS_MOBILE_NATIVE) {
+                            if (platform === 'iOS' && element.urls['deeplink_ios'] && element.urls['deeplink_ios'] !='') {
+                                //url = element.urls['deeplink_ios'];
+                                url = url.replace('http:','nflx:');
+                            } else if (element.urls['deeplink_android'] && element.urls['deeplink_android'] !='') {
+                                url = element.urls['deeplink_android'];
+                            }
+                        }
                         switch (element.provider_id) {
                             case 8:
                                 if (service === JustWatchItem.NETFLIX) returnURL = url;

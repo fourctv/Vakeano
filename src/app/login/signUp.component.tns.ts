@@ -57,7 +57,7 @@ export class SignUpComponent {
 
     validateUserName() {
         let checkUser:ShellUsers = new ShellUsers();
-        checkUser.getRecord(null, null, ShellUsers.kUserName+';=;'+this.userRecord.UserName)
+        checkUser.getRecord(null, null, {query: [ShellUsers.kUserName+';=;'+this.userRecord.UserName]})
         .then(rec => {
             if (checkUser.isRecordLoaded) {
                 this.showError = 'Username already taken';

@@ -17,10 +17,10 @@
 
         <GridLayout rows="*,auto" [visibility]="(isLoading || frontPageisUp) ? 'collapse' : 'visible'" marginTop="5" marginBottom="5">
             <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
-                <Image [src]='fullResPosterURL()' (tap)="showIMDB()"></Image>
+                <Image [src]='fullResPosterURL()' (tap)="gotoJustWatch()"></Image>
             </StackLayout>
 
-            <GridLayout rows="auto,*,auto,auto" row="0" (longPress)="showIMDB()">
+            <GridLayout rows="auto,*,auto,auto" row="0" (longPress)="gotoJustWatch()">
 
                 <StackLayout row="0" verticalAlignment="center" horizontalAlignment="center">
                     <Label [text]="thumbsUp"  class="icon" (tap)="rateThis(3)"></Label>

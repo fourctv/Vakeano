@@ -9,6 +9,7 @@ import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
 import { FourDCollection } from '../js44D/js44D/JSFourDCollection';
 
 import { ViewerContent, ViewerContentEx, Features, TasteProfiles } from '../moviegenome/index';
+import { JustWatchItem } from '../moviegenome/index';
 
 @Component({
     moduleId: module.id,
@@ -32,7 +33,7 @@ export class UserRecommendations implements OnInit {
 
 
 
-    constructor(private fourD:FourDInterface, private modalService: ModalDialogService, private vref:ViewContainerRef) {
+    constructor(private fourD:FourDInterface, private justWatch:JustWatchItem, private modalService: ModalDialogService, private vref:ViewContainerRef) {
        
     }
 
@@ -78,14 +79,14 @@ export class UserRecommendations implements OnInit {
         this.controlList.getRecords(query,
                                     [ViewerContent.kRecordID, ViewerContent.kFeatureID, ViewerContent.kUserID,
                                     ViewerContent.kMGPEI, ViewerContent.kMGPAI, ViewerContent.kMGCCI, ViewerContent.kMGEQI, ViewerContent.kMGNQI,
-                                    Features.kIMDBID, Features.kIMDBTitle,Features.kPosterURL, 
+                                    Features.kIMDBID, Features.kIMDBTitle,Features.kPosterURL,Features.kJustWatchID, 
                                     Features.kProdYear, Features.kFeatureCast, Features.kDirectorsList,
                                     TasteProfiles.kDescription],
                                     0, -1, '','<'+ViewerContent.kMGPVR)
             .then(recs => {
                 //console.log('length:'+recs.length);
                 if (recs.length > 0) {
-                    this.currentRecommendation = 'Recommended for you based on: '+recs[0].Description;
+                    this.currentRecommendation = 'Recommended for you based on: '+ (<any>recs[0]).Description;
                     this.isLoading = false;
                  }
              });
@@ -111,7 +112,12 @@ export class UserRecommendations implements OnInit {
     }
 
 
-    showIMDB(currentFeature:any ) {
-        openUrl("http://www.imdb.com/title/"+currentFeature.IMDBID);
+    public showJustWatch(jwID) {
+        if (jwID && jwID != '') {
+            this.justWatch.getJustWatchItem(jwID)
+            .then (jw => {
+                if (this.justWatch.movieURL != '') openUrl(this.justWatch.movieURL);
+            });
+        }
     }
 }

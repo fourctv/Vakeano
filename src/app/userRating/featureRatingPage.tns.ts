@@ -7,13 +7,14 @@ import { SwipeGestureEventData, SwipeDirection } from "tns-core-modules/ui/gestu
 import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
 
 import { Features } from '../moviegenome/index';
+import { JustWatchItem } from '../moviegenome/index';
 
 @Component({
      moduleId: module.id,
   selector: 'modal-content',
     template: `
     <StackLayout style="background-color: white;padding:3px;" margin="24" verticalAlignment="center" horizontalAlignment="left" (swipe)="onSwipe($event)">
-       <Image [src]='currentFeature.PosterURL' width="128" height="128" marginLeft="5" (tap)="showIMDB()"></Image>
+       <Image [src]='currentFeature.PosterURL' width="128" height="128" marginLeft="5" (tap)="gotoJustWatch()"></Image>
        <StackLayout orientation="vertical" marginTop="15">
         <Label text="IMDB ID:"></Label>
         <Label [text]="currentFeature.IMDBID" textWrap="true" marginLeft="10"></Label>
@@ -48,7 +49,7 @@ export class FeatureRatingPage {
     @Input() currentUser:number = FourDInterface.currentUserID;
     @Input() public currentFeature:Features;
 
-    constructor(private fourD:FourDInterface, private params: ModalDialogParams) {
+    constructor(private fourD:FourDInterface, private justWatch:JustWatchItem, private params: ModalDialogParams) {
         this.currentFeature = params.context.feature;
     }
 
@@ -56,8 +57,14 @@ export class FeatureRatingPage {
         this.params.closeCallback(res);
     }
 
-    public showIMDB( ) {
-        openUrl("http://www.imdb.com/title/"+this.currentFeature.IMDBID);
+    public gotoJustWatch() {
+        //openUrl("http://www.imdb.com/title/"+this.currentFeature.IMDBID);
+        if (this.currentFeature.JustWatchID && this.currentFeature.JustWatchID != '') {
+            this.justWatch.getJustWatchItem(this.currentFeature.JustWatchID)
+            .then (jw => {
+                if (this.justWatch.movieURL != '') openUrl(this.justWatch.movieURL);
+            });
+        }
     }
 
     public rateThis(stars:number) {

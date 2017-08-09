@@ -3,6 +3,7 @@ import { ActivatedRoute }     from '@angular/router';
 import { Observable }         from 'rxjs/Observable';
 import { RouterExtensions } from 'nativescript-angular';
 
+import * as app from "tns-core-modules/application";
 import { openUrl } from "tns-core-modules/utils/utils";
 import { SwipeGestureEventData, SwipeDirection } from "tns-core-modules/ui/gestures";
 
@@ -10,6 +11,7 @@ import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
 import { FourDCollection } from '../js44D/js44D/JSFourDCollection';
 
 import { ViewerContent, ViewerContentEx, Features } from '../moviegenome/index';
+import { JustWatchItem } from '../moviegenome/index';
 
 
 @Component({
@@ -30,6 +32,8 @@ export class UserRecommendationPage implements OnInit {
     @Input() isLoading = false;
     @Input() isComplete = false;
 
+    @Input() onNetflixURL:string = '';
+
     // fontawesome icons
     @Input() thumbsUp:string = "\uf164";
     @Input() arrow:string = '\uf137';
@@ -39,7 +43,7 @@ export class UserRecommendationPage implements OnInit {
     private currentFeatureIndex:number = 0;
 
     private swipeCount:number = 0;
-    constructor(private fourD:FourDInterface, private router:RouterExtensions, private route: ActivatedRoute) {
+    constructor(private fourD:FourDInterface, private justWatch:JustWatchItem, private router:RouterExtensions, private route: ActivatedRoute) {
     }
 
     /**
@@ -87,24 +91,55 @@ export class UserRecommendationPage implements OnInit {
         this.controlList.getRecords(query,
                                     [ViewerContent.kRecordID, ViewerContent.kFeatureID, ViewerContent.kUserID,
                                     ViewerContent.kMGPEI, ViewerContent.kMGPAI, ViewerContent.kMGCCI, ViewerContent.kMGEQI, ViewerContent.kMGNQI,
-                                    Features.kIMDBID, Features.kIMDBTitle,Features.kPosterURL, 
+                                    Features.kIMDBID, Features.kIMDBTitle,Features.kPosterURL,Features.kJustWatchID, 
                                     Features.kProdYear, Features.kFeatureCast, Features.kDirectorsList],
                                     0, -1, '','<'+ViewerContent.kMGPVR)
             .then(recs => {
                 //console.log('length:'+recs.length);
                 if (recs.length > 0) {
-                    this.currentFeature = recs[0];
+                    this.currentFeature = <ViewerContentEx>recs[0];
                     this.isLoading = false;
                     this.isComplete = false;
+                    this.loadJustWatchItem(); // grab JW data for current feature
                     //console.log('feature:',this.currentFeature.IMDBTitle);
                  }
              }).catch(err => {console.log('err:',err)});
     }
 
 
+    //
+    // load JustWatch info on the current title, so we can get availability info
+    //
+    loadJustWatchItem() {
+        if (this.currentFeature.JustWatchID != '') {
+            this.justWatch.getJustWatchItem(this.currentFeature.JustWatchID)
+            .then(jw => {
+                this.onNetflixURL = (app.ios)?this.justWatch.getServiceURL(JustWatchItem.NETFLIX,'iOS'):this.justWatch.getServiceURL(JustWatchItem.NETFLIX,'Android');
+            })
+        } else {
+            this.justWatch.jwItem = null;
+            this.onNetflixURL = '';
+        }
+    }
 
-    showIMDB() {
-        openUrl("http://www.imdb.com/title/"+this.currentFeature.IMDBID);
+    //
+    // go to Just Watch page for this title
+    //
+    gotoJustWatch() {
+        //openUrl("http://www.imdb.com/title/"+this.currentFeature.IMDBID);
+        if (this.currentFeature.JustWatchID && this.currentFeature.JustWatchID != '') {
+            this.justWatch.getJustWatchItem(this.currentFeature.JustWatchID)
+            .then (jw => {
+                if (this.justWatch.movieURL != '') openUrl(this.justWatch.movieURL);
+            });
+        }
+    }
+
+    //
+    // go to Netflix page if title is available on Netflix
+    //
+    gotoNetFlix() {
+        if (this.onNetflixURL != '') openUrl(this.onNetflixURL);
     }
 
     //
@@ -135,6 +170,7 @@ export class UserRecommendationPage implements OnInit {
     nextFeature() {
         if (++this.currentFeatureIndex < this.controlList.models.length) {
             this.currentFeature = this.controlList.models[this.currentFeatureIndex];
+            this.loadJustWatchItem(); // grab JW data for current feature
         } else {
             this.isComplete = true; // we are done with this list...
         }

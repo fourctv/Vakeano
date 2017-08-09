@@ -17,6 +17,8 @@ const EXCLUDED = [
     '!**/featureList/*',
     '!**/genomeMapList/*',
     '!**/userProfileList/*',
+    '!**/theaterManagement/*',
+    '!**/userManagement/*',
 ];
 
 function removeTns (path) {
@@ -54,7 +56,7 @@ gulp.task('project.Typescript', () => {
 });
 
 gulp.task('project.Styles', () => {
-    return gulp.src([`${SRC}**/*.scss`, '!**/*.tns.*'], {follow: true})
+    return gulp.src([`${SRC}**/*.scss`, '!**/*.tns.*', ...EXCLUDED], {follow: true})
         .pipe(gulp.dest(DEST));
 });
 

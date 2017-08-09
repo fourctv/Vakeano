@@ -8,6 +8,7 @@ import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
 import { FourDCollection } from '../js44D/js44D/JSFourDCollection';
 
 import { Features } from '../moviegenome/index';
+import { JustWatchItem } from '../moviegenome/index';
 
 @Component({
     moduleId: module.id,
@@ -35,7 +36,7 @@ export class ProfileBuildingPage implements OnInit {
     private currentFeatureIndex:number = 0;
     private ratedFeatures:number = 0;
 
-    constructor(private fourD:FourDInterface, private router:RouterExtensions) {
+    constructor(private fourD:FourDInterface, private justWatch:JustWatchItem, private router:RouterExtensions) {
        
     }
 
@@ -72,12 +73,12 @@ export class ProfileBuildingPage implements OnInit {
  
     ratingList() {
         this.controlList.getRecords(<any>{custom:"MGSEFilterViewerContent", tableName:"Features", filter:"control", userID:this.currentUser},
-            [Features.kIMDBID, Features.kIMDBTitle,Features.kPosterURL, Features.kFeatureId,
+            [Features.kIMDBID, Features.kIMDBTitle,Features.kPosterURL, Features.kFeatureId, Features.kJustWatchID,
             Features.kProdYear, Features.kFeatureCast, Features.kDirectorsList])
             .then(recs => {
                 //this.log.debug('length:'+recs.length);
                 if (recs.length > 0) {
-                    this.currentFeature = recs[0];
+                    this.currentFeature = <Features>recs[0];
                     this.isLoading = false;
                  }
              });
@@ -85,9 +86,16 @@ export class ProfileBuildingPage implements OnInit {
 
 
 
-    showIMDB( ) {
-        openUrl("http://www.imdb.com/title/"+this.currentFeature.IMDBID);
+    public gotoJustWatch() {
+        //openUrl("http://www.imdb.com/title/"+this.currentFeature.IMDBID);
+        if (this.currentFeature.JustWatchID && this.currentFeature.JustWatchID != '') {
+            this.justWatch.getJustWatchItem(this.currentFeature.JustWatchID)
+            .then (jw => {
+                if (this.justWatch.movieURL != '') openUrl(this.justWatch.movieURL);
+            });
+        }
     }
+
     //
     // handle user swipe on a row
     //
