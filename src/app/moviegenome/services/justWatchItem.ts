@@ -19,13 +19,21 @@ export class JustWatchItem {
     public get posterURL(): string { return (this.jwItem) ? 'https://www.justwatch.com/images' + this.jwItem.poster.replace('{profile}', 's332') : '' }
     public get movieURL(): string { return (this.jwItem) ? 'https://www.justwatch.com' + this.jwItem.full_path : '' }
 
-    constructor(public fourD: FourDInterface) { }
+    private userLocale:string = 'en_US'; // this is the default locale for all users
+
+    constructor(public fourD: FourDInterface) {
+        if (FourDInterface.authentication && FourDInterface.authentication['location']) {
+            if (FourDInterface.authentication.location['locale'] && FourDInterface.authentication.location['locale'] != '') {
+                this.userLocale = FourDInterface.authentication.location['locale'];
+            }
+        }
+     }
 
     public queryJW(title: string, prodYear: number): Promise<any> {
         const contentHeaders = new Headers();
         contentHeaders.append('Accept', 'text/json;text/html,application/xhtml+xml,application/xml,application/json;q=0.9,image/webp,*/*;q=0.8'); // need all this crap for 4D V15!!
         let body = { query: title.replace(' ', '+') };
-        let jwURL = 'https://apis.justwatch.com/content/titles/en_US/popular?body=' + JSON.stringify(body);
+        let jwURL = 'https://apis.justwatch.com/content/titles/'+this.userLocale+'/popular?body=' + JSON.stringify(body);
 
         return new Promise((resolve, reject) => {
             this.fourD.call4DRESTMethod('REST_ProxyHTTPGet', { url: jwURL })
@@ -58,7 +66,7 @@ export class JustWatchItem {
     public getJustWatchItem(id: string): Promise<any> {
         const contentHeaders = new Headers();
         contentHeaders.append('Accept', 'text/json;text/html,application/xhtml+xml,application/xml,application/json;q=0.9,image/webp,*/*;q=0.8'); // need all this crap for 4D V15!!
-        let jwURL = 'https://apis.justwatch.com/content/titles/movie/' + id + '/locale/en_US';
+        let jwURL = 'https://apis.justwatch.com/content/titles/movie/' + id + '/locale/'+this.userLocale;
 
         return new Promise((resolve, reject) => {
             this.fourD.call4DRESTMethod('REST_ProxyHTTPGet', { url: jwURL })

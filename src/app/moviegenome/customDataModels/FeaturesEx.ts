@@ -5,7 +5,6 @@ export class FeaturesEx extends Features {
         { name: 'ProdCompany', longname: Companies.kShortName, type: 'text', related: true },
         { name: 'SeriesName', longname: Series.kIMDBTitle, type: 'text', related: true },
         { name: 'SeasonName', longname: Seasons.kIMDBTitle, type: 'text', related: true },
-        { name: 'JustWatchItem', formula: 'FEATGetJustWatchInfo', type: 'text'},
         { name: 'contentProfileList', subTable: new ContentProfileEx(), joinFK: 'ContentProfile.FeatureID', joinPK: 'Features.FeatureId' }
     ].concat(new Features().fields);
 
@@ -18,9 +17,6 @@ export class FeaturesEx extends Features {
 
     get SeasonName(): string { return this.get('SeasonName'); }
     set SeasonName(v: string) { this.set('SeasonName', v); }
-
-    get JustWatchItem(): string { return this.get('JustWatchItem'); }
-    set JustWatchItem(v: string) { this.set('JustWatchItem', v); }
 
     // children records
     get contentProfileList(): Array<ContentProfileEx> {

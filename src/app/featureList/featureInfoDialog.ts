@@ -38,9 +38,11 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
 
     ngAfterViewInit() {
         this.dialog.setTitle('Program Details: ' + this.currentRecord.IMDBTitle);
-        if (this.currentRecord.JustWatchItem && this.currentRecord.JustWatchItem != '') {
-            this.justWatch.jwItem = JSON.parse(this.currentRecord.JustWatchItem);
-            this.analyzeJW();
+        if (this.currentRecord.JustWatchID && this.currentRecord.JustWatchID != '') {
+            this.justWatch.getJustWatchItem(this.currentRecord.JustWatchID)
+            .then(jw => {
+                this.analyzeJW();
+            })
         }
     }
 

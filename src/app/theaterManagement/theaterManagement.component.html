@@ -15,13 +15,16 @@
             </div>
             <div class="col-sm-2" style="border-style: solid; border-width: thin; padding-bottom: 4px; height:450px;">
                 <h4 style="overflow: auto;max-height: 20px;">{{currentLocation.LocationName}} Theaters</h4>
-                <table class="listTable">
+                <table class="listTable" style="height: 350px;">
                     <tbody class="listBody">
                         <tr *ngFor='let item of theaterList' (click)="selectTheater($event.target,item)">
                             <td class="listItem">{{item.TheaterName}}</td>
                         </tr>
                     </tbody>
                 </table>
+                <div style="padding-left: 20px;margin-top:20px;">
+                    <button class="regularButton" style="width: 80px;margin-left: 15px;" (click)="newTheater()" [disabled]="!selectedLocation">New Theater</button>
+                </div>
             </div>
 
             <div class="col-sm-3" style="border-style: solid; border-width: thin; padding-bottom: 4px; height:450px;">
@@ -53,6 +56,10 @@
                         <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
                             <label for="field" class="control-label col-sm-2">Country:</label>
                             <input name="country" type="text" class="form-control" style="width:200px;height:20px" [(ngModel)]="currentLocation.Country"/>
+                        </div>
+                        <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
+                            <label for="field" class="control-label col-sm-2">Locale:</label>
+                            <input name="locale" type="text" class="form-control" style="width:200px;height:20px" [(ngModel)]="currentLocation.Locale"/>
                         </div>
                         <div class="form-group" style="padding-top: 10px;margin-bottom:0;">
                             <label for="field" class="control-label col-sm-2">Geo Location:</label>

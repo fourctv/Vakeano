@@ -112,12 +112,22 @@ export class TheaterManagementApp implements ICustomModalComponent, AfterContent
         return 'location';
     }
 
+    newTheater() {
+        if (this.currentLocation) {
+            let theater = new Theater();
+            theater.LocationID = this.currentLocation.RecordID;
+            theater.TheaterName = 'New Theater';
+            theater.insertRecord()
+            .then(r => {this.selectLocation(this.selectedLocation, this.currentLocation);});
+        }
+    }
+
     newRoom() {
         if (this.currentTheater) {
             let room = new ExhibitionRoom();
             room.TheaterID = this.currentTheater.RecordID;
             room.RoomIdentification = 'New Room';
-            room.SpecialRoomFeatures = '{}'
+            room.SpecialRoomFeatures = {};
             room.insertRecord()
             .then(r => {this.selectTheater(this.selectedTheater, this.currentTheater);});
         }
