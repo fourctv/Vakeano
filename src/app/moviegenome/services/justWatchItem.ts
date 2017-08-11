@@ -36,7 +36,7 @@ export class JustWatchItem {
         let jwURL = 'https://apis.justwatch.com/content/titles/'+this.userLocale+'/popular?body=' + JSON.stringify(body);
 
         return new Promise((resolve, reject) => {
-            this.fourD.call4DRESTMethod('REST_ProxyHTTPGet', { url: jwURL })
+            this.fourD.proxyURLThru4D(jwURL)
                 .subscribe(
                 response => {
                     this.jwItem = null;
@@ -69,7 +69,7 @@ export class JustWatchItem {
         let jwURL = 'https://apis.justwatch.com/content/titles/movie/' + id + '/locale/'+this.userLocale;
 
         return new Promise((resolve, reject) => {
-            this.fourD.call4DRESTMethod('REST_ProxyHTTPGet', { url: jwURL })
+            this.fourD.proxyURLThru4D(jwURL)
                 .subscribe(
                 response => {
                     this.jwItem = response.json();

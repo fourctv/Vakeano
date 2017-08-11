@@ -24,7 +24,11 @@
 
                 <DockLayout columns="auto,*,auto" row="3" verticalAlignment="center" marginBottom="10">
                     <Label dock="left" [text]="currentFeature.IMDBTitle + ' (' + currentFeatureScore() + ')'" textWrap="true" color="white"></Label>
-                    <Image dock="right" *ngIf="onNetflixURL != ''" src="~/assets/icons/netflix.jpeg" width="32" height="32" horizontalAlignment="right" marginRight="5"  (tap)="gotoNetFlix()"></Image>                    
+                    <Image dock="right" *ngIf="onNetflixURL != ''" src="~/assets/icons/netflix.jpeg" width="32" height="32" horizontalAlignment="right" marginRight="5"  (tap)="gotoService('Netflix')"></Image>                    
+                    <Image dock="right" *ngIf="onAmazonURL != ''" src="~/assets/icons/amazon.jpeg" width="32" height="32" horizontalAlignment="right" marginRight="5"  (tap)="gotoService('Amazon')"></Image>                    
+                    <Image dock="right" *ngIf="onHBOGOURL != ''" src="~/assets/icons/hbo-go.jpeg" width="32" height="32" horizontalAlignment="right" marginRight="5"  (tap)="gotoService('HBOGO')"></Image>                    
+                    <Image dock="right" *ngIf="onHBONowURL != ''" src="~/assets/icons/hbo-now.jpeg" width="32" height="32" horizontalAlignment="right" marginRight="5"  (tap)="gotoService('HBONow')"></Image>                    
+                    <Image dock="right" *ngIf="onFandangoURL != ''" src="~/assets/icons/fandango.jpeg" width="32" height="32" horizontalAlignment="right" marginRight="5"  (tap)="gotoService('Fandango')"></Image>                    
                 </DockLayout>
             </GridLayout>
             <!--

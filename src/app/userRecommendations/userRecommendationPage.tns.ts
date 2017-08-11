@@ -33,6 +33,10 @@ export class UserRecommendationPage implements OnInit {
     @Input() isComplete = false;
 
     @Input() onNetflixURL:string = '';
+    @Input() onAmazonURL: string = '';
+    @Input() onHBOGOURL: string = '';
+    @Input() onHBONowURL: string = '';
+    @Input() onFandangoURL: string = '';
 
     // fontawesome icons
     @Input() thumbsUp:string = "\uf164";
@@ -115,10 +119,18 @@ export class UserRecommendationPage implements OnInit {
             this.justWatch.getJustWatchItem(this.currentFeature.JustWatchID)
             .then(jw => {
                 this.onNetflixURL = (app.ios)?this.justWatch.getServiceURL(JustWatchItem.NETFLIX,'iOS'):this.justWatch.getServiceURL(JustWatchItem.NETFLIX,'Android');
+                this.onAmazonURL = (app.ios)?this.justWatch.getServiceURL(JustWatchItem.AMAZON,'iOS'):this.justWatch.getServiceURL(JustWatchItem.AMAZON,'Android');
+                this.onHBOGOURL = (app.ios)?this.justWatch.getServiceURL(JustWatchItem.HBOGO,'iOS'):this.justWatch.getServiceURL(JustWatchItem.HBOGO,'Android');
+                this.onHBONowURL = (app.ios)?this.justWatch.getServiceURL(JustWatchItem.HBONOW,'iOS'):this.justWatch.getServiceURL(JustWatchItem.HBONOW,'Android');
+                this.onFandangoURL = (app.ios)?this.justWatch.getServiceURL(JustWatchItem.FANDANGO,'iOS'):this.justWatch.getServiceURL(JustWatchItem.FANDANGO,'Android');
             })
         } else {
             this.justWatch.jwItem = null;
             this.onNetflixURL = '';
+            this.onAmazonURL = '';
+            this.onHBOGOURL = '';
+            this.onHBONowURL = '';
+            this.onFandangoURL = '';
         }
     }
 
@@ -136,10 +148,30 @@ export class UserRecommendationPage implements OnInit {
     }
 
     //
-    // go to Netflix page if title is available on Netflix
+    // go to Streaming service page if title is available on that service
     //
-    gotoNetFlix() {
-        if (this.onNetflixURL != '') openUrl(this.onNetflixURL);
+    gotoService(service:string) {
+        switch (service) {
+            case 'Netflix':
+                if (this.onNetflixURL != '') openUrl(this.onNetflixURL);
+                break;
+        
+            case 'Amazon':
+                if (this.onAmazonURL != '') openUrl(this.onAmazonURL);
+                break;
+        
+            case 'HBOGO':
+                if (this.onHBOGOURL != '') openUrl(this.onHBOGOURL);
+                break;
+        
+            case 'HBONow':
+                if (this.onHBONowURL != '') openUrl(this.onHBONowURL);
+                break;
+        
+            case 'Fandango':
+                if (this.onFandangoURL != '') openUrl(this.onFandangoURL);
+                break;
+        }
     }
 
     //

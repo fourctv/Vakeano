@@ -35,7 +35,11 @@ import { JustWatchItem } from '../moviegenome/index';
 
                 <DockLayout columns="auto,*,auto" row="3" verticalAlignment="center" marginBottom="10">
                     <Label dock="left" [text]="currentFeature.IMDBTitle + ' (' + currentFeatureScore() + ')'" textWrap="true" color="white"></Label>
-                    <Image dock="right" *ngIf="onNetflixURL != ''" src="~/assets/icons/netflix.jpeg" width="32" height="32" horizontalAlignment="right" marginRight="5"  (tap)="gotoNetFlix()"></Image>                    
+                    <Image dock="right" *ngIf="onNetflixURL != ''" src="~/assets/icons/netflix.jpeg" width="32" height="32" horizontalAlignment="right" marginRight="5"  (tap)="gotoService('Netflix')"></Image>                    
+                    <Image dock="right" *ngIf="onAmazonURL != ''" src="~/assets/icons/amazon.jpeg" width="32" height="32" horizontalAlignment="right" marginRight="5"  (tap)="gotoService('Amazon')"></Image>                    
+                    <Image dock="right" *ngIf="onHBOGOURL != ''" src="~/assets/icons/hbo-go.jpeg" width="32" height="32" horizontalAlignment="right" marginRight="5"  (tap)="gotoService('HBOGO')"></Image>                    
+                    <Image dock="right" *ngIf="onHBONowURL != ''" src="~/assets/icons/hbo-now.jpeg" width="32" height="32" horizontalAlignment="right" marginRight="5"  (tap)="gotoService('HBONow')"></Image>                    
+                    <Image dock="right" *ngIf="onFandangoURL != ''" src="~/assets/icons/fandango.jpeg" width="32" height="32" horizontalAlignment="right" marginRight="5"  (tap)="gotoService('Fandango')"></Image>                    
                 </DockLayout>
 
             </GridLayout>
@@ -49,7 +53,10 @@ export class FeatureRecommendation implements OnInit {
    @Input() public currentFeature:any;
    
     @Input() onNetflixURL:string = '';
-
+    @Input() onAmazonURL: string = '';
+    @Input() onHBOGOURL: string = '';
+    @Input() onHBONowURL: string = '';
+    @Input() onFandangoURL: string = '';
     stars:string = "\uF006";
 
     constructor(private fourD:FourDInterface, private justWatch:JustWatchItem, private params: ModalDialogParams) {
@@ -61,10 +68,18 @@ export class FeatureRecommendation implements OnInit {
             this.justWatch.getJustWatchItem(this.currentFeature.JustWatchID)
             .then(jw => {
                 this.onNetflixURL = (app.ios)?this.justWatch.getServiceURL(JustWatchItem.NETFLIX,'iOS'):this.justWatch.getServiceURL(JustWatchItem.NETFLIX,'Android');
+                this.onAmazonURL = (app.ios)?this.justWatch.getServiceURL(JustWatchItem.AMAZON,'iOS'):this.justWatch.getServiceURL(JustWatchItem.AMAZON,'Android');
+                this.onHBOGOURL = (app.ios)?this.justWatch.getServiceURL(JustWatchItem.HBOGO,'iOS'):this.justWatch.getServiceURL(JustWatchItem.HBOGO,'Android');
+                this.onHBONowURL = (app.ios)?this.justWatch.getServiceURL(JustWatchItem.HBONOW,'iOS'):this.justWatch.getServiceURL(JustWatchItem.HBONOW,'Android');
+                this.onFandangoURL = (app.ios)?this.justWatch.getServiceURL(JustWatchItem.FANDANGO,'iOS'):this.justWatch.getServiceURL(JustWatchItem.FANDANGO,'Android');
             })
         } else {
             this.justWatch.jwItem = null;
             this.onNetflixURL = '';
+            this.onAmazonURL = '';
+            this.onHBOGOURL = '';
+            this.onHBONowURL = '';
+            this.onFandangoURL = '';
         }
     }
 
@@ -87,13 +102,31 @@ export class FeatureRecommendation implements OnInit {
     }
 
     //
-    // go to Netflix page if title is available on Netflix
+    // go to Streaming service page if title is available on that service
     //
-    public gotoNetFlix() {
-        console.log('flix URL:'+this.onNetflixURL);
-        if (this.onNetflixURL != '') openUrl(this.onNetflixURL);
+    gotoService(service:string) {
+        switch (service) {
+            case 'Netflix':
+                if (this.onNetflixURL != '') openUrl(this.onNetflixURL);
+                break;
+        
+            case 'Amazon':
+                if (this.onAmazonURL != '') openUrl(this.onAmazonURL);
+                break;
+        
+            case 'HBOGO':
+                if (this.onHBOGOURL != '') openUrl(this.onHBOGOURL);
+                break;
+        
+            case 'HBONow':
+                if (this.onHBONowURL != '') openUrl(this.onHBONowURL);
+                break;
+        
+            case 'Fandango':
+                if (this.onFandangoURL != '') openUrl(this.onFandangoURL);
+                break;
+        }
     }
-
     public rateThis(stars:number) {
         console.log('stars:'+stars);
         let body = {type: 'Feature', 
