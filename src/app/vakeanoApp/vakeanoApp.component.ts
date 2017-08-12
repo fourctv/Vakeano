@@ -5,6 +5,7 @@ import { Http } from '@angular/http';
 import { Config } from '../common/index';
 
 import { LoginComponent } from '../login/login.component';
+import { SignUpComponent } from '../login/signUp.component';
 import { Modal } from '../js44D/angular2-modal/providers/Modal';
 import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
 
@@ -85,7 +86,7 @@ export class VakeanoAppComponent implements AfterContentInit {
     constructor (public router:Router, private http:Http, private modal: Modal, private hostViewRef: ViewContainerRef) {
         FourDInterface.http = http;
 //        FourDInterface.fourDUrl = 'http://localhost:8080';
-        FourDInterface.fourDUrl = 'http://54.191.46.243:8080';
+        FourDInterface.fourDUrl = 'http://www.vakeano.com';
         Modal.hostViewRef = this.hostViewRef;
     }
 
@@ -94,7 +95,7 @@ export class VakeanoAppComponent implements AfterContentInit {
         if (Config.PLATFORM_TARGET === Config.PLATFORMS.WEB) this.showLoginDialog();
     }
     
-    userHasLoggedIn() {
+    userHasLoggedIn(isNew:boolean = false) {
         // load current profile user functions
         if (this.userIsLoggedIn) {
             FourDInterface.runningInsideWorkspace = true; // we are indeed running inside the workspace
@@ -104,7 +105,7 @@ export class VakeanoAppComponent implements AfterContentInit {
                 this.menuList.forEach(element => {
                     element.hideMenu = !this.userHasAccess(element.roles);
                 });
-                this.router.navigate(['/userRecommendations'], { skipLocationChange: true });
+                this.router.navigate((isNew)?['/userRating']:['/userRecommendations'], { skipLocationChange: true });
             } else {
                  this.menuList.forEach(element => {
                     element.hideMenu = false;
@@ -126,9 +127,34 @@ export class VakeanoAppComponent implements AfterContentInit {
     showLoginDialog() {
         this.modal.openInside(<any>LoginComponent, this.hostViewRef, null, LoginComponent['dialogConfig'])
             .then((result) => {
-                    this.userHasLoggedIn();
+                switch (result) {
+                    case 'loggedin':
+                        this.userHasLoggedIn();
+                        break;
+                
+                    case 'signUp':
+                        this.showSignUpDialog();
+                        break;
+                }
             });        
     }
+
+    showSignUpDialog() {
+        this.modal.openInside(<any>SignUpComponent, this.hostViewRef, null, SignUpComponent['dialogConfig'])
+            .then((result) => {
+                switch (result) {
+                    case 'signedUp':
+                        this.userHasLoggedIn(true);
+                        break;
+                
+                    case 'login':
+                        this.showLoginDialog();
+                        break;
+                }
+            });        
+        
+    }
+
 
     userHasAccess(roles: Array<string>): boolean {
 

@@ -26,7 +26,7 @@ export class FeatureInfo {
             let xOffset = 30;
             let yOffset = 180;
 
-            $('body').append('<img id="preview" src="http://54.191.46.243:8080/4DAction/REST_GetWebImage?image=' + this.record.PosterURL + '" alt="Image preview" />');
+            $('body').append('<img id="preview" src="http://www.vakeano.com/4DAction/REST_GetWebImage?image=' + this.record.PosterURL + '" alt="Image preview" />');
             $('#preview').css({
                 'top': (e.pageY - yOffset) + 'px',
                 'left': (e.pageX + xOffset) + 'px',

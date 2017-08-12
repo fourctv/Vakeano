@@ -21,6 +21,7 @@ import { routes } from './vakeanoApp/vakeanoApp.component';
 // applets
 import { BlankPage } from './vakeanoApp/blankPage';
 import { LoginComponent  } from './login/login.component';
+import { SignUpComponent  } from './login/signUp.component';
 
 // feature modules
 import { JS44DModule } from './js44D/js44D.module';
@@ -42,13 +43,13 @@ let routerModule = RouterModule.forRoot(routes);
     JS44DModule, ModalModule,
     MGModule
   ],
-  declarations: [ VakeanoAppComponent, BlankPage, LoginComponent
+  declarations: [ VakeanoAppComponent, BlankPage, LoginComponent, SignUpComponent
                 ],
   providers: [
     FourDInterface, FourDModel, FourDCollection
   ],
   exports: [JS44DModule, ModalModule, MGModule ],
-  entryComponents: [ LoginComponent ],
+  entryComponents: [ LoginComponent, SignUpComponent ],
   bootstrap: [ VakeanoAppComponent ]
 })
 

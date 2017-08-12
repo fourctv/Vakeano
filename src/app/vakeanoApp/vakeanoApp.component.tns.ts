@@ -40,7 +40,7 @@ export class VakeanoAppComponent {
 
   constructor( private http: Http) {
     FourDInterface.http = http;
-    FourDInterface.fourDUrl = 'http://54.191.46.243:8080';
+    FourDInterface.fourDUrl = 'http://www.vakeano.com';
 
   }
 

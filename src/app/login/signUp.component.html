@@ -1,0 +1,36 @@
+<div class="login container">
+    <form class="form-vertical" role="form">
+        <label textWrap="true" class="formHeader">Please fill in all details below to register into Vakeano.</label>
+        <div class="form-group" style="margin-left: 20px;">
+            <label class="fieldPrompt" style="width:120px;">User Name:  </label>
+            <input type="text" class="fieldEntry" style="width:300px;" id="username" name="username" placeholder="Username" [(ngModel)]="userRecord.UserName" (focus)="showError = '';">
+        </div>
+        <div class="form-group" style="margin-left: 20px;">
+            <label class="fieldPrompt" style="width:120px;">Password:  </label>
+            <input type="password" class="fieldEntry" style="width:300px;" id="password" name="password" placeholder="Password" [(ngModel)]="userRecord.Password">
+            </div>
+        <div class="form-group" style="margin-left: 20px;">
+            <label class="fieldPrompt" style="width:120px;">Repeat Password:  </label>
+            <input type="password" class="fieldEntry" style="width:300px;" id="repeatpassword" name="repeatpassword" placeholder="Repeat Password" [(ngModel)]="repeatPassword">
+        </div>
+        <div class="form-group" style="margin-left: 20px;">
+            <label class="fieldPrompt" style="width:120px;">First Name:  </label>
+            <input type="text" class="fieldEntry" style="width:300px;" id="firstname" name="firstname" placeholder="first name" [(ngModel)]="userRecord.FirstName">
+        </div>
+        <div class="form-group" style="margin-left: 20px;">
+            <label class="fieldPrompt" style="width:120px;">Last Name:  </label>
+            <input type="text" class="fieldEntry" style="width:300px;" id="lastname" name="lastname" placeholder="last name" [(ngModel)]="userRecord.LastName">
+        </div>
+
+        <div class="form-group" style="margin-left: 20px;">
+            <label class="fieldPrompt" style="width:120px;">Country:  </label>
+            <input type="text" class="fieldEntry" style="width:300px;" id="country" name="country" placeholder="country" [(ngModel)]="userRecord.Country">
+        </div>
+        <button type="button" class="regularButton" style="width:100px;margin-left: 30px;" (click)="signUp()">Sign Up</button>
+        <button type="button" class="regularButton" style="width:100px;margin-left: 50px;" (click)="login()">Login</button>
+
+    </form>
+
+    <div class="alert alert-warning" style="width: 500px;" [hidden]="!showError">{{showError}}</div>
+
+</div>

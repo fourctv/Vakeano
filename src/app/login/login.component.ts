@@ -1,4 +1,4 @@
-import { Component, Input, ReflectiveInjector } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Config } from '../common/index';
 
 import { ModalDialogInstance } from '../js44D/angular2-modal/models/ModalDialogInstance';
@@ -43,7 +43,7 @@ export class LoginComponent implements ICustomModalComponent {
                     //console.log('authenticated');
  
                     this.showError = false;
-                     this.dialog.close('loggedin');
+                    this.dialog.close('loggedin');
                 } else {
                     console.log('oops');
                     this.showError = true;
@@ -53,5 +53,9 @@ export class LoginComponent implements ICustomModalComponent {
                 console.log(e);
                 this.showError = true;
             });
+    }
+
+    signUp() {
+        this.dialog.close('signUp'); // close login and open signUp        
     }
 }

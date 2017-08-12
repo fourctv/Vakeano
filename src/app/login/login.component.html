@@ -10,6 +10,7 @@
                 <input type="password" class="fieldEntry" style="width:300px;" id="password" name="password" placeholder="Password" [(ngModel)]="password">
             </div>
             <button type="submit" class="regularButton" style="width:100px;margin-left: 30px;">Login</button>
+            <button type="button" class="regularButton" style="width:100px;margin-left: 50px;" (click)="signUp()">Sign Up</button>
         </form>
         <div class="alert alert-warning" style="width: 500px;" [hidden]="!showError">Sorry, the username and/or password was incorrect</div>
 
