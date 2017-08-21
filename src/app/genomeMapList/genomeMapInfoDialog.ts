@@ -15,7 +15,7 @@ export class GenomeMapInfoDialog extends RecordEditWindow implements AfterViewIn
             actions:['Maximize', 'Minimize', 'Close'], position: {top:100, left:100},selfCentered:true,
             title:'Gene Details',
             isResizable:false,
-            width:1000, height:500
+            width:1000, height:510
         };
     
     currentRecord: GenomeMap;

@@ -20,4 +20,7 @@
  
   <router-outlet></router-outlet>
 
+    <div [hidden]="!userIsLoggedIn" style="position:absolute; bottom:2px; left:5px;">
+        <label>This product uses the <a href="https://www.themoviedb.org/" target="_blank">TMDb</a> API but is not endorsed or certified by <a href="https://www.themoviedb.org/" target="_blank"><img src="https://www.themoviedb.org/assets/static_cache/2dceae11589334eecd61443249261daf/images/v4/logos/208x226-stacked-green.png" width="32"></a></label>
+    </div>
 </div>

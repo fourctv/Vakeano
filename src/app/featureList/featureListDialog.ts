@@ -21,9 +21,10 @@ export class FeatureListDialog implements AfterContentInit {
      * Declare the dialog configuration
      */
     private dialogConfig: ModalConfig = <ModalConfig>{size: 'lg', 
-            selfCentered:true,
+            selfCentered:false,
+            position:{top:100,left:100},
             title:'Features',
-            width:1200, height:1000};
+            width:1200, height:700};
     /**
      * AFter our view gets initialized, subscribe to various events on the Query band and the Grid
      */

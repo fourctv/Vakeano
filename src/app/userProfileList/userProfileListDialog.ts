@@ -23,7 +23,7 @@ export class UserProfileListDialog implements AfterContentInit {
     private dialogConfig: ModalConfig = <ModalConfig>{size: 'lg', 
             selfCentered:true,
             title:'Taste Profiles',
-            width:1200, height:1000};
+            width:1200, height:700};
     /**
      * AFter our view gets initialized, subscribe to various events on the Query band and the Grid
      */

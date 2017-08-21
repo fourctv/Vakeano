@@ -5,15 +5,17 @@ import { Observable } from 'rxjs/Observable';
 
 import { RecordEditWindow } from '../js44D/containers/recordEditWindow';
 import { ModalConfig } from '../js44D/angular2-modal/models/ModalConfig';
+import { ListSelectorDialog } from '../js44D/dialogs/listSelectorDialog';
 
 import { FeaturesEx } from '../moviegenome/index';
-import { JustWatchItem } from '../moviegenome/index';
+import { JustWatchItem, TMDB } from '../moviegenome/index';
 
 
 @Component({
     moduleId: module.id,
     selector: 'modal-content',
-    templateUrl: 'featureInfoDialog.html'
+    templateUrl: 'featureInfoDialog.html',
+    providers: [ListSelectorDialog]
 })
 
 export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit {
@@ -21,7 +23,7 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
         actions: ['Maximize', 'Minimize', 'Close'], position: { top: 50, left: 50 }, selfCentered: true,
         title: 'Program Details',
         isResizable: false,
-        width: 1000, height: 810
+        width: 1000, height: 600
     };
 
     public currentRecord: FeaturesEx;
@@ -32,7 +34,7 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
     public onHBONowURL: string = '';
     public onFandangoURL: string = '';
 
-    constructor(private justWatch:JustWatchItem, private http: Http) {
+    constructor(private justWatch:JustWatchItem, private tmdb:TMDB, private http: Http, private selector:ListSelectorDialog) {
         super();
     }
 
@@ -46,6 +48,31 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
         }
     }
 
+    public queryTMDB() {
+        if (this.currentRecord.IMDBTitle && this.currentRecord.IMDBTitle != '') {
+            this.tmdb.queryTMDB(this.currentRecord.IMDBTitle, this.currentRecord.ProdYear)
+                .then(recjw => {
+                     if (this.tmdb.tmdbRecord) {
+                        this.tmdb.grabTMDBData(this.currentRecord).then(() => this.queryJustWatch());
+                    } else  if (this.tmdb.tmdbList && this.tmdb.tmdbList.length > 0) {
+                        // we got a list back...let user select
+                        let titleList = [];
+                        this.tmdb.tmdbList.forEach(item => {
+                            titleList.push(item.title + ' - ' + item.release_date);
+                        });
+                        this.selector.show(titleList)
+                        .then(index => {
+                            this.tmdb.tmdbRecord = this.tmdb.tmdbList[index];
+                            this.tmdb.grabTMDBData(this.currentRecord).then(() => this.queryJustWatch());
+                        })
+                    } else {
+                        alert('not found');
+                    }
+                })
+                .catch(err => { alert('Error:' + err) })
+        }
+
+    }
     public queryJustWatch() {
         if (this.currentRecord.IMDBTitle && this.currentRecord.IMDBTitle != '' && this.currentRecord.ProdYear && this.currentRecord.ProdYear > 0) {
             this.justWatch.queryJW(this.currentRecord.IMDBTitle, this.currentRecord.ProdYear)
@@ -53,7 +80,7 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
                      if (this.justWatch.jwItem) {
                         //console.log(this.jwItem);
                         this.currentRecord.JustWatchID = this.justWatch.justWatchID.toString();
-                        this.currentRecord.PosterURL = this.justWatch.posterURL;
+                        //this.currentRecord.PosterURL = this.justWatch.posterURL;
                         this.analyzeJW();
                     } else {
                         alert('not found');
@@ -63,8 +90,22 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
         }
     }
 
-    public showJWPoster(e) {
-        if (this.justWatch.posterURL != '') {
+    public showPoster(e) {
+        if (this.tmdb.posterURL != '') {
+            let xOffset = 30;
+            let yOffset = 180;
+
+            $('body').append('<img id="jwpreview" src="' + this.tmdb.posterURL + '" alt="Image preview" />');
+            $('#jwpreview').css({
+                'top': (e.pageY - yOffset) + 'px',
+                'left': (e.pageX + xOffset) + 'px',
+                'display': 'block',
+                'width': '300px',
+                'position': 'relative',
+                'z-index': 25000
+            });
+
+        } else if (this.justWatch.posterURL != '') {
             let xOffset = 30;
             let yOffset = 180;
 
@@ -81,7 +122,7 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
         }
     }
 
-    public hideJWPoster(e) {
+    public hidePoster(e) {
         //console.log('leave', e);
         $('#jwpreview').remove();
     }

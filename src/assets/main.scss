@@ -167,7 +167,7 @@ label input {
     margin-right: 5px;
     margin-left: 5px;
     margin-bottom: 5px;
-    height: calc(100% - 115px);
+    height: calc(100% - 130px);
     width: calc(100% - 15px);
 }
 
@@ -358,6 +358,7 @@ legend {
 
 .formPanel {
     margin:15px;
+    overflow: scroll;
 }
 
 .tabPane {

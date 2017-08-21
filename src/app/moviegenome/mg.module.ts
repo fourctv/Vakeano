@@ -3,14 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { MGListDropDown, JustWatchItem } from './index';
+import { MGListDropDown, JustWatchItem, TMDB } from './index';
 
 @NgModule({
     imports: [FormsModule, CommonModule],
     declarations: [
         MGListDropDown
     ],
-    providers: [JustWatchItem],
+    providers: [JustWatchItem, TMDB],
     exports: [FormsModule, CommonModule,
         MGListDropDown
     ]

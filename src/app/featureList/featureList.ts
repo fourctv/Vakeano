@@ -3,8 +3,9 @@ import { Component, ViewChild } from '@angular/core';
 import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
 import { DataGrid } from '../js44D/dataGrid/dataGrid';
 import { Modal } from '../js44D/angular2-modal/providers/Modal';
+import { ModalDialogInstance } from '../js44D/angular2-modal/models/ModalDialogInstance';
 
-import {FeatureInfoDialog} from './featureInfoDialog';
+import { FeatureInfoDialog } from './featureInfoDialog';
 import { AnalyzeFeatureComponent } from './analyzeFeature';
 
 import {FeaturesEx} from '../moviegenome/index';
@@ -13,7 +14,7 @@ import {FeaturesEx} from '../moviegenome/index';
     selector: 'feature-list',
     template: `
     <web-application>
-        <record-list [editWindow]="editWindow">
+        <record-list [editWindow]="editWindow" [dialogInstance]="dialog">
             <query-band [enableSort]="true" [enableQBE]="true" [enableButtonBar]="true" [enableAddRecord]="true" [enableDeleteRecord]="true">
                 <queryband class="form-group">
                     <features-queryband #customQueryBand class="form-group"></features-queryband>
@@ -22,7 +23,7 @@ import {FeaturesEx} from '../moviegenome/index';
                     <button class="regularButton" style="width:120px;" (click)="checkFeature()">Analyze</button>
                 </custombuttonbar>
             </query-band>
-           <datagrid [height]="'calc(100% - 90px)'"
+           <datagrid
                 [model]="model"
                 [columns]="columnDefs"
                 [useLazyLoading]="true"
@@ -42,7 +43,12 @@ export class FeatureListApp {
      * get the associated Datagrid object instance
      */
     @ViewChild(DataGrid) theGrid: DataGrid;
-     
+
+    //
+    // our Modal Dialog instance, populated by the Modal service, when running inside
+    //
+    public dialog:ModalDialogInstance = null;
+
     //
     // Declare Program edit Window
     //

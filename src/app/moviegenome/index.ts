@@ -29,3 +29,4 @@ export * from './controls/mgListDropDown';
 
 // Special Services
 export * from './services/justWatchItem'
+export * from './services/tmdb'

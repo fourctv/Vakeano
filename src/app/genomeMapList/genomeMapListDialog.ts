@@ -24,7 +24,7 @@ export class GenomeMapListDialog implements AfterContentInit {
             actions:['Maximize', 'Minimize', 'Close'],
             selfCentered:true,
             title:'Genome Map',
-            width:1200, height:800};
+            width:1200, height:700};
     /**
      * AFter our view gets initialized, subscribe to various events on the Query band and the Grid
      */

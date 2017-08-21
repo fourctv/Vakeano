@@ -4,6 +4,7 @@ import { NgModel } from '@angular/forms';
 
 import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
 import { Modal } from '../js44D/angular2-modal/providers/Modal';
+import { ModalDialogInstance } from '../js44D/angular2-modal/models/ModalDialogInstance';
 import { DataGrid } from '../js44D/dataGrid/dataGrid';
 
 import { ShellUsersEx, Location } from '../moviegenome/index';
@@ -16,7 +17,7 @@ import { UserInfoDialog } from './userInfo.dialog';
     providers: [Modal, NgModel],
     template: `
     <web-application>
-        <record-list [editWindow]="editWindow">
+        <record-list [editWindow]="editWindow" [dialogInstance]="dialog">
             <query-band [enableSort]="true" [enableQBE]="true" [enableButtonBar]="true" [enableAddRecord]="true" [enableDeleteRecord]="true">
                 <queryband class="form-group">
                     <user-queryband #customQueryBand class="form-group"></user-queryband>
@@ -24,7 +25,6 @@ import { UserInfoDialog } from './userInfo.dialog';
             </query-band>
 
             <datagrid
-                [height]="'calc(100% - 90px)'"
                 [model]="model"
                 [columns]="columnDefs"
                 [optimizeGridLoading]="true"
@@ -44,6 +44,11 @@ export class UserListApp {
      */
     @ViewChild(DataGrid) theGrid: DataGrid;
 
+    //
+    // our Modal Dialog instance, populated by the Modal service, when running inside
+    //
+    public dialog:ModalDialogInstance = null;
+    
     //
     // Declare Program edit Window
     //
