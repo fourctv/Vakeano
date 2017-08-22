@@ -6,10 +6,6 @@
                 <label class="fieldPromptBold">Feature Title</label>
                 <input type="text" class="fieldEntry" size="60" [(ngModel)]="currentRecord.IMDBTitle" />
             </span>
-            <span style="padding-left:16px;">
-                <label class="fieldPromptBold">TMDB ID</label>
-                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.TMDBID"  size="12"/>
-            </span>
             <span>
                 <label class="fieldPromptBold">IMDB ID</label>
                 <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.IMDBID"  size="12"/>
@@ -37,13 +33,23 @@
         </fieldset>
 
         <fieldset class="titledGroupBox">
-            <legend class="formHeaderSmall">JustWatch Info</legend>
+            <legend class="formHeaderSmall">JustWatch & TMDB Info</legend>
             <span>
                 <label class="fieldPromptBold">JustWatch ID</label>
                 <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.JustWatchID"  size="12"/>
             </span>
-            <!-- <button class="regularButton" style="margin-left:20px;width:160px;" (click)="queryJustWatch()" [disabled]="!currentRecord.IMDBTitle || currentRecord.IMDBTitle == '' || !currentRecord.ProdYear || currentRecord.ProdYear == 0">&lt;== Get JustWatch ID</button> -->
-            <span style="padding-left:40px;" [hidden]="!currentRecord.JustWatchID || currentRecord.JustWatchID == ''">
+            <span style="padding-left:16px;">
+                <label class="fieldPromptBold">TMDB ID</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.TMDBID"  size="12"/>
+            </span>
+                <!-- <button class="regularButton" style="margin-left:20px;width:160px;" (click)="queryJustWatch()" [disabled]="!currentRecord.IMDBTitle || currentRecord.IMDBTitle == '' || !currentRecord.ProdYear || currentRecord.ProdYear == 0">&lt;== Get JustWatch ID</button> -->
+            <span style="padding-left:20px;" [hidden]="!currentRecord.TMDBID || currentRecord.TMDBID == ''">
+                <a role="button" (click)="showMovieSite()" ><img id="movieicon" [src]="this.tmdb.iconURL" height="32px"/></a>
+            </span>
+            <span style="padding-left:20px;" [hidden]="!currentRecord.TMDBID || currentRecord.TMDBID == ''">
+                <a role="button" (click)="showTMDB()" ><img src="https://www.themoviedb.org/assets/static_cache/2dceae11589334eecd61443249261daf/images/v4/logos/208x226-stacked-green.png" width="32"></a>
+            </span>
+            <span style="padding-left:20px;" [hidden]="!currentRecord.JustWatchID || currentRecord.JustWatchID == ''">
                 <a role="button" (click)="showJW()" (mouseenter)="showPoster($event)" (mouseleave)="hidePoster($event)"><span class="jw-icon" title="go to JustWatch"></span></a>
             </span>
             <span style="padding-left:20px;">

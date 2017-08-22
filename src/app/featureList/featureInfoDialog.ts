@@ -34,7 +34,7 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
     public onHBONowURL: string = '';
     public onFandangoURL: string = '';
 
-    constructor(private justWatch:JustWatchItem, private tmdb:TMDB, private http: Http, private selector:ListSelectorDialog) {
+    constructor(public justWatch:JustWatchItem, public tmdb:TMDB, private http: Http, private selector:ListSelectorDialog) {
         super();
     }
 
@@ -45,6 +45,10 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
             .then(jw => {
                 this.analyzeJW();
             })
+        }
+
+        if (this.currentRecord.TMDBID && this.currentRecord.TMDBID != '') {
+            this.tmdb.getTMDBDetails(this.currentRecord.TMDBID)
         }
     }
 
@@ -57,10 +61,14 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
                     } else  if (this.tmdb.tmdbList && this.tmdb.tmdbList.length > 0) {
                         // we got a list back...let user select
                         let titleList = [];
+                        let tipsList = [];
                         this.tmdb.tmdbList.forEach(item => {
                             titleList.push(item.title + ' - ' + item.release_date);
+                            tipsList.push(item.overview);
                         });
-                        this.selector.show(titleList)
+                        this.selector.title = 'Select title...';
+                        this.selector.width = 600;
+                        this.selector.show(titleList, tipsList)
                         .then(index => {
                             this.tmdb.tmdbRecord = this.tmdb.tmdbList[index];
                             this.tmdb.grabTMDBData(this.currentRecord).then(() => this.queryJustWatch());
@@ -125,6 +133,14 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
     public hidePoster(e) {
         //console.log('leave', e);
         $('#jwpreview').remove();
+    }
+
+    public showTMDB() {
+        if (this.currentRecord.TMDBID && this.currentRecord.TMDBID != '') window.open('https://www.themoviedb.org/movie/'+this.currentRecord.TMDBID, '_blank');
+    }
+
+    public showMovieSite() {
+        if (this.tmdb.movieURL != '') window.open(this.tmdb.movieURL, '_blank');
     }
 
     public showJW() {

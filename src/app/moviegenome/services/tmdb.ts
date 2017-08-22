@@ -17,7 +17,8 @@ export class TMDB {
 
     public get tmdbID(): number { return (this.tmdbRecord) ? this.tmdbRecord.id : null }
     public get posterURL(): string { return (this.tmdbRecord) ? 'http://image.tmdb.org/t/p/w500' + this.tmdbRecord.poster_path : '' }
-    public get movieURL(): string { return (this.tmdbRecord) ? 'https://www.justwatch.com' + this.tmdbRecord.full_path : '' }
+    public get iconURL(): string { return (this.tmdbRecord) ? 'http://image.tmdb.org/t/p/w92' + this.tmdbRecord.poster_path : '' }
+    public get movieURL(): string { return (this.tmdbDetails) ? this.tmdbDetails.homepage : '' }
 
     private userLocale:string = 'en_US'; // this is the default locale for all users
 
@@ -68,9 +69,40 @@ export class TMDB {
 
     }
 
+
+
+    public getTMDBDetails(id: string): Promise<any> {
+        const contentHeaders = new Headers();
+        contentHeaders.append('Accept', 'text/json;text/html,application/xhtml+xml,application/xml,application/json;q=0.9,image/webp,*/*;q=0.8'); // need all this crap for 4D V15!!
+        let tmdbURL = 'https://api.themoviedb.org/3/movie/' + id + '?api_key=' + TMDB.apiKey + '&language=en-US&append_to_response=release_dates%2Ccredits';
+
+        return new Promise((resolve, reject) => {
+            this.fourD.proxyURLThru4D(tmdbURL)
+                .subscribe(
+                response => {
+                    this.tmdbDetails = response.json();
+//                    console.log(this.tmdbDetails);
+                    resolve(this.tmdbDetails);
+
+                },
+                error => {
+                    this.tmdbDetails = null;
+                    reject(error);
+                }
+                );
+        });
+
+    }
+
+
+    /**
+     * Grab data from TMDB and populate a Feature record
+     * 
+     * @param feature the Feature record to update with TMDB Data 
+     */
     public grabTMDBData(feature:Features):Promise<any> {
         if (this.tmdbRecord) {
-            console.log(this.tmdbRecord);
+    //        console.log(this.tmdbRecord);
             feature.TMDBID = this.tmdbRecord.id.toString();
             feature.PosterURL = this.posterURL;
             feature.IMDBTitle = this.tmdbRecord.title;
@@ -87,16 +119,16 @@ export class TMDB {
                 .subscribe(
                 response => {
                     this.tmdbDetails = response.json();
-                    console.log(this.tmdbDetails);
+//                    console.log(this.tmdbDetails);
 
                     // grab IMDB ID
                     feature.IMDBID = this.tmdbDetails.imdb_id;
-
-                    // grab Production Copy info
+/*
+                    // grab Production Company info
                     if (this.tmdbDetails.production_companies && this.tmdbDetails.production_companies.length > 0) {
                         feature.ProdCompanyID = this.tmdbDetails.production_companies[0].name;
                     }
-
+*/
                     // grab Production Country info
                     if (this.tmdbDetails.production_countries && this.tmdbDetails.production_countries.length > 0) {
                         feature.CountryOfOrigin = this.tmdbDetails.production_countries[0].name;
