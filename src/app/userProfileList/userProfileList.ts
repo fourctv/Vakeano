@@ -88,7 +88,13 @@ export class UserProfileListApp {
     public showRecommendations() {
         if (this.theGrid && this.theGrid.currentRecord && this.theGrid.currentRecord.isRecordLoaded()) {
             let theRec:TasteProfilesEx = <any>this.theGrid.currentRecord; 
-            this.modal.openDialog(UserRecommendationsDialog, {profileID:theRec.ProfileID, profileName:theRec.Name}); // open user recomendations dialog
+            this.modal.openDialog(UserRecommendationsDialog, 
+                {
+                    profileID:theRec.ProfileID, 
+                    profileName:theRec.Name, 
+                    profileUserID:theRec.UserID,
+                    userName: theRec.UserName
+                }); // open user recomendations dialog
 
         }
     }
@@ -96,7 +102,7 @@ export class UserProfileListApp {
     public showRatings() {
         if (this.theGrid && this.theGrid.currentRecord && this.theGrid.currentRecord.isRecordLoaded()) {
             let theRec:TasteProfilesEx = <any>this.theGrid.currentRecord; 
-            this.modal.openDialog(UserRatingDialog, {currentProfile:theRec.ProfileID}); // open user recomendations dialog
+            this.modal.openDialog(UserRatingDialog, {currentProfile:theRec.ProfileID, profileUserID:theRec.UserID, userName: theRec.UserName}); // open user recomendations dialog
 
         }
     }

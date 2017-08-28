@@ -61,7 +61,7 @@
     position: relative;
     width: 250px;
     height: 250px;
-    margin: 0 5px;
+    margin: 0 5px 20px;
     padding: 0;
     padding-bottom: 25px;
 }
@@ -79,7 +79,8 @@
     overflow: hidden;
     font-size: 12px;
     font-weight: normal;
-    color: #999;
+    text-align: left;
+    color: #000000;
 }
 .product p {
     visibility: hidden;
@@ -87,7 +88,7 @@
 .product:hover p {
     visibility: visible;
     position: absolute;
-    width: 280px;
+    width: 240px;
     height: 190px;
     top: 20px;
     left: 0;

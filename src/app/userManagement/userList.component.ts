@@ -18,7 +18,7 @@ import { UserInfoDialog } from './userInfo.dialog';
     template: `
     <web-application>
         <record-list [editWindow]="editWindow" [dialogInstance]="dialog">
-            <query-band [enableSort]="true" [enableQBE]="true" [enableButtonBar]="true" [enableAddRecord]="true" [enableDeleteRecord]="true">
+            <query-band [enableSort]="true" [enableQBE]="true" [enableButtonBar]="true" [enableAddRecord]="true" [enableDeleteRecord]="true" [cascadeDeleteRecord]="true">
                 <queryband class="form-group">
                     <user-queryband #customQueryBand class="form-group"></user-queryband>
                 </queryband>

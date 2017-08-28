@@ -62,6 +62,7 @@ export class ProfileRecommendationsInfo implements AfterViewInit {
             let query = {custom:'MGSEFilterViewerContent', tableName:'ViewerContent', filter:'recommend'};
             if (this.record.ProfileID && this.record.ProfileID > 0) {
                 query['profileID']=this.record.ProfileID;
+                query['userID']=this.record.UserID;
             } else {
                 query['userID']=FourDInterface.currentUserID;
             }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 
 import { ICustomModal } from '../js44D/angular2-modal/models/ICustomModal';
 import { ICustomModalComponent } from '../js44D/angular2-modal/models/ICustomModalComponent';
@@ -7,10 +7,10 @@ import { ModalDialogInstance } from '../js44D/angular2-modal/models/ModalDialogI
 
 @Component({
     selector: 'userrating-dialog',
-    template : '<user-rating [currentUser]="currentUser" [currentProfile]="currentProfile"></user-rating>'
+    template : '<user-rating [currentUser]="profileUserID" [currentProfile]="currentProfileID"></user-rating>'
 })
 
-export class UserRatingDialog implements ICustomModalComponent {
+export class UserRatingDialog implements ICustomModalComponent, AfterViewInit {
     public static dialogConfig: ModalConfig = <ModalConfig>{size: 'lg', 
             actions:['Maximize', 'Minimize', 'Close'], position: {top:100, left:100},selfCentered:true,
             title:'User Rating',
@@ -19,19 +19,27 @@ export class UserRatingDialog implements ICustomModalComponent {
    
     public dialog: ModalDialogInstance;
           
-    @Input() public currentUser:number = 0;
-    @Input() public currentProfile:number = 0;
-
+    @Input() public profileUserID:number = 0;
+    @Input() public currentProfileID:number = 0;
+    private userName:string = '';
+    
     public set modelContentData(v:ICustomModal) {
         if (v) {
                 let parms:Object = v;
-                if (parms.hasOwnProperty('currentUser')) {
-                    this.currentUser = parms['currentUser'];
-                }
                 if (parms.hasOwnProperty('currentProfile')) {
-                    this.currentProfile = parms['currentProfile'];
+                    this.currentProfileID = parms['currentProfile'];
+                }
+                if (parms.hasOwnProperty('profileUserID')) {
+                    this.profileUserID = parms['profileUserID'];
+                }
+                if (parms.hasOwnProperty('userName')) {
+                    this.userName = parms['userName'];
                 }
             }
+    }
+
+    ngAfterViewInit() {
+        if (this.userName != '') this.dialog.setTitle('Profile Building for: '+this.userName);
     }
 
 }

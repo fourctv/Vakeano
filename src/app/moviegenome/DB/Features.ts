@@ -32,6 +32,7 @@ export class Features extends FourDModel {
 	public static kStarName:string = 'Features.StarName';
 	public static kisControlFeature:string = 'Features.isControlFeature';
 	public static kJustWatchID:string = 'Features.JustWatchID';
+	public static kTMDBID:string = 'Features.TMDBID';
 
 	tableName:string = 'Features';
 	tableNumber:number = 20;
