@@ -10,7 +10,7 @@
         
         <div style="display:block;float:left;width:1080px;height:550px;padding-top:15px;overflow:scroll;">
             <fieldset *ngFor="let currentFeature of controlList.models" class="product">
-                <label style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size: 16px !important;">{{currentFeature.IMDBTitle}}</label>
+                <label style="text-overflow:ellipsis;font-size: 16px !important; height:47px; color:#0076db">{{currentFeature.IMDBTitle}}</label>
                 <img src="http://www.vakeano.com/4DAction/REST_GetWebImage?image={{currentFeature.PosterURL}}" alt="Image preview"/>
                 <br/>
                 <div  class="rating">

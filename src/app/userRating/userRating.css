@@ -1,6 +1,6 @@
 .rating {
   float: left;
-  width: 200px;
+  width: 155px;
 }
 
 /* :not(:checked) is a filter, so that browsers that don’t support :checked don’t
@@ -60,16 +60,13 @@
     float: left;
     position: relative;
     width: 250px;
-    height: 250px;
-    margin: 0 5px 20px;
-    padding: 0;
-    padding-bottom: 25px;
+    height: 300px;
+    margin: 0 5px;
 }
 .product img {
     width: 130px;
     height: 180px;
-    padding-bottom:10px;
-    padding-top:10px;
+    padding-bottom:5px;
     padding-left: 20px;
 }
 .product label {
