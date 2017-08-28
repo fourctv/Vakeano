@@ -8,7 +8,7 @@ import { ICustomModalComponent } from '../js44D/angular2-modal/models/ICustomMod
 import { UserRating } from './userRating'
 
 @Component({
-    selector: 'feature-list-dialog',
+    selector: 'ratings-dialog',
     template: '<div></div>',
     providers: [Modal]
 })
@@ -21,9 +21,10 @@ export class UserRatingAppDialog implements AfterContentInit {
      * Declare the dialog configuration
      */
     private dialogConfig: ModalConfig = <ModalConfig>{size: 'lg', 
-            selfCentered:true,
+            selfCentered:false,
+            position: {top:70, left:70},
             title:'User Rating',
-            width:1200, height:1000};
+            width:1100, height:800};
     /**
      * AFter our view gets initialized, subscribe to various events on the Query band and the Grid
      */

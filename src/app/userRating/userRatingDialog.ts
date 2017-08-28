@@ -15,7 +15,7 @@ export class UserRatingDialog implements ICustomModalComponent, AfterViewInit {
             actions:['Maximize', 'Minimize', 'Close'], position: {top:100, left:100},selfCentered:true,
             title:'User Rating',
             isResizable:true,
-            width:1160, height:800};
+            width:1100, height:800};
    
     public dialog: ModalDialogInstance;
           
