@@ -83,6 +83,9 @@ export class VakeanoAppComponent implements AfterContentInit {
         return (FourDInterface.authentication) ? FourDInterface.currentUser : '?';
     }
 
+    public userIsAdmin:boolean = false;
+
+
     constructor (public router:Router, private http:Http, private modal: Modal, private hostViewRef: ViewContainerRef) {
         FourDInterface.http = http;
 //        FourDInterface.fourDUrl = 'http://localhost:8080';
@@ -98,6 +101,7 @@ export class VakeanoAppComponent implements AfterContentInit {
     userHasLoggedIn(isNew:boolean = false) {
         // load current profile user functions
         if (this.userIsLoggedIn) {
+            this.userIsAdmin = FourDInterface.authentication.options.isAdmin === 'true';           
             FourDInterface.runningInsideWorkspace = true; // we are indeed running inside the workspace
  
             // now we need to check user Roles and enable/disable menus accordingly
@@ -170,4 +174,9 @@ export class VakeanoAppComponent implements AfterContentInit {
            this.router.navigate([menu.routePath], { skipLocationChange: true });
        }
     }
+
+    showAbout() {
+        window.open("https://vakeano.godaddysites.com", '_blank')
+    }
+
 }

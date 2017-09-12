@@ -170,7 +170,7 @@ export class TMDB {
                 error => { reject(error) }
                 )
             });
-        }
+        } else return null;
     }
 
 }

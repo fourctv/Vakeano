@@ -19,7 +19,7 @@ import { UserRatingDialog } from '../userRating/userRatingDialog';
     template: `
     <web-application>
         <record-list [editWindow]="editWindow" [dialogInstance]="dialog">
-            <query-band [enableSort]="true" [enableQBE]="true" [enableButtonBar]="true" [enableAddRecord]="true" [enableDeleteRecord]="true">
+            <query-band [enableSort]="true" [enableQBE]="true" [enableButtonBar]="true" [enableAddRecord]="true" [enableDeleteRecord]="true" [cascadeDeleteRecord]="true">
                 <queryband class="form-group">
                     <userprofile-queryband #customQueryBand class="form-group"></userprofile-queryband>
                 </queryband>

@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { UserRecommendations } from './userRecommendations';
 import { UserRecommendationsAppDialog } from './userRecommendationsAppDialog';
 import { UserRecommendationsSubModule } from './userRecommendationsSubModule';
 
@@ -12,7 +13,7 @@ import { MGModule } from '../moviegenome/mg.module';
 export const userRecommendationsRoutes: Routes = [
     {
         path: '',
-        component: UserRecommendationsAppDialog
+        component: UserRecommendations
     }
 ];
 

@@ -1,6 +1,6 @@
 .rating {
   float: left;
-  width: 200px;
+  width: 180px;
 }
 
 /* :not(:checked) is a filter, so that browsers that don’t support :checked don’t

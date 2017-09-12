@@ -2,17 +2,25 @@
 
     <!-- This is our Header, with the web apps drop down -->
     <header [hidden]="!userIsLoggedIn">
-        <div>
-                <img src="./assets/icons/MGLogo.png" style="display: inline-block;vertical-align: top; margin-right:20px" height="132"/>
-                <span style="display:inline-block;padding-left:40px ">
-                    <label class="fieldPromptBold" style="font-size:32pt;">Welcome {{currentUser}}</label>
-                    <br/>
-                    <nav>
+        <div style="padding-left:30px;padding-top:10px;height:110px;background-color:black;">
+                <img src="./assets/icons/MGLogo.png" style="display: inline-block;vertical-align: center; margin-right:20px" height="88"/>
+                <span style="display:inline-block;padding-left:40px;height: 100%;vertical-align: center;font-size:16px; font-weight: 600;color:white;font-family: sans-serif;">
+                    <label [hidden]="userIsAdmin" style="font-size:32px;">Vakeano Recommendations for {{currentUser}}</label>
+                    <nav [hidden]="!userIsAdmin">
                         <a *ngFor="let menuItem of menuList" (click)="openApp(menuItem)" [hidden]="menuItem.hideMenu">{{menuItem.title}}</a>
-                        <a (click)="doLogin();" style="padding-left:50px;">Logout</a>
                     </nav>
                 </span>
- 
+                <div class="btn-group" dropdown style="height:100%; float:right; margin-top:-10px;">
+                        <button dropdownToggle type="button" class="btn dropdown-toggle" style="height:100%; background-color: black;background-blend-mode: color;">
+                            <span class="glyphicon glyphicon-option-vertical" aria-hidden="true" style="color:white; font-size: x-large"></span>
+                        </button>
+                        <ul *dropdownMenu class="dropdown-menu" role="menu" style="left:-100px; top:60px; font-family: sans-serif">
+                            <li role="menuitem"><a style="font-weight: bold" (click)="showAbout();">About us</a></li>
+                            <li class="divider dropdown-divider"></li>
+                            <li role="menuitem"><a style="font-weight: bold" (click)="doLogin();">Logout</a></li>
+                    </ul>
+                </div>
+                      
 
         </div>
 
@@ -20,9 +28,9 @@
  
   <router-outlet></router-outlet>
 
-    <div [hidden]="!userIsLoggedIn" style="position:absolute; bottom:2px; left:5px;">
+    <div [hidden]="!userIsLoggedIn" class="bottomMessage">
         <label>This product uses the <a href="https://www.justwatch.com/" target="_blank">JustWatch</a> API but is not endorsed or certified by <a href="https://www.justwatch.com/" target="_blank">JustWatch</a>.</label>
         <br/>
-        <label>This product uses the <a href="https://www.themoviedb.org/" target="_blank">TMDb</a> API but is not endorsed or certified by <a href="https://www.themoviedb.org/" target="_blank"><img src="https://www.themoviedb.org/assets/static_cache/2dceae11589334eecd61443249261daf/images/v4/logos/208x226-stacked-green.png" width="32"></a></label>
+        <label>This product uses the <a href="https://www.themoviedb.org/" target="_blank">TMDb</a> API but is not endorsed or certified by <a href="https://www.themoviedb.org/" target="_blank">TMDb</a></label>
     </div>
 </div>
