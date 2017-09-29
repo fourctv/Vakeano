@@ -1,4 +1,5 @@
-import { GenomeMap, ShellLists } from '../index';
+import { GenomeMap } from '../DB/GenomeMap';
+import { ShellLists } from '../DB/ShellLists';
 
 export class GenomeModel {
     public themesGenes:Array<GenomeMap> = [];

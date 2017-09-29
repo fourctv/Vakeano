@@ -1,4 +1,5 @@
-import { ViewerContent, Features } from '../index';
+import { ViewerContent } from '../DB/ViewerContent';
+import { Features } from '../DB/Features';
 
 export class ViewerContentEx extends ViewerContent {
     fields: Array<any> = [

@@ -1,4 +1,6 @@
-import { ContentProfile, GenomeMap, ShellUsers } from '../index';
+import { ContentProfile } from '../DB/ContentProfile';
+import { GenomeMap } from '../DB/GenomeMap';
+import { ShellUsers } from '../DB/ShellUsers';
 
 export class ContentProfileEx extends ContentProfile {
     fields: Array<any> = [

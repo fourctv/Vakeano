@@ -1,4 +1,5 @@
-import { ProfileGenes, GenomeMap } from '../index';
+import { ProfileGenes } from '../DB/ProfileGenes';
+import { GenomeMap } from '../DB/GenomeMap';
 
 export class ProfileGenesEx extends ProfileGenes {
     fields: Array<any> = [

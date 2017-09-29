@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit} from '@angular/core';
+import { Component, Input, AfterContentInit} from '@angular/core';
 
 import {ShellLists} from '../DB/ShellLists';
 
@@ -22,25 +22,33 @@ import {FourDCollection} from '../../js44D/js44D/JSFourDCollection';
        `
 })
 
-export class MGListDropDown implements AfterViewInit {
+export class MGListDropDown implements AfterContentInit {
     @Input() public listName: string;
     @Input() public selectedValue: string;
     @Input() public listOptions: Array<string> = [];
 
     private shellList:ShellLists;
 
-    ngAfterViewInit() {
+    private static _listCache: any = {};
+    
+    ngAfterContentInit() {
         if (this.listName) {
-            this.shellList = new ShellLists();
-            let query = {query:[ShellLists.kListName+';=;'+this.listName]};
-            this.shellList.getRecords(query)
-                .then((recs:FourDCollection) => {
-                    this.listOptions = [''];
-                    recs.models.forEach((rec:ShellLists) => {
-                        this.listOptions.push(rec.ElementShortValue);
-                    });
-                })
-                .catch((reason) => { console.log('error', reason); });
+            if (MGListDropDown._listCache[this.listName]) {
+                // list is cached, reuse it
+                this.listOptions = MGListDropDown._listCache[this.listName];
+            } else {
+                this.shellList = new ShellLists();
+                let query = {query:[ShellLists.kListName+';=;'+this.listName]};
+                this.shellList.getRecords(query)
+                    .then((recs:FourDCollection) => {
+                        this.listOptions = [''];
+                        recs.models.forEach((rec:ShellLists) => {
+                            this.listOptions.push(rec.ElementShortValue);
+                        });
+                        MGListDropDown._listCache[this.listName] = this.listOptions; // cache list
+                    })
+                    .catch((reason) => { console.log('error', reason); });
+            }
         }
     }
 

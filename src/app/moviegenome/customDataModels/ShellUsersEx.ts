@@ -1,4 +1,5 @@
-import { ShellUsers, Location } from '../index';
+import { ShellUsers } from '../DB/ShellUsers';
+import { Location } from '../DB/Location';
 
 export class ShellUsersEx extends ShellUsers {
     fields: Array<any> = [

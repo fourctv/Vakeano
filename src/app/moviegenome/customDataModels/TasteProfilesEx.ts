@@ -1,4 +1,9 @@
-import { TasteProfiles, ShellUsers, ProfileGenes, ProfileGenesEx, ViewerContent, ViewerContentEx } from '../index';
+import { TasteProfiles } from '../DB/TasteProfiles';
+import { ShellUsers } from '../DB/ShellUsers';
+import { ProfileGenes } from '../DB/ProfileGenes';
+import { ProfileGenesEx } from './ProfileGenesEx';
+import { ViewerContent } from '../DB/ViewerContent';
+import { ViewerContentEx } from './ViewerContentEx';
 
 export class TasteProfilesEx extends TasteProfiles {
     fields: Array<any> = [

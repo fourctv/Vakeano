@@ -1,4 +1,8 @@
-import { Features, Series, Seasons, Companies, ContentProfileEx } from '../index';
+import { Features } from '../DB/Features';
+import { Series } from '../DB/Series';
+import { Seasons } from '../DB/Seasons';
+import { Companies } from '../DB/Companies';
+import { ContentProfileEx } from './ContentProfileEx';
 
 export class FeaturesEx extends Features {
     fields: Array<any> = [
