@@ -129,7 +129,7 @@ export class VakeanoAppComponent implements AfterContentInit {
     }
 
     showLoginDialog() {
-        this.modal.openInside(<any>LoginComponent, this.hostViewRef, null, LoginComponent['dialogConfig'])
+        this.modal.openDialog(<any>LoginComponent, null)
             .then((result) => {
                 switch (result) {
                     case 'loggedin':
@@ -144,7 +144,7 @@ export class VakeanoAppComponent implements AfterContentInit {
     }
 
     showSignUpDialog() {
-        this.modal.openInside(<any>SignUpComponent, this.hostViewRef, null, SignUpComponent['dialogConfig'])
+        this.modal.openDialog(<any>SignUpComponent, null)
             .then((result) => {
                 switch (result) {
                     case 'signedUp':
