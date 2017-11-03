@@ -24,9 +24,9 @@ export class LoginComponent {
 
 
     constructor( private fourD:FourDInterface, public router:RouterExtensions ) {
-        this.fourD.call4DRESTMethod('REST_GetApplicationVersion',{})
+        this.fourD.call4DRESTMethod('REST_GetApplicationVersion',{}, {responseType:'text'})
             .subscribe((v) => {
-                this.fourDVersion = v.text();
+                this.fourDVersion = v;
                 this.webAppVersion += ' - v'+this.fourDVersion;
             });
     }

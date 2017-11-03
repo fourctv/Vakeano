@@ -74,8 +74,7 @@ export class FeatureRatingPage {
                     rating: stars, 
                     viewer: this.currentUser};
         this.fourD.call4DRESTMethod('MGLErestUpdateViewerProfile', body)
-        .subscribe(result => {
-            let response = result.json();
+        .subscribe(response => {
             if (response.result === 'OK') {
                 this.close('OK');
             } else alert('Error:'+response.message);

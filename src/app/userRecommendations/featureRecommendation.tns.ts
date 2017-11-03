@@ -134,8 +134,7 @@ export class FeatureRecommendation implements OnInit {
                     rating: stars, 
                     viewer: this.currentFeature.UserID};
         this.fourD.call4DRESTMethod('MGLErestUpdateViewerProfile', body)
-        .subscribe(result => {
-            let response = result.json();
+        .subscribe(response => {
             if (response.result === 'OK') {
                 this.close('OK');
             } else alert('Error:'+response.message);

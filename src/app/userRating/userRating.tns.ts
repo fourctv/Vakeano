@@ -55,8 +55,7 @@ export class UserRating implements OnInit {
                     rating: stars, 
                     viewer: this.currentUser};
         this.fourD.call4DRESTMethod('MGLErestUpdateViewerProfile', body)
-        .subscribe(result => {
-            let response = result.json();
+        .subscribe(response => {
             if (response.result === 'OK') {
                 this.removeFeature(feature);
             } else alert('Error:'+response.message);

@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import {NgModel} from '@angular/forms';
 
 import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
@@ -81,7 +81,7 @@ export class UserProfileListApp {
     //
     // We need access to a Modal dialog component, to open an associated Record Edit Form 
     //
-    constructor(private modal: Modal, private viewref:ViewContainerRef, private fourD:FourDInterface, private http:Http) {
+    constructor(private modal: Modal, private viewref:ViewContainerRef, private fourD:FourDInterface, private http:HttpClient) {
         if (!FourDInterface.http) FourDInterface.http = http;
     }
 
@@ -110,7 +110,7 @@ export class UserProfileListApp {
     public recalcRecommendations() {
          let body = {};
             kendo.ui.progress($(this.viewref.element.nativeElement), true); // show loading progress icon
-            this.fourD.call4DRESTMethod('MGSERecalcAllRecommendations', body)
+            this.fourD.call4DRESTMethod('MGSERecalcAllRecommendations', body, {responseType:'text'})
                 .subscribe(result => {
                        kendo.ui.progress($(this.viewref.element.nativeElement), false); // hide loading progress icon
                 }, error => { console.log(error); alert('Error:' + error); });

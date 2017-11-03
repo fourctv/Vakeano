@@ -1,6 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { Http } from '@angular/http';
-import { Headers } from '@angular/http';
+import { HttpClient }      from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { RecordEditWindow } from '../js44D/containers/recordEditWindow';
@@ -34,7 +33,7 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
     public onHBONowURL: string = '';
     public onFandangoURL: string = '';
 
-    constructor(public justWatch:JustWatchItem, public tmdb:TMDB, private http: Http, private selector:ListSelectorDialog) {
+    constructor(public justWatch:JustWatchItem, public tmdb:TMDB, private http: HttpClient, private selector:ListSelectorDialog) {
         super();
     }
 

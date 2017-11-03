@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Headers } from '@angular/http';
 
 import { FourDInterface } from '../../js44D/js44D/JSFourDInterface';
 import { Config } from '../../common/index';
@@ -37,10 +35,8 @@ export class JustWatchItem {
 
         return new Promise((resolve, reject) => {
             this.fourD.proxyURLThru4D(jwURL)
-                .subscribe(
-                response => {
+                .subscribe(resultJSON => {
                     this.jwItem = null;
-                    let resultJSON = response.json();
                     if (resultJSON.items.length === 1) {
                         this.jwItem = resultJSON.items[0];
                     } else {
@@ -72,7 +68,7 @@ export class JustWatchItem {
             this.fourD.proxyURLThru4D(jwURL)
                 .subscribe(
                 response => {
-                    this.jwItem = response.json();
+                    this.jwItem = response;
                     resolve(this.jwItem);
 
                 },

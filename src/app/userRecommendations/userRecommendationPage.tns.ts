@@ -76,8 +76,7 @@ export class UserRecommendationPage implements OnInit {
                     rating: stars, 
                     viewer: FourDInterface.currentUserID};
         this.fourD.call4DRESTMethod('MGLErestUpdateViewerProfile', body)
-        .subscribe(result => {
-            let response = result.json();
+        .subscribe(response => {
             if (response.result === 'OK') {
                 this.nextFeature();
             } else alert('Error:'+response.message);

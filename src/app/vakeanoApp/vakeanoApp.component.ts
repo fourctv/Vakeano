@@ -1,6 +1,6 @@
 import { Component, AfterContentInit, ViewContainerRef} from '@angular/core';
 import { Routes, Router } from '@angular/router';
-import { Http } from '@angular/http';
+import { HttpClient }      from '@angular/common/http';
 
 import { Config } from '../common/index';
 
@@ -86,7 +86,7 @@ export class VakeanoAppComponent implements AfterContentInit {
     public userIsAdmin:boolean = false;
 
 
-    constructor (public router:Router, private http:Http, private modal: Modal, private hostViewRef: ViewContainerRef) {
+    constructor (public router:Router, private http:HttpClient, private modal: Modal, private hostViewRef: ViewContainerRef) {
         FourDInterface.http = http;
 //        FourDInterface.fourDUrl = 'http://localhost:8080';
         FourDInterface.fourDUrl = 'http://www.vakeano.com';

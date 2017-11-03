@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
 import { ModalDialogInstance } from '../js44D/angular2-modal/models/ModalDialogInstance';
@@ -62,7 +62,7 @@ export class GenomeMapListApp {
         { title: 'UI Name', field: 'UIName', width:250}
     ];
     
-    constructor(private http:Http) {
+    constructor(private http:HttpClient) {
          if (!FourDInterface.http) FourDInterface.http = http;
     }
 

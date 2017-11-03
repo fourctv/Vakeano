@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Headers } from '@angular/http';
 
 import { FourDInterface } from '../../js44D/js44D/JSFourDInterface';
 import { JustWatchItem } from './justWatchItem';
@@ -42,11 +40,9 @@ export class TMDB {
 
         return new Promise((resolve, reject) => {
             this.fourD.proxyURLThru4D(tmdbURL)
-                .subscribe(
-                response => {
+                .subscribe(resultJSON => {
                     this.tmdbRecord = null;
                     this.tmdbList = [];
-                    let resultJSON = response.json();
                     if (resultJSON.results.length === 1) {
                         this.tmdbRecord = resultJSON.results[0];
                     } else {
@@ -80,7 +76,7 @@ export class TMDB {
             this.fourD.proxyURLThru4D(tmdbURL)
                 .subscribe(
                 response => {
-                    this.tmdbDetails = response.json();
+                    this.tmdbDetails = response;
 //                    console.log(this.tmdbDetails);
                     resolve(this.tmdbDetails);
 
@@ -118,7 +114,7 @@ export class TMDB {
                 this.fourD.proxyURLThru4D(tmdbURL)
                 .subscribe(
                 response => {
-                    this.tmdbDetails = response.json();
+                    this.tmdbDetails = response;
 //                    console.log(this.tmdbDetails);
 
                     // grab IMDB ID

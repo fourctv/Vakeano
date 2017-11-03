@@ -56,8 +56,7 @@ export class UserRecommendations implements OnInit {
                     rating: stars, 
                     viewer: feature.UserID};
         this.fourD.call4DRESTMethod('MGLErestUpdateViewerProfile', body)
-        .subscribe(result => {
-            let response = result.json();
+        .subscribe(response => {
             if (response.result === 'OK') {
                 let list:Array<ViewerContentEx> = this.controlList.models;
                 this.controlList.models = list.filter((item) => {return item.RecordID !== feature.RecordID;});

@@ -80,9 +80,9 @@ export class AnalyzeFeatureComponent implements AfterViewInit {
                 featureID: (<any>this.inputData).featureID,
                 profileID: (<TasteProfilesEx>this.theGrid.currentRecord).ProfileID
             };
-            this.fourD.call4DRESTMethod('MGRErestCheckFeature', body)
+            this.fourD.call4DRESTMethod('MGRErestCheckFeature', body, {responseType:'text'})
                 .subscribe(result => {
-                    this.analyzeResponse = result.text();
+                    this.analyzeResponse = result;
                 }, error => { console.log(error); alert('Error:' + error); });
         }
     }

@@ -70,9 +70,9 @@ export class ViewerContentInfo implements AfterViewInit {
                 featureID: (<ViewerContent>this.theGrid.selectedRow()).FeatureID,
                 profileID: (<ViewerContent>this.theGrid.selectedRow()).ProfileID
             };
-            this.fourD.call4DRESTMethod('MGRErestCheckFeature', body)
+            this.fourD.call4DRESTMethod('MGRErestCheckFeature', body, {responseType:'text'})
                 .subscribe(result => {
-                    this.analyzeResponse = result.text();
+                    this.analyzeResponse = result;
                 }, error => { console.log(error); alert('Error:' + error); });
         }
     }
@@ -83,7 +83,7 @@ export class ViewerContentInfo implements AfterViewInit {
                 profileID: this.record.ProfileID
             };
             kendo.ui.progress($(this.elementRef.nativeElement), true); // show loading progress icon
-            this.fourD.call4DRESTMethod('MGSErestRecalcRecommendations', body)
+            this.fourD.call4DRESTMethod('MGSErestRecalcRecommendations', body, {responseType:'text'})
                 .subscribe(result => {
                    this.record.refresh().then(r => {
                        kendo.ui.progress($(this.elementRef.nativeElement), false); // hide loading progress icon

@@ -163,9 +163,8 @@ export class EditTasteProfile {
         };
         kendo.ui.progress($(this.elementRef.nativeElement), true); // show loading progress icon
         this.fourD.call4DRESTMethod('MGLErestViewerProfileToVectors', body)
-            .subscribe(result => {
+            .subscribe(response => {
                 kendo.ui.progress($(this.elementRef.nativeElement), false); // hide loading progress icon
-                let response = result.json();
                 if (response.result !== 'OK') alert('Error:' + response.message);
                 this.profileUpdated.emit();
             }, error => { console.log(error); alert('Error:' + error); });

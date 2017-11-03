@@ -1,5 +1,5 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { NgModel } from '@angular/forms';
 
 import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
@@ -72,7 +72,7 @@ export class UserListApp {
     //
     // We need access to a Modal dialog component, to open an associated Record Edit Form 
     //
-    constructor(private modal: Modal, private viewref:ViewContainerRef, private fourD:FourDInterface, private http:Http) {
+    constructor(private modal: Modal, private viewref:ViewContainerRef, private fourD:FourDInterface, private http:HttpClient) {
         if (!FourDInterface.http) FourDInterface.http = http;
     }
 

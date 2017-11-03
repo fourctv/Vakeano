@@ -34,8 +34,7 @@ export class UserRating implements AfterViewInit {
                     viewer: this.currentUser,
                     profile: this.currentProfile};
         this.fourD.call4DRESTMethod('MGLErestUpdateViewerProfile', body)
-        .subscribe(result => {
-            let response = result.json();
+        .subscribe(response => {
             if (response.result === 'OK') {
                 let list:Array<Features> = this.controlList.models;
                 this.controlList.models = list.filter((item) => {return item.FeatureId !== feature.FeatureId;});

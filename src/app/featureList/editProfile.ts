@@ -144,8 +144,7 @@ export class EditProfile {
             vector: gene.Vector
         };
         this.fourD.call4DRESTMethod('CPROrestProfileToVectors', body)
-            .subscribe(result => {
-                let response = result.json();
+            .subscribe(response => {
                 if (response.result !== 'OK') alert('Error:' + response.message);
             }, error => { console.log(error); alert('Error:' + error); });
 

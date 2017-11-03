@@ -1,5 +1,6 @@
 import { NgModule, NO_ERRORS_SCHEMA, NgModuleFactoryLoader } from '@angular/core';
 import { Routes } from '@angular/router';
+import { HttpClientModule }      from '@angular/common/http';
 
 // nativescript
 import { NSModuleFactoryLoader } from 'nativescript-angular/router';
@@ -53,6 +54,7 @@ Config.PLATFORM_TARGET = Config.PLATFORMS.MOBILE_NATIVE;
         NativeScriptRouterModule,
         NativeScriptRouterModule.forRoot(<any>routes),
         NativeScriptUISideDrawerModule,
+        HttpClientModule,
         MGModule
     ],
     exports: [
