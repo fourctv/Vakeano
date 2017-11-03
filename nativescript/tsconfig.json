@@ -36,7 +36,9 @@
             "node_modules/@types",
             "node_modules"
         ],
-        "types": ["jquery", "kendo-ui",
+        "types": [
+            "jquery",
+            "kendo-ui",
             "jasmine"
         ]
     },
