@@ -176,7 +176,7 @@ export class VakeanoAppComponent implements AfterContentInit {
     }
 
     showAbout() {
-        window.open("https://vakeano.godaddysites.com", '_blank')
+        window.open("/about.html", '_blank')
     }
 
 }
