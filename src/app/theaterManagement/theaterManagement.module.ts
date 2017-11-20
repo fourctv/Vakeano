@@ -5,8 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TheaterManagementDialog } from './theatherManagement.dialog';
 import { TheaterManagementApp } from './theaterManagement.component';
 
-import { JS44DModule } from '../js44D/js44D.module';
-import { ModalModule } from '../js44D/modal.module';
+import { JS44DModule, ModalModule } from 'js44d/ui';
 import { MGModule } from '../moviegenome/mg.module';
 
 export const TheaterManagementAppRoute: Routes = [

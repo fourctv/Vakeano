@@ -4,7 +4,7 @@ import { Route } from '@angular/router';
 import { HttpClient }      from '@angular/common/http';
 
 
-import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
+import { FourDInterface } from 'js44d';
 import { LoginComponent } from '../login/login.component';
 import { SignUpComponent } from '../login/signUp.component';
 

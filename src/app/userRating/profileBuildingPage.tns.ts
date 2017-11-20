@@ -4,8 +4,8 @@ import { RouterExtensions } from 'nativescript-angular';
 import { openUrl } from "tns-core-modules/utils/utils";
 import { SwipeGestureEventData, SwipeDirection } from "tns-core-modules/ui/gestures";
 
-import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
-import { FourDCollection } from '../js44D/js44D/JSFourDCollection';
+import { FourDInterface } from 'js44d';
+import { FourDCollection } from 'js44d';
 
 import { Features } from '../moviegenome/index';
 import { JustWatchItem } from '../moviegenome/index';

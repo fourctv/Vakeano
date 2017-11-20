@@ -11,8 +11,7 @@ import { EditProfile } from './editProfile';
 import { ContentProfileInfo } from './contentProfileInfo';
 import { AnalyzeFeatureComponent } from './analyzeFeature';
 
-import { JS44DModule } from '../js44D/js44D.module';
-import { ModalModule } from '../js44D/modal.module';
+import { JS44DModule, ModalModule } from 'js44d/ui';
 import { MGModule } from '../moviegenome/mg.module';
 
 export const FeatureListAppRoute: Routes = [

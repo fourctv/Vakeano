@@ -1,12 +1,12 @@
-import { Component, Input, AfterContentInit} from '@angular/core';
+import { Component, Input, AfterContentInit } from '@angular/core';
 
-import {ShellLists} from '../DB/ShellLists';
+import { ShellLists } from '../DB/ShellLists';
 
-import {FourDCollection} from '../../js44D/js44D/JSFourDCollection';
+import { FourDCollection } from 'js44d';
 
 @Component({
     selector: 'mglist-dropdown',
-    styles : [`.mglistDropdown {
+    styles: [`.mglistDropdown {
                 margin: inherit;
                 width: inherit;
                 padding: inherit;
@@ -14,7 +14,7 @@ import {FourDCollection} from '../../js44D/js44D/JSFourDCollection';
                 border: 1px solid #ccc;
                 height: inherit;
                 }
-            `], 
+            `],
     template: `
         <select  #selector class='mglistDropdown' (change)='selectedValue = $event.target.value' [(value)]='selectedValue'>
             <option *ngFor='let item of listOptions' value='{{item}}' [selected]='isItemSelected(item)'>{{item}}</option>
@@ -27,10 +27,10 @@ export class MGListDropDown implements AfterContentInit {
     @Input() public selectedValue: string;
     @Input() public listOptions: Array<string> = [];
 
-    private shellList:ShellLists;
+    private shellList: ShellLists;
 
     private static _listCache: any = {};
-    
+
     ngAfterContentInit() {
         if (this.listName) {
             if (MGListDropDown._listCache[this.listName]) {
@@ -38,11 +38,11 @@ export class MGListDropDown implements AfterContentInit {
                 this.listOptions = MGListDropDown._listCache[this.listName];
             } else {
                 this.shellList = new ShellLists();
-                let query = {query:[ShellLists.kListName+';=;'+this.listName]};
+                let query = { query: [ShellLists.kListName + ';=;' + this.listName] };
                 this.shellList.getRecords(query)
-                    .then((recs:FourDCollection) => {
+                    .then((recs: FourDCollection) => {
                         this.listOptions = [''];
-                        recs.models.forEach((rec:ShellLists) => {
+                        recs.models.forEach((rec: ShellLists) => {
                             this.listOptions.push(rec.ElementShortValue);
                         });
                         MGListDropDown._listCache[this.listName] = this.listOptions; // cache list

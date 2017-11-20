@@ -1,7 +1,7 @@
 import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
 
 
-import { DataGrid } from '../js44D/dataGrid/dataGrid';
+import { DataGrid } from 'js44d/ui';
 import { FeaturesEx } from '../moviegenome/index';
 
 @Component({

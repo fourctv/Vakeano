@@ -5,7 +5,7 @@ import * as app from "tns-core-modules/application";
 import { openUrl } from "tns-core-modules/utils/utils";
 import { SwipeGestureEventData, SwipeDirection } from "tns-core-modules/ui/gestures";
 
-import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
+import { FourDInterface } from 'js44d';
 import { JustWatchItem } from '../moviegenome/index';
 
 @Component({

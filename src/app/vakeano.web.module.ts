@@ -10,9 +10,7 @@ import { HttpClientModule }      from '@angular/common/http';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 // libs
-import { FourDInterface } from './js44D/js44D/JSFourDInterface';
-import { FourDModel } from './js44D/js44D/JSFourDModel';
-import { FourDCollection } from './js44D/js44D/JSFourDCollection';
+import { FourDInterface, FourDModel, FourDCollection } from 'js44d';
 
 // app
 import { VakeanoAppComponent } from './vakeanoApp/vakeanoApp.component';
@@ -24,8 +22,7 @@ import { LoginComponent  } from './login/login.component';
 import { SignUpComponent  } from './login/signUp.component';
 
 // feature modules
-import { JS44DModule } from './js44D/js44D.module';
-import { ModalModule } from './js44D/modal.module';
+import { JS44DModule, ModalModule } from 'js44d/ui';
 import { MGModule } from './moviegenome/mg.module';
 
 let routerModule = RouterModule.forRoot(routes);

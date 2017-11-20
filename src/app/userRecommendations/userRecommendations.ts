@@ -1,7 +1,7 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
 
-import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
-import { FourDCollection } from '../js44D/js44D/JSFourDCollection';
+import { FourDInterface } from 'js44d';
+import { FourDCollection } from 'js44d';
 
 import { ViewerContent, ViewerContentEx, Features, TasteProfiles } from '../moviegenome/index';
 import { JustWatchItem, TMDB } from '../moviegenome/index';

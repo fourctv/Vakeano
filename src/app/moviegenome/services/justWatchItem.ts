@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { FourDInterface } from '../../js44D/js44D/JSFourDInterface';
+import { FourDInterface } from 'js44d';
 import { Config } from '../../common/index';
 
 @Injectable()

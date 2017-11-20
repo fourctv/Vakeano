@@ -1,9 +1,8 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 
-import { ModalConfig } from '../js44D/angular2-modal/models/ModalConfig';
-import { ICustomModal } from '../js44D/angular2-modal/models/ICustomModal';
-import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
-import { DataGrid } from '../js44D/dataGrid/dataGrid';
+import { FourDInterface } from 'js44d';
+import { ModalConfig, ICustomModal } from 'js44d/ui';
+import { DataGrid } from 'js44d/ui';
 import { TasteProfilesEx } from '../moviegenome/index';
 
 @Component({

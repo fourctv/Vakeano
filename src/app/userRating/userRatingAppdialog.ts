@@ -1,9 +1,7 @@
 import { Component, ContentChild, ElementRef, ViewContainerRef, AfterContentInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ModalConfig } from '../js44D/angular2-modal/models/ModalConfig';
-import { Modal } from '../js44D/angular2-modal/providers/Modal';
-import { ICustomModalComponent } from '../js44D/angular2-modal/models/ICustomModalComponent';
+import { ModalConfig, Modal, ICustomModalComponent } from 'js44d/ui';
 
 import { UserRating } from './userRating'
 

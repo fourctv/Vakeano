@@ -7,8 +7,7 @@ import { UserListApp } from './userList.component';
 import { UserQueryBand } from './userQueryBand';
 import { UserInfoDialog } from './userInfo.dialog';
 
-import { JS44DModule } from '../js44D/js44D.module';
-import { ModalModule } from '../js44D/modal.module';
+import { JS44DModule, ModalModule } from 'js44d/ui';
 import { MGModule } from '../moviegenome/mg.module';
 
 export const UserManagementAppRoute: Routes = [

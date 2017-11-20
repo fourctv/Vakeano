@@ -14,9 +14,7 @@ import { NativeScriptUISideDrawerModule } from "nativescript-pro-ui/sidedrawer/a
 
 
 // libs
-import { FourDInterface } from './js44D/js44D/JSFourDInterface';
-import { FourDModel } from './js44D/js44D/JSFourDModel';
-import { FourDCollection } from './js44D/js44D/JSFourDCollection';
+import { FourDInterface, FourDModel, FourDCollection } from 'js44d';
 
 // app
 import { Config } from './common/index';

@@ -4,8 +4,7 @@ import { NgModule } from '@angular/core';
 import { UserRecommendations } from './userRecommendations';
 import { UserRecommendationsDialog } from './userRecommendationsDialog';
 
-import { JS44DModule } from '../js44D/js44D.module';
-import { ModalModule } from '../js44D/modal.module';
+import { JS44DModule, ModalModule } from 'js44d/ui';
 import { MGModule } from '../moviegenome/mg.module';
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { FourDModel } from '../../js44D/js44D/JSFourDModel';
+import { FourDModel } from 'js44d';
 
 export class Features extends FourDModel {
 

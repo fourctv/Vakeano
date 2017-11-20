@@ -1,11 +1,8 @@
 import { Component, AfterContentInit } from '@angular/core';
 
-//import { LogService } from '../core/services/logging/log.service';
-import { ModalConfig } from '../js44D/angular2-modal/models/ModalConfig';
-import { ICustomModalComponent } from '../js44D/angular2-modal/models/ICustomModalComponent';
-import { ModalDialogInstance } from '../js44D/angular2-modal/models/ModalDialogInstance';
+import { ModalConfig, ICustomModalComponent, ModalDialogInstance } from 'js44d/ui';
 
-import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
+import { FourDInterface } from 'js44d';
 
 import { Location, Theater, ExhibitionRoom } from '../moviegenome/index';
 

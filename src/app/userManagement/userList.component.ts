@@ -2,10 +2,9 @@ import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgModel } from '@angular/forms';
 
-import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
-import { Modal } from '../js44D/angular2-modal/providers/Modal';
-import { ModalDialogInstance } from '../js44D/angular2-modal/models/ModalDialogInstance';
-import { DataGrid } from '../js44D/dataGrid/dataGrid';
+import { FourDInterface } from 'js44d';
+import { Modal, ModalDialogInstance } from 'js44d/ui';
+import { DataGrid } from 'js44d/ui';
 
 import { ShellUsersEx, Location } from '../moviegenome/index';
 

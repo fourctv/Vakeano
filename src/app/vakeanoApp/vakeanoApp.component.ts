@@ -6,8 +6,8 @@ import { Config } from '../common/index';
 
 import { LoginComponent } from '../login/login.component';
 import { SignUpComponent } from '../login/signUp.component';
-import { Modal } from '../js44D/angular2-modal/providers/Modal';
-import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
+import { Modal } from 'js44d/ui';
+import { FourDInterface } from 'js44d';
 
 import { BlankPage } from './blankPage';
 

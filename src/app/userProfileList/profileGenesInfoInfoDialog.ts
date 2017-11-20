@@ -1,7 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 
-import { RecordEditWindow } from '../js44D/containers/recordEditWindow';
-import { ModalConfig } from '../js44D/angular2-modal/models/ModalConfig';
+import { RecordEditWindow } from 'js44d/ui';
+import { ModalConfig } from 'js44d/ui';
 
 import { ProfileGenesEx } from '../moviegenome/index';
 

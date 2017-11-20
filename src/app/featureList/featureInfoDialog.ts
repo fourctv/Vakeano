@@ -2,9 +2,9 @@ import { Component, AfterViewInit } from '@angular/core';
 import { HttpClient }      from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import { RecordEditWindow } from '../js44D/containers/recordEditWindow';
-import { ModalConfig } from '../js44D/angular2-modal/models/ModalConfig';
-import { ListSelectorDialog } from '../js44D/dialogs/listSelectorDialog';
+import { RecordEditWindow } from 'js44d/ui';
+import { ModalConfig } from 'js44d/ui';
+import { ListSelectorDialog } from 'js44d/ui';
 
 import { FeaturesEx } from '../moviegenome/index';
 import { JustWatchItem, TMDB } from '../moviegenome/index';

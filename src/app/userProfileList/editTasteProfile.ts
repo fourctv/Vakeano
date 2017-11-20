@@ -1,6 +1,6 @@
 import { Component, Input, EventEmitter, Output, ElementRef } from '@angular/core';
 
-import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
+import { FourDInterface } from 'js44d';
 
 import {  GenomeModel, GenomeMap, TasteProfiles, TasteProfilesEx, ProfileGenes, ProfileGenesEx } from '../moviegenome/index';
 

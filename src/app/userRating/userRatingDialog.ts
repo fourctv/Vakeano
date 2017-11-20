@@ -1,9 +1,6 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
 
-import { ICustomModal } from '../js44D/angular2-modal/models/ICustomModal';
-import { ICustomModalComponent } from '../js44D/angular2-modal/models/ICustomModalComponent';
-import { ModalConfig } from '../js44D/angular2-modal/models/ModalConfig';
-import { ModalDialogInstance } from '../js44D/angular2-modal/models/ModalDialogInstance';
+import { ICustomModal, ICustomModalComponent, ModalConfig, ModalDialogInstance } from 'js44d/ui';
 
 @Component({
     selector: 'userrating-dialog',

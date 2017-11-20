@@ -1,7 +1,7 @@
 import { Component, ViewChild, ViewContainerRef, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { DataGrid }  from '../js44D/dataGrid/dataGrid';
-import { Modal } from '../js44D/angular2-modal/providers/Modal';
+import { DataGrid }  from 'js44d/ui';
+import { Modal } from 'js44d/ui';
 import { TasteProfilesEx, ProfileGenes, ProfileGenesEx } from '../moviegenome/index';
 
 import { ProfileGenesInfoDialog } from './profileGenesInfoInfoDialog';

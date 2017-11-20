@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { RouterExtensions } from 'nativescript-angular';
 
-import { FourDInterface,  MD5 } from '../js44D/js44D/JSFourDInterface';
+import { FourDInterface,  MD5 } from 'js44d';
 import { ShellUsers } from  '../moviegenome/index';
 
 @Component({

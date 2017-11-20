@@ -1,7 +1,6 @@
 import { Component, Input, AfterViewInit } from '@angular/core';
 
-import { FourDInterface } from '../js44D/js44D/JSFourDInterface';
-import { FourDCollection } from '../js44D/js44D/JSFourDCollection';
+import { FourDInterface, FourDCollection } from 'js44d';
 
 import { Features } from '../moviegenome/index';
 
