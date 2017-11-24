@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 
 import { FourDInterface } from 'js44d';
-import { ModalConfig, RecordEditWindow } from 'js44d/ui';
+import { ModalConfig, RecordEditWindow } from 'js44d';
 import { TasteProfilesEx } from '../moviegenome/index';
 import { ProfileGenesInfo } from './profileGenesInfo';
 import { ViewerContentInfo } from './viewerContentInfo';

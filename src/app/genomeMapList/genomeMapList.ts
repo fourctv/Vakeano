@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { FourDInterface } from 'js44d';
-import { ModalDialogInstance } from 'js44d/ui';
+import { ModalDialogInstance } from 'js44d';
 
 import { GenomeMap } from '../moviegenome/index';
 

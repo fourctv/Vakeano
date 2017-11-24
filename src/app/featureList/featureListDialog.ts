@@ -1,7 +1,7 @@
 import { Component, ContentChild, ElementRef, ViewContainerRef, AfterContentInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ModalConfig, Modal, ICustomModalComponent } from 'js44d/ui';
+import { ModalConfig, Modal, ICustomModalComponent } from 'js44d';
 
 import { FeatureListApp } from './featureList'
 

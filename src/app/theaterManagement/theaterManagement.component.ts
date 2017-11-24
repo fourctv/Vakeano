@@ -1,6 +1,6 @@
 import { Component, AfterContentInit } from '@angular/core';
 
-import { ModalConfig, ICustomModalComponent, ModalDialogInstance } from 'js44d/ui';
+import { ModalConfig, ICustomModalComponent, ModalDialogInstance } from 'js44d';
 
 import { FourDInterface } from 'js44d';
 

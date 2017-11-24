@@ -1,8 +1,8 @@
 import { Component, AfterViewInit, ViewChild, ElementRef,Input } from '@angular/core';
 
 import { FourDInterface, MD5 } from 'js44d';
-import { ModalConfig } from 'js44d/ui';
-import { RecordEditWindow } from 'js44d/ui';
+import { ModalConfig } from 'js44d';
+import { RecordEditWindow } from 'js44d';
 
 import { ShellUsersEx, Location } from '../moviegenome/index';
 

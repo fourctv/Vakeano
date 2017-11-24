@@ -2,7 +2,7 @@ import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
 
 import { FourDCollection, FourDInterface } from 'js44d';
 
-import { DataGrid } from 'js44d/ui';
+import { DataGrid } from 'js44d';
 import { TasteProfilesEx, ViewerContent, ViewerContentEx, Features } from '../moviegenome/index';
 
 @Component({

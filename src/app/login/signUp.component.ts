@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { ModalDialogInstance, ICustomModalComponent, ModalConfig } from 'js44d/ui';
+import { ModalDialogInstance, ICustomModalComponent, ModalConfig } from 'js44d';
 
 import { FourDInterface,  MD5 } from 'js44d';
 import { ShellUsers } from  '../moviegenome/index';

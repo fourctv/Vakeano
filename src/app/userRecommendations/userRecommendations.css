@@ -56,7 +56,7 @@
 }
 
 .product {
-    display: flex;
+    display: grid;
     float: left;
     position: relative;
     width: 250px;

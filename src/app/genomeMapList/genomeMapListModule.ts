@@ -7,7 +7,7 @@ import { GenomeMapListApp } from './genomeMapList';
 import { GenomeMapInfoDialog } from './genomeMapInfoDialog';
 import { GenomeMapQueryBand } from './genomeMapQueryBand';
 
-import { JS44DModule, ModalModule } from 'js44d/ui';
+import { JS44DModule, ModalModule } from 'js44d';
 import { MGModule } from '../moviegenome/mg.module';
 
 export const GenomeMapRoutes: Routes = [

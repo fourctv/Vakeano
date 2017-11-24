@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { NgModel } from '@angular/forms';
 
 import { FourDInterface } from 'js44d';
-import { Modal, ModalDialogInstance } from 'js44d/ui';
-import { DataGrid } from 'js44d/ui';
+import { Modal, ModalDialogInstance } from 'js44d';
+import { DataGrid } from 'js44d';
 
 import { ShellUsersEx, Location } from '../moviegenome/index';
 

@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { FourDInterface } from 'js44d';
-import { DataGrid } from 'js44d/ui';
-import { Modal, ModalDialogInstance } from 'js44d/ui';
+import { DataGrid } from 'js44d';
+import { Modal, ModalDialogInstance } from 'js44d';
 
 import { FeatureInfoDialog } from './featureInfoDialog';
 import { AnalyzeFeatureComponent } from './analyzeFeature';

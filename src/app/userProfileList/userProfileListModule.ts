@@ -17,7 +17,7 @@ import { ProfileGenesInfoDialog } from './profileGenesInfoInfoDialog';
 import { UserRatingSubModule } from '../userRating/userRatingSubModule';
 import { UserRecommendationsSubModule } from '../userRecommendations/userRecommendationsSubModule';
 
-import { JS44DModule, ModalModule } from 'js44d/ui';
+import { JS44DModule, ModalModule } from 'js44d';
 import { MGModule } from '../moviegenome/mg.module';
 
 export const UserProfileAppRoute: Routes = [

@@ -6,7 +6,7 @@ import { Config } from '../common/index';
 
 import { LoginComponent } from '../login/login.component';
 import { SignUpComponent } from '../login/signUp.component';
-import { Modal } from 'js44d/ui';
+import { Modal } from 'js44d';
 import { FourDInterface } from 'js44d';
 
 import { BlankPage } from './blankPage';

@@ -22,7 +22,7 @@ import { LoginComponent  } from './login/login.component';
 import { SignUpComponent  } from './login/signUp.component';
 
 // feature modules
-import { JS44DModule, ModalModule } from 'js44d/ui';
+import { JS44DModule, ModalModule } from 'js44d';
 import { MGModule } from './moviegenome/mg.module';
 
 let routerModule = RouterModule.forRoot(routes);
