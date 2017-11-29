@@ -9,9 +9,6 @@ import { HttpClientModule }      from '@angular/common/http';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
-// libs
-import { FourDInterface, FourDModel, FourDCollection } from 'js44d';
-
 // app
 import { VakeanoAppComponent } from './vakeanoApp/vakeanoApp.component';
 import { routes } from './vakeanoApp/vakeanoApp.component';
@@ -22,7 +19,7 @@ import { LoginComponent  } from './login/login.component';
 import { SignUpComponent  } from './login/signUp.component';
 
 // feature modules
-import { JS44DModule, ModalModule } from 'js44d';
+import { fourDModule, JS44DModule, ModalModule } from 'js44d';
 import { MGModule } from './moviegenome/mg.module';
 
 let routerModule = RouterModule.forRoot(routes);
@@ -37,14 +34,10 @@ let routerModule = RouterModule.forRoot(routes);
     HttpClientModule,
     BsDropdownModule.forRoot(),
     routerModule,
-    JS44DModule, ModalModule,
+    fourDModule, JS44DModule, ModalModule,
     MGModule
   ],
-  declarations: [ VakeanoAppComponent, BlankPage, LoginComponent, SignUpComponent
-                ],
-  providers: [
-    FourDInterface, FourDModel, FourDCollection
-  ],
+  declarations: [ VakeanoAppComponent, BlankPage, LoginComponent, SignUpComponent ],
   exports: [JS44DModule, ModalModule, MGModule ],
   entryComponents: [ LoginComponent, SignUpComponent ],
   bootstrap: [ VakeanoAppComponent ]

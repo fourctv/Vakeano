@@ -1,5 +1,4 @@
 import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import {NgModel} from '@angular/forms';
 
 import { FourDInterface } from 'js44d';
@@ -80,8 +79,7 @@ export class UserProfileListApp {
     //
     // We need access to a Modal dialog component, to open an associated Record Edit Form 
     //
-    constructor(private modal: Modal, private viewref:ViewContainerRef, private fourD:FourDInterface, private http:HttpClient) {
-        if (!FourDInterface.http) FourDInterface.http = http;
+    constructor(private modal: Modal, private viewref:ViewContainerRef, private fourD:FourDInterface) {
     }
 
     public showRecommendations() {

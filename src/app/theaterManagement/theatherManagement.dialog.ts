@@ -27,6 +27,6 @@ export class TheaterManagementDialog implements AfterContentInit {
      */
     ngAfterContentInit() {
         this.router.navigate(['/blank'], { skipLocationChange: true });
-        this.modal.open(TheaterManagementApp, {}, this.dialogConfig, false, 'userList'); // open web app dialog window
+        this.modal.open(TheaterManagementApp, {}, this.dialogConfig, false, 'theaterList'); // open web app dialog window
     }
 }

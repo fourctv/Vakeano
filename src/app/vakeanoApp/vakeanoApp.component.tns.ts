@@ -1,7 +1,6 @@
 // angular
 import { Component, Inject } from '@angular/core';
 import { Route } from '@angular/router';
-import { HttpClient }      from '@angular/common/http';
 
 
 import { FourDInterface } from 'js44d';
@@ -38,8 +37,7 @@ export const routes: Route[] = [
 })
 export class VakeanoAppComponent {
 
-  constructor( private http: HttpClient) {
-    FourDInterface.http = http;
+  constructor() {
     FourDInterface.fourDUrl = 'http://www.vakeano.com';
 
   }

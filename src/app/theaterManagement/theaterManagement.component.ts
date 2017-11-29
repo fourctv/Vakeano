@@ -2,8 +2,6 @@ import { Component, AfterContentInit } from '@angular/core';
 
 import { ModalConfig, ICustomModalComponent, ModalDialogInstance } from 'js44d';
 
-import { FourDInterface } from 'js44d';
-
 import { Location, Theater, ExhibitionRoom } from '../moviegenome/index';
 
 @Component({
@@ -34,9 +32,6 @@ export class TheaterManagementApp implements ICustomModalComponent, AfterContent
     public currentExhibitionRoom: ExhibitionRoom = new ExhibitionRoom();
     public selectedExhibitionRoom: any;
  
-    constructor(private fourD: FourDInterface/*, private logger: LogService*/) {
-
-    }
 
     ngAfterContentInit() {
         this.refreshLocations();
