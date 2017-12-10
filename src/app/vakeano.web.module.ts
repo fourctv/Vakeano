@@ -19,7 +19,7 @@ import { LoginComponent  } from './login/login.component';
 import { SignUpComponent  } from './login/signUp.component';
 
 // feature modules
-import { fourDModule, JS44DModule, ModalModule } from 'js44d';
+import { FourDModule, JS44DModule, ModalModule } from 'js44d';
 import { MGModule } from './moviegenome/mg.module';
 
 let routerModule = RouterModule.forRoot(routes);
@@ -34,7 +34,7 @@ let routerModule = RouterModule.forRoot(routes);
     HttpClientModule,
     BsDropdownModule.forRoot(),
     routerModule,
-    fourDModule, JS44DModule, ModalModule,
+    FourDModule, JS44DModule, ModalModule,
     MGModule
   ],
   declarations: [ VakeanoAppComponent, BlankPage, LoginComponent, SignUpComponent ],
