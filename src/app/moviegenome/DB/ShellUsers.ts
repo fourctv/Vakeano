@@ -67,10 +67,10 @@ export class ShellUsers extends FourDModel {
 	set nbLogins(v:number) {this.set('nbLogins',v);}
 
 	get lastLogin():Date {return this.get('lastLogin');}
-	set lastLogin(v:Date) {this.set('lastLogin',new Date(<any>v));}
+	set lastLogin(v:Date) {this.set('lastLogin',v);}
 
 	get lastPasswordChange():Date {return this.get('lastPasswordChange');}
-	set lastPasswordChange(v:Date) {this.set('lastPasswordChange',new Date(<any>v));}
+	set lastPasswordChange(v:Date) {this.set('lastPasswordChange',v);}
 
 	get ChangeNextLogin():boolean {return this.get('ChangeNextLogin');}
 	set ChangeNextLogin(v:boolean) {this.set('ChangeNextLogin',v);}
@@ -94,7 +94,7 @@ export class ShellUsers extends FourDModel {
 	set LastName(v:string) {this.set('LastName',v);}
 
 	get DOB():Date {return this.get('DOB');}
-	set DOB(v:Date) {this.set('DOB',new Date(<any>v));}
+	set DOB(v:Date) {this.set('DOB',v);}
 
 	get Gender():string {return this.get('Gender');}
 	set Gender(v:string) {this.set('Gender',v);}

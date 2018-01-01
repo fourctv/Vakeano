@@ -64,10 +64,10 @@ export class TasteProfiles extends FourDModel {
 	set Priority(v:number) {this.set('Priority',v);}
 
 	get CreationDate():Date {return this.get('CreationDate');}
-	set CreationDate(v:Date) {this.set('CreationDate',new Date(<any>v));}
+	set CreationDate(v:Date) {this.set('CreationDate',v);}
 
 	get LastUpdateDate():Date {return this.get('LastUpdateDate');}
-	set LastUpdateDate(v:Date) {this.set('LastUpdateDate',new Date(<any>v));}
+	set LastUpdateDate(v:Date) {this.set('LastUpdateDate',v);}
 
 	get TimeStamp():string {return this.get('TimeStamp');}
 	set TimeStamp(v:string) {this.set('TimeStamp',v);}

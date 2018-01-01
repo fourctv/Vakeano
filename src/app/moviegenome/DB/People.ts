@@ -36,10 +36,10 @@ export class People extends FourDModel {
 	set PeopleID(v:number) {this.set('PeopleID',v);}
 
 	get CreationDate():Date {return this.get('CreationDate');}
-	set CreationDate(v:Date) {this.set('CreationDate',new Date(<any>v));}
+	set CreationDate(v:Date) {this.set('CreationDate',v);}
 
 	get LastUpdateDate():Date {return this.get('LastUpdateDate');}
-	set LastUpdateDate(v:Date) {this.set('LastUpdateDate',new Date(<any>v));}
+	set LastUpdateDate(v:Date) {this.set('LastUpdateDate',v);}
 
 	get TimeStamp():string {return this.get('TimeStamp');}
 	set TimeStamp(v:string) {this.set('TimeStamp',v);}
@@ -54,10 +54,10 @@ export class People extends FourDModel {
 	set LastName(v:string) {this.set('LastName',v);}
 
 	get DOB():Date {return this.get('DOB');}
-	set DOB(v:Date) {this.set('DOB',new Date(<any>v));}
+	set DOB(v:Date) {this.set('DOB',v);}
 
 	get DOD():Date {return this.get('DOD');}
-	set DOD(v:Date) {this.set('DOD',new Date(<any>v));}
+	set DOD(v:Date) {this.set('DOD',v);}
 
 	get Awards():string {return this.get('Awards');}
 	set Awards(v:string) {this.set('Awards',v);}

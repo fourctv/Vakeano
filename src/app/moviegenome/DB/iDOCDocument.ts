@@ -71,7 +71,7 @@ export class iDOCDocument extends FourDModel {
 	set FileName(v:string) {this.set('FileName',v);}
 
 	get CreationDate():Date {return this.get('CreationDate');}
-	set CreationDate(v:Date) {this.set('CreationDate',new Date(<any>v));}
+	set CreationDate(v:Date) {this.set('CreationDate',v);}
 
 	get TimeStamp():string {return this.get('TimeStamp');}
 	set TimeStamp(v:string) {this.set('TimeStamp',v);}
@@ -95,7 +95,7 @@ export class iDOCDocument extends FourDModel {
 	set DocumentName(v:string) {this.set('DocumentName',v);}
 
 	get DocumentDate():Date {return this.get('DocumentDate');}
-	set DocumentDate(v:Date) {this.set('DocumentDate',new Date(<any>v));}
+	set DocumentDate(v:Date) {this.set('DocumentDate',v);}
 
 	get FileSize():number {return this.get('FileSize');}
 	set FileSize(v:number) {this.set('FileSize',v);}

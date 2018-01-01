@@ -38,10 +38,10 @@ export class Schedule extends FourDModel {
 	set RecordID(v:number) {this.set('RecordID',v);}
 
 	get CreationDate():Date {return this.get('CreationDate');}
-	set CreationDate(v:Date) {this.set('CreationDate',new Date(<any>v));}
+	set CreationDate(v:Date) {this.set('CreationDate',v);}
 
 	get LastUpdateDate():Date {return this.get('LastUpdateDate');}
-	set LastUpdateDate(v:Date) {this.set('LastUpdateDate',new Date(<any>v));}
+	set LastUpdateDate(v:Date) {this.set('LastUpdateDate',v);}
 
 	get TimeStamp():string {return this.get('TimeStamp');}
 	set TimeStamp(v:string) {this.set('TimeStamp',v);}
@@ -59,13 +59,13 @@ export class Schedule extends FourDModel {
 	set LocationID(v:number) {this.set('LocationID',v);}
 
 	get ExhibitionDate():Date {return this.get('ExhibitionDate');}
-	set ExhibitionDate(v:Date) {this.set('ExhibitionDate',new Date(<any>v));}
+	set ExhibitionDate(v:Date) {this.set('ExhibitionDate',v);}
 
 	get ExhibitionTimes():Date {return this.get('ExhibitionTimes');}
-	set ExhibitionTimes(v:Date) {this.set('ExhibitionTimes',new Date(<any>v));}
+	set ExhibitionTimes(v:Date) {this.set('ExhibitionTimes',v);}
 
 	get SpecialFeatures():Date {return this.get('SpecialFeatures');}
-	set SpecialFeatures(v:Date) {this.set('SpecialFeatures',new Date(<any>v));}
+	set SpecialFeatures(v:Date) {this.set('SpecialFeatures',v);}
 
 	get Notes():string {return this.get('Notes');}
 	set Notes(v:string) {this.set('Notes',v);}

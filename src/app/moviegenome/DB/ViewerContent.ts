@@ -62,10 +62,10 @@ export class ViewerContent extends FourDModel {
 	set RecordID(v:number) {this.set('RecordID',v);}
 
 	get CreationDate():Date {return this.get('CreationDate');}
-	set CreationDate(v:Date) {this.set('CreationDate',new Date(<any>v));}
+	set CreationDate(v:Date) {this.set('CreationDate',v);}
 
 	get LastUpdateDate():Date {return this.get('LastUpdateDate');}
-	set LastUpdateDate(v:Date) {this.set('LastUpdateDate',new Date(<any>v));}
+	set LastUpdateDate(v:Date) {this.set('LastUpdateDate',v);}
 
 	get TimeStamp():string {return this.get('TimeStamp');}
 	set TimeStamp(v:string) {this.set('TimeStamp',v);}
@@ -92,13 +92,13 @@ export class ViewerContent extends FourDModel {
 	set ProfileID(v:number) {this.set('ProfileID',v);}
 
 	get RecommendationDate():Date {return this.get('RecommendationDate');}
-	set RecommendationDate(v:Date) {this.set('RecommendationDate',new Date(<any>v));}
+	set RecommendationDate(v:Date) {this.set('RecommendationDate',v);}
 
 	get UserScore():number {return this.get('UserScore');}
 	set UserScore(v:number) {this.set('UserScore',v);}
 
 	get ScoreDate():Date {return this.get('ScoreDate');}
-	set ScoreDate(v:Date) {this.set('ScoreDate',new Date(<any>v));}
+	set ScoreDate(v:Date) {this.set('ScoreDate',v);}
 
 	get IsRejected():boolean {return this.get('IsRejected');}
 	set IsRejected(v:boolean) {this.set('IsRejected',v);}
