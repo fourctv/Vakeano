@@ -44,10 +44,10 @@
             </span>
                 <!-- <button class="regularButton" style="margin-left:20px;width:160px;" (click)="queryJustWatch()" [disabled]="!currentRecord.IMDBTitle || currentRecord.IMDBTitle == '' || !currentRecord.ProdYear || currentRecord.ProdYear == 0">&lt;== Get JustWatch ID</button> -->
             <span style="padding-left:20px;" [hidden]="!currentRecord.TMDBID || currentRecord.TMDBID == ''">
-                <a role="button" (click)="showMovieSite()" ><img id="movieicon" [src]="this.tmdb.iconURL" height="32px"/></a>
+                <a role="button" (click)="showMovieSite()" title="go to movie site" ><img id="movieicon" [src]="tmdb.iconURL" height="32px"/></a>
             </span>
             <span style="padding-left:20px;" [hidden]="!currentRecord.TMDBID || currentRecord.TMDBID == ''">
-                <a role="button" (click)="showTMDB()" ><img src="https://www.themoviedb.org/assets/static_cache/2dceae11589334eecd61443249261daf/images/v4/logos/208x226-stacked-green.png" width="32"></a>
+                <a role="button" (click)="showTMDB()" ><span class="tmdb-icon" title="go to TMDB"></span></a>
             </span>
             <span style="padding-left:20px;" [hidden]="!currentRecord.JustWatchID || currentRecord.JustWatchID == ''">
                 <a role="button" (click)="showJW()" (mouseenter)="showPoster($event)" (mouseleave)="hidePoster($event)"><span class="jw-icon" title="go to JustWatch"></span></a>

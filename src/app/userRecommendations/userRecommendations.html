@@ -1,5 +1,5 @@
 <web-application>
-    <div class="container">
+    <div class="container" style="height: calc(100% - 20px)">
         <div class="row" style="padding-left:10px;">
             <h4>Here is a list of Recommended Features.<br/>For each picture, if you have seen it please give it 1-5 stars,<br/>or if you have not seen it, leave it on your recommendation list.</h4>
             <h4>Recommended for you based on: <span style="color: red">{{currentRecommendation}}</span>
@@ -14,7 +14,7 @@
         
         <hr style="margin-top:0;width:1080px;" />
         
-        <div style="display:block;float:left;width:1080px;height:550px;padding-top:15px;overflow:scroll;">
+        <div style="display:block;float:left;width:1080px;height:calc(100% - 160px);padding-top:15px;overflow:scroll;">
             <fieldset *ngFor="let currentFeature of controlList.models" class="product">
                 <label style="text-overflow:ellipsis;font-size: 16px !important; height:47px; color:#0076db" (click)="showMovieSite(currentFeature.TMDBID)">{{currentFeature.IMDBTitle}}</label>
                 <img src="http://www.vakeano.com/4DAction/REST_GetWebImage?image={{currentFeature.PosterURL}}" alt="Image preview" (click)="showMovieSite(currentFeature.TMDBID)"/>

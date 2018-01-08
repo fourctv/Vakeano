@@ -15,7 +15,7 @@ export class TMDB {
 
     public get tmdbID(): number { return (this.tmdbRecord) ? this.tmdbRecord.id : null }
     public get posterURL(): string { return (this.tmdbRecord) ? 'http://image.tmdb.org/t/p/w500' + this.tmdbRecord.poster_path : '' }
-    public get iconURL(): string { return (this.tmdbRecord) ? 'http://image.tmdb.org/t/p/w92' + this.tmdbRecord.poster_path : '' }
+    public get iconURL(): string { return (this.tmdbDetails) ? 'http://image.tmdb.org/t/p/w92' + this.tmdbDetails.poster_path : '' }
     public get movieURL(): string { return (this.tmdbDetails) ? this.tmdbDetails.homepage : '' }
 
     private userLocale:string = 'en_US'; // this is the default locale for all users

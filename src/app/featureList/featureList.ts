@@ -19,7 +19,7 @@ import {FeaturesEx} from '../moviegenome/index';
                     <features-queryband #customQueryBand class="form-group"></features-queryband>
                 </queryband>
                 <custombuttonbar>
-                    <button class="regularButton" style="width:120px;" (click)="checkFeature()">Analyze</button>
+                    <button class="regularButton" style="width:120px;" (click)="checkFeature()">Analyse</button>
                 </custombuttonbar>
             </query-band>
            <datagrid

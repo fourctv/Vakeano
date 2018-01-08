@@ -47,7 +47,7 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
         }
 
         if (this.currentRecord.TMDBID && this.currentRecord.TMDBID != '') {
-            this.tmdb.getTMDBDetails(this.currentRecord.TMDBID)
+            this.tmdb.getTMDBDetails(this.currentRecord.TMDBID).then(v => {});
         }
     }
 
