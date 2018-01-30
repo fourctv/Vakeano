@@ -57,4 +57,15 @@ export class GenomeMapQueryBand {
         return {query:currQuery};
 
     }
+
+    //
+    // need to manually reset drop down select input fields
+    // for some reason although the UI gets cleared, 2-way binding does not clean the variables
+    //
+    public doResetForm() { 
+        this.selectVector = '';
+        this.selectCluster = '';
+        this.selectNarrative = '';
+        this.selectActingType = '';
+     }
 }

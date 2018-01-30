@@ -1,4 +1,4 @@
-<form style="display:flex;overflow:auto">
+<form style="display:flex;overflow:auto" (reset)="doResetForm()">
         <div style="margin-right: 10px;">
                 <label class="fieldPrompt" for="geneName" style="margin-right:10px;">Gene Name</label>
                 <input name="geneName" type="text" class="fieldEntry" style="width:180px;height:20px;" [(ngModel)]="geneName" />

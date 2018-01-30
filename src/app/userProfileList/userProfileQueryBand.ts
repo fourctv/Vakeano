@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ShellUsers, TasteProfiles } from '../moviegenome/index';
 
 @Component({
     selector: 'userprofile-queryband',
     template: `
-             <form >
+             <form  (reset)="doResetForm()">
                 <label class="fieldPrompt" for="userName" style="margin-right:10px;">User Name</label>
                 <input name="userName" type="text" class="fieldEntry"  style="width:180px;height:20px;" [(ngModel)]="userName"/>
                 <label class="fieldPrompt" for="profileName" style="margin-right:10px; margin-left:10px;">Profile Name</label>
@@ -39,7 +39,7 @@ export class UserProfileQueryBand {
         if (this.userName && this.userName !== '') {
             currQuery.push(ShellUsers.kUserName + ';begins with;' + this.userName + ';AND');
         }
- 
+
         // Query based on Profile Name
         if (this.profileName && this.profileName !== '') {
             currQuery.push(TasteProfiles.kName + ';begins with;' + this.profileName + ';AND');
@@ -50,7 +50,14 @@ export class UserProfileQueryBand {
             currQuery.push(TasteProfiles.kOrigin + ';=;' + this.profileOrigin + ';AND');
         }
 
-        return {query:currQuery};
+        return { query: currQuery };
 
+    }
+    //
+    // need to manually reset drop down select input fields
+    // for some reason although the UI gets cleared, 2-way binding does not clean the variables
+    //
+    public doResetForm() { 
+        this.profileOrigin = '';
     }
 }
