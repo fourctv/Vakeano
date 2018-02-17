@@ -2,18 +2,18 @@ import { Component, Input } from '@angular/core';
 
 import { FourDInterface } from 'js44d';
 
-import { FeaturesEx, GenomeModel, GenomeMap, ContentProfile, ContentProfileEx } from '../moviegenome/index';
+import { SeasonEx, GenomeModel, GenomeMap, ContentProfile, ContentProfileEx } from '../moviegenome/index';
 
 @Component({
     moduleId: module.id,
-    selector: 'edit-profile',
-    templateUrl: 'editProfile.html',
-    styleUrls: ['editProfile.css']
+    selector: 'season-profile',
+    templateUrl: 'seasonProfile.html',
+    styleUrls: ['seasonProfile.css']
 })
 
 
-export class EditProfile {
-    @Input() public record: FeaturesEx;
+export class SeasonProfile {
+    @Input() public record: SeasonEx;
 
     @Input() public genomeModel: GenomeModel = new GenomeModel();
 
@@ -25,11 +25,11 @@ export class EditProfile {
             let validItens: Array<string> = [];
             if (gene.AppActingType && gene.AppActingType !== '') {
                 validItens = gene.AppActingType.split(',');
-                if (validItens.indexOf(this.record.ActingType) < 0) return false; // gene does not apply to this feature's acting type
+                if (validItens.indexOf(this.record.ActingType) < 0) return false; // gene does not apply to this series's acting type
             }
             if (gene.AppNarrativeType && gene.AppNarrativeType !== '') {
                 validItens = gene.AppNarrativeType.split(',');
-                if (validItens.indexOf(this.record.NarrativeType) < 0) return false; // gene does not apply to this feature's narrative type
+                if (validItens.indexOf(this.record.NarrativeType) < 0) return false; // gene does not apply to this series's narrative type
             }
 
             return true;
@@ -99,7 +99,7 @@ export class EditProfile {
         } else {
             // new gene, add to content profile
             let newGene: ContentProfileEx = new ContentProfileEx();
-            newGene.FeatureID = this.record.FeatureId;
+            newGene.SeasonID = this.record.SeasonId;
             newGene.GeneID = gene.GeneId;
             newGene.CuratorID = FourDInterface.currentUserID;
             newGene.CoordinateValue = '1';
@@ -125,7 +125,7 @@ export class EditProfile {
         } else {
             // new gene, add to content profile
             let newGene: ContentProfileEx = new ContentProfileEx();
-            newGene.FeatureID = this.record.FeatureId;
+            newGene.SeasonID = this.record.SeasonId;
             newGene.GeneID = gene.GeneId;
             newGene.CuratorID = FourDInterface.currentUserID;
             newGene.CoordinateValue = rate;
@@ -139,8 +139,8 @@ export class EditProfile {
     // call 4D to recalculate Vectors...
     recalculateVectors(gene: GenomeMap) {
         let body = {
-            type: 'Feature',
-            contentID: this.record.FeatureId,
+            type: 'Season',
+            contentID: this.record.SeasonId,
             vector: gene.Vector
         };
         this.fourD.call4DRESTMethod('CPROrestProfileToVectors', body)

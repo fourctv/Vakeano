@@ -6,18 +6,18 @@ import { RecordEditWindow } from 'js44d';
 import { ModalConfig } from 'js44d';
 import { ListSelectorDialog } from 'js44d';
 
-import { FeaturesEx } from '../moviegenome/index';
+import { SeriesEx } from '../moviegenome/index';
 import { JustWatchItem, TMDB } from '../moviegenome/index';
 
 
 @Component({
     moduleId: module.id,
     selector: 'modal-content',
-    templateUrl: 'featureInfoDialog.html',
+    templateUrl: 'seriesInfoDialog.html',
     providers: [ListSelectorDialog]
 })
 
-export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit {
+export class SeriesInfoDialog extends RecordEditWindow implements AfterViewInit {
     public static dialogConfig: ModalConfig = <ModalConfig>{
         actions: ['Maximize', 'Minimize', 'Close'], position: { top: 50, left: 50 }, selfCentered: true,
         title: 'Program Details',
@@ -25,7 +25,7 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
         width: 1000, height: 600
     };
 
-    public currentRecord: FeaturesEx;
+    public currentRecord: SeriesEx;
 
     public onNetFlixURL: string = '';
     public onAmazonURL: string = '';
@@ -38,39 +38,39 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
     }
 
     ngAfterViewInit() {
-        this.dialog.setTitle('Program Details: ' + this.currentRecord.IMDBTitle);
+        this.dialog.setTitle('Series Details: ' + this.currentRecord.IMDBTitle);
         if (this.currentRecord.JustWatchID && this.currentRecord.JustWatchID != '') {
-            this.justWatch.getJustWatchItem(this.currentRecord.JustWatchID,(this.currentRecord.SeriesID > 0)?'show':'movie')
+            this.justWatch.getJustWatchItem(this.currentRecord.JustWatchID, 'show')
             .then(jw => {
                 this.analyzeJW();
             })
         }
 
         if (this.currentRecord.TMDBID && this.currentRecord.TMDBID != '') {
-            this.tmdb.getTMDBDetails(this.currentRecord.TMDBID,(this.currentRecord.SeriesID > 0)?'tv':'movie',(this.currentRecord.SeriesID > 0)?this.currentRecord.SeasonNumber:-1).then(v => {});
+            this.tmdb.getTMDBDetails(this.currentRecord.TMDBID,'tv').then(v => {});
         }
     }
 
     public queryTMDB() {
         if (this.currentRecord.IMDBTitle && this.currentRecord.IMDBTitle != '') {
-            this.tmdb.queryTMDB(this.currentRecord.IMDBTitle, this.currentRecord.ProdYear)
+            this.tmdb.queryTMDBSeries(this.currentRecord.IMDBTitle, this.currentRecord.ProdYear)
                 .then(recjw => {
                      if (this.tmdb.tmdbRecord) {
-                        this.tmdb.grabTMDBData(this.currentRecord).then(() => this.queryJustWatch());
+                        this.tmdb.grabTMDBSeriesData(this.currentRecord).then(() => this.queryJustWatch());
                     } else  if (this.tmdb.tmdbList && this.tmdb.tmdbList.length > 0) {
                         // we got a list back...let user select
                         let titleList = [];
                         let tipsList = [];
                         this.tmdb.tmdbList.forEach(item => {
-                            titleList.push(item.title + ' - ' + item.release_date);
+                            titleList.push(item.name + ' - ' + item.first_air_date);
                             tipsList.push(item.overview);
                         });
-                        this.selector.title = 'Select title...';
+                        this.selector.title = 'Select Series...';
                         this.selector.width = 600;
                         this.selector.show(titleList, tipsList)
                         .then(index => {
                             this.tmdb.tmdbRecord = this.tmdb.tmdbList[index];
-                            this.tmdb.grabTMDBData(this.currentRecord).then(() => this.queryJustWatch());
+                            this.tmdb.grabTMDBSeriesData(this.currentRecord).then(() => this.queryJustWatch());
                         })
                     } else {
                         alert('not found');
@@ -98,21 +98,7 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
     }
 
     public showPoster(e) {
-        if (this.currentRecord.PosterURL != '') {
-            let xOffset = 30;
-            let yOffset = 180;
-
-            $('body').append('<img id="jwpreview" src="' + this.currentRecord.PosterURL + '" alt="Image preview" />');
-            $('#jwpreview').css({
-                'top': (e.pageY - yOffset) + 'px',
-                'left': (e.pageX + xOffset) + 'px',
-                'display': 'block',
-                'width': '300px',
-                'position': 'relative',
-                'z-index': 25000
-            });
-
-        } else if (this.tmdb.posterURL != '') {
+        if (this.tmdb.posterURL != '') {
             let xOffset = 30;
             let yOffset = 180;
 
@@ -149,13 +135,7 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
     }
 
     public showTMDB() {
-        if (this.currentRecord.TMDBID && this.currentRecord.TMDBID != '') {
-            if (this.currentRecord.SeasonID > 0) {
-                window.open('https://www.themoviedb.org/tv/'+this.currentRecord.TMDBID+'/season/'+this.currentRecord.SeasonNumber+'/episode/'+this.currentRecord.EpisodeNumber, '_blank');
-            } else {
-                window.open('https://www.themoviedb.org/movie/'+this.currentRecord.TMDBID, '_blank');
-            }
-        };
+        if (this.currentRecord.TMDBID && this.currentRecord.TMDBID != '') window.open('https://www.themoviedb.org/tv/'+this.currentRecord.TMDBID, '_blank');
     }
 
     public showMovieSite() {
@@ -163,13 +143,7 @@ export class FeatureInfoDialog extends RecordEditWindow implements AfterViewInit
     }
 
     public showJW() {
-        if (this.justWatch && this.justWatch.movieURL != '') {
-            if (this.currentRecord.SeasonID > 0) {
-                window.open(this.justWatch.movieURL+'/season-'+this.currentRecord.SeasonNumber, '_blank');
-            } else {
-                window.open(this.justWatch.movieURL, '_blank');
-            }        
-        }
+        if (this.justWatch && this.justWatch.movieURL != '') window.open(this.justWatch.movieURL, '_blank');
     }
 
     public showNetflix() {

@@ -21,18 +21,18 @@
                 <mglist-dropdown class="fieldEntry" listName="GMM_GeneClusters" [(selectedValue)]="currentRecord.Cluster" (change)="currentRecord.Cluster = $event.target.value"></mglist-dropdown>
             </span>
         </div>
-        <div style="height:32px;">
+        <div>
             <span>
                 <label class="fieldPromptBold" style="width:115px;">Acting Type</label>
-                <mglist-dropdown class="fieldEntry" listName="GMM_ActingTypes" [(selectedValue)]="currentRecord.AppActingType" (change)="currentRecord.AppActingType = $event.target.value"></mglist-dropdown>
+                <mglist-multiple class="fieldEntry"  style="width:140px;" listName="GMM_ActingTypes" [(selectedValue)]="currentRecord.AppActingType" (change)="currentRecord.AppActingType = $event"></mglist-multiple>
             </span>
             <span style="padding-left:30px;">
                 <label class="fieldPromptBold" style="padding-right:20px;">Narrative Type</label>
-                <mglist-dropdown class="fieldEntry" listName="GMM_NarrativeTypes" [(selectedValue)]="currentRecord.AppNarrativeType" (change)="currentRecord.AppNarrativeType = $event.target.value"></mglist-dropdown>
+                <mglist-multiple class="fieldEntry" style="width:140px;" listName="GMM_NarrativeTypes" [(selectedValue)]="currentRecord.AppNarrativeType" (change)="currentRecord.AppNarrativeType = $event"></mglist-multiple>
             </span>
             <span style="padding-left:30px;">
                 <label class="fieldPromptBold" style="padding-right:20px;">Values List</label>
-                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.AcceptedValuesList"  size="40"/>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.AcceptedValuesList"  size="20"/>
             </span>
         </div>
         <div style="height:32px;">

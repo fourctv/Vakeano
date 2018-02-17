@@ -1,9 +1,9 @@
 <div style="height:520px;">
     <div class="formPanel" style="height:100%">
         <fieldset class="titledGroupBox">
-            <legend class="formHeaderSmall">Feature<button class="regularButton" style="margin-left:20px;width:140px;" (click)="queryTMDB()" [disabled]="!currentRecord.IMDBTitle || currentRecord.IMDBTitle == ''">Query TMDB Data</button></legend>
+            <legend class="formHeaderSmall">Series Season</legend>
             <span>
-                <label class="fieldPromptBold">Feature Title</label>
+                <label class="fieldPromptBold">Series Title</label>
                 <input type="text" class="fieldEntry" size="60" [(ngModel)]="currentRecord.IMDBTitle" />
             </span>
             <span>
@@ -13,23 +13,13 @@
             <br/>
             <span>
                 <label class="fieldPromptBold">Production Title</label>
-                <input type="text" class="fieldEntry" size="80" [(ngModel)]="currentRecord.ProductionTitle" />
+                <input type="text" class="fieldEntry" size="60" [(ngModel)]="currentRecord.ProductionTitle" />
             </span>
-            <br/>
             <span>
-                <label class="fieldPromptBold">Series</label>
-                <input type="text" class="fieldEntry" size="30" [(ngModel)]="currentRecord.SeriesName" disabled/>
+                <label class="fieldPromptBold">Season</label>
+                <input type="text" class="fieldEntry" [(ngModel)]="currentRecord.SeasonNumber"  size="8"/>
             </span>
-            <span style="padding-left:10px;">
-                <label class="fieldPromptBold" style="width:85px;">Season</label>
-                <input type="text" class="fieldEntry" size="20" [(ngModel)]="currentRecord.SeasonName" disabled/>
-            </span>
-            <span style="padding-left:20px;">
-                <label class="fieldPromptBold">Episode</label>
-                <input type="text" class="fieldEntry" size="8" [(ngModel)]="currentRecord.EpisodeNumber" />
-            </span>
-            <input type="checkbox" class="fieldEntry" [(ngModel)]="currentRecord.isControlFeature" style="margin-left:30px;margin-right:10px;"
-            />THIS IS A CONTROL FEATURE?
+
         </fieldset>
 
         <fieldset class="titledGroupBox">
@@ -64,16 +54,16 @@
         <hr style="margin:0;" />
 
         <tabs class="nav nav-tabs">
-            <tab [title]="'Feature Info'" style="height:475px">
-                <feature-info [record]="currentRecord"></feature-info>
+            <tab [title]="'Season Info'" style="height:475px">
+                <season-info [record]="currentRecord" [tmdb]="tmdb"></season-info>
             </tab>
 
             <tab [title]="'Edit Profile'" style="height:475px" *ngIf="currentRecord.isRecordLoaded()">
-                <edit-profile [record]="currentRecord"></edit-profile>
+                <season-profile [record]="currentRecord"></season-profile>
             </tab>
 
             <tab [title]="'Profile Records'" style="height:475px" *ngIf="currentRecord.isRecordLoaded()">
-                <contentprofile-info [record]="currentRecord"></contentprofile-info>
+                <seasoncontentprofile-info [record]="currentRecord"></seasoncontentprofile-info>
             </tab>
 
         </tabs>

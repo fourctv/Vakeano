@@ -3,7 +3,10 @@ import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { FourDCollection, FourDInterface } from 'js44d';
 
 import { DataGrid } from 'js44d';
-import { TasteProfilesEx, ViewerContent, ViewerContentEx, Features } from '../moviegenome/index';
+import { ViewerContentEx } from '../moviegenome/customDataModels/ViewerContentEx';
+import { TasteProfilesEx } from '../moviegenome/customDataModels/TasteProfilesEx';
+import { ViewerContent } from '../moviegenome/DB/ViewerContent';
+import { Features } from '../moviegenome/DB/Features';
 
 @Component({
     selector: 'profilerecommendations-info',
@@ -78,11 +81,14 @@ export class ProfileRecommendationsInfo implements AfterViewInit {
                 .then(recs => {
                     //this.log.debug('length:'+recs.length);
                     if (recs.length > 0) {
+                        let data = [];
                         this.controlList.models.forEach(element => {
-                            element['EScore'] = this.currentFeatureScore(element);
+                            let item = element.extractModelData();
+                            item['EScore'] = this.currentFeatureScore(element);
+                            data.push(item);
                         });
 
-                        this.theGrid.setDataSource(<any>this.controlList.models);
+                        this.theGrid.setDataSource(data);
                     }
                 });
 

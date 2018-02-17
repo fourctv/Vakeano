@@ -46,12 +46,12 @@ export class GenomeMapQueryBand {
  
           // Query based on Narrative Type
         if (this.selectNarrative && this.selectNarrative !== '') {
-            currQuery.push(GenomeMap.kAppNarrativeType+ ';=;' + this.selectNarrative + ';AND');
+            currQuery.push(GenomeMap.kAppNarrativeType+ ';contains;' + this.selectNarrative + ';AND');
         }
  
           // Query based on Acting Type
         if (this.selectActingType && this.selectActingType !== '') {
-            currQuery.push(GenomeMap.kAppActingType+ ';=;' + this.selectActingType + ';AND');
+            currQuery.push(GenomeMap.kAppActingType+ ';contais;' + this.selectActingType + ';AND');
         }
  
         return {query:currQuery};

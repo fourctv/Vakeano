@@ -1,17 +1,15 @@
-import { Features } from '../DB/Features';
-import { Series } from '../DB/Series';
 import { Seasons } from '../DB/Seasons';
+import { Series } from '../DB/Series';
 import { Companies } from '../DB/Companies';
+import { ContentProfile } from '../DB/ContentProfile';
 import { ContentProfileEx } from './ContentProfileEx';
 
-export class FeaturesEx extends Features {
+export class SeasonEx extends Seasons {
     fields: Array<any> = [
         { name: 'ProdCompany', longname: Companies.kShortName, type: 'text', related: true },
         { name: 'SeriesName', longname: Series.kIMDBTitle, type: 'text', related: true },
-        { name: 'SeasonName', longname: Seasons.kProductionTitle, type: 'text', related: true },
-        { name: 'SeasonNumber', longname: Seasons.kSeasonNumber, type: 'number', related: true },
-        { name: 'contentProfileList', subTable: new ContentProfileEx(), joinFK: 'ContentProfile.FeatureID', joinPK: 'Features.FeatureId' }
-    ].concat(new Features().fields);
+        { name: 'contentProfileList', subTable: new ContentProfileEx(), joinFK: ContentProfile.kSeasonID, joinPK: Seasons.kSeasonId }
+    ].concat(new Seasons().fields);
 
     // related fields
     get ProdCompany(): string { return this.get('ProdCompany'); }
@@ -19,12 +17,6 @@ export class FeaturesEx extends Features {
 
     get SeriesName(): string { return this.get('SeriesName'); }
     set SeriesName(v: string) { this.set('SeriesName', v); }
-
-    get SeasonName(): string { return this.get('SeasonName'); }
-    set SeasonName(v: string) { this.set('SeasonName', v); }
-
-    get SeasonNumber(): number { return this.get('SeasonNumber'); }
-    set SeasonNumber(v: number) { this.set('SeasonNumber', v); }
 
     // children records
     get contentProfileList(): Array<ContentProfileEx> {

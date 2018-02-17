@@ -18,6 +18,8 @@ export * from './DB/ViewerContent';
 // DB Custom Data Models
 export * from './customDataModels/ContentProfileEx';
 export * from './customDataModels/FeaturesEx';
+export * from './customDataModels/SeriesEx';
+export * from './customDataModels/SeasonEx';
 export * from './customDataModels/GenomeModel';
 export * from './customDataModels/ProfileGenesEx';
 export * from './customDataModels/ShellUsersEx';
@@ -26,6 +28,7 @@ export * from './customDataModels/ViewerContentEx';
 
 // Custom controls
 export * from './controls/mgListDropDown';
+export * from './controls/mgListMultiple';
 
 // Special Services
 export * from './services/justWatchItem'

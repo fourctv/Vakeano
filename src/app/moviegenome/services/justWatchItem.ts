@@ -59,10 +59,10 @@ export class JustWatchItem {
     }
 
 
-    public getJustWatchItem(id: string): Promise<any> {
+    public getJustWatchItem(id: string, type='movie'): Promise<any> {
         const contentHeaders = new Headers();
         contentHeaders.append('Accept', 'text/json;text/html,application/xhtml+xml,application/xml,application/json;q=0.9,image/webp,*/*;q=0.8'); // need all this crap for 4D V15!!
-        let jwURL = 'https://apis.justwatch.com/content/titles/movie/' + id + '/locale/'+this.userLocale;
+        let jwURL = 'https://apis.justwatch.com/content/titles/'+type+'/' + id + '/locale/'+this.userLocale;
 
         return new Promise((resolve, reject) => {
             this.fourD.proxyURLThru4D(jwURL)

@@ -1,0 +1,65 @@
+<fieldset class="titledGroupBox">
+    <legend class="formHeaderSmall">Series Season Info</legend>
+    <span>
+        <label class="fieldPromptBold" style="width:115px;">Prod. Company</label>
+        <input type="text" class="fieldEntry" size="40" [(ngModel)]="record.ProdCompany" disabled/>
+    </span>
+    <span style="padding-left:10px;">
+        <label class="fieldPromptBold" style="width:85px;">First Air Year</label>
+        <input type="text" class="fieldEntry" size="10" [(ngModel)]="record.ProdYear" />
+    </span>
+    <span style="padding-left:10px;">
+        <label class="fieldPromptBold" style="width:85px;"># of Episodes</label>
+        <input type="text" class="fieldEntry" size="10" [(ngModel)]="record.Episodes" />
+        <button class="regularButton" style="width:90px;padding-left:20px;" (click)="createEpisodes()" [hidden]="!showCreateEpisodes">Create Episodes</button>
+    </span>
+
+</fieldset>
+<fieldset class="titledGroupBox">
+    <legend class="formHeaderSmall">Additional Info</legend>
+    <span style="padding-left:30px;">
+        <label class="fieldPromptBold" style="padding-right:20px;">Acting Type</label>
+        <mglist-dropdown class="fieldEntry" listName="GMM_ActingTypes" [(selectedValue)]="record.ActingType" (change)="record.ActingType = $event.target.value"></mglist-dropdown>
+    </span>
+    <span style="padding-left:30px;">
+        <label class="fieldPromptBold" style="padding-right:20px;">Narrative Type</label>
+        <mglist-dropdown class="fieldEntry" listName="GMM_NarrativeTypes" [(selectedValue)]="record.NarrativeType" (change)="record.NarrativeType = $event.target.value"></mglist-dropdown>
+    </span>
+
+    <br/>
+    <span style="display:inline-block;vertical-align:middle">
+        <label class="fieldPromptBold" style="width:115px;padding-right:20px;">Poster URL</label>
+        <input type="text" class="fieldEntry" size="80" [(ngModel)]="record.PosterURL" />
+        <!--   <a role="button" class="btn" (mouseenter)="showPoster($event)" (mouseleave)="hidePoster($event)"><span class="imdb-icon" title="show poster"></span></a>
+                   <img src="../../../../../assets/icons/IMDBLogo.jpg" (mouseenter)="showPoster($event)" (mouseleave)="hidePoster($event)"/> -->
+    </span>
+
+</fieldset>
+<fieldset class="titledGroupBox">
+    <legend class="formHeaderSmall">Gene Profile</legend>
+    <span>
+        <label class="fieldPromptBold" style="width:115px;padding-right:20px;">Theme Vector</label>
+        <input type="text" class="fieldEntry" size="60" [(ngModel)]="record.ThemeVector" />
+    </span>
+    <span style="padding-left:10px;">
+        <label class="fieldPromptBold" style="width:115px;padding-right:10px;">Narrative Vector</label>
+        <input type="text" class="fieldEntry" size="20" [(ngModel)]="record.NarrativeVector" />
+    </span>
+    <br/>
+    <span>
+        <label class="fieldPromptBold" style="width:115px;padding-right:20px;">Content Vector</label>
+        <input type="text" class="fieldEntry" size="60" [(ngModel)]="record.ContentVector" />
+    </span>
+    <span style="padding-left:10px;">
+        <label class="fieldPromptBold" style="width:115px;padding-right:10px;">Execution Vector</label>
+        <input type="text" class="fieldEntry" size="20" [(ngModel)]="record.ExecutionVector" />
+    </span>
+    <br/>
+    <span>
+        <label class="fieldPromptBold" style="width:115px;padding-right:20px;">Style Vector</label>
+        <input type="text" class="fieldEntry" size="60" [(ngModel)]="record.StyleVector" />
+    </span>
+    <!--
+                 <button class="regularButton" style="width:90px;padding-left:20px;" (click)="generateContentProfile()">Generate</button>
+            -->
+</fieldset>

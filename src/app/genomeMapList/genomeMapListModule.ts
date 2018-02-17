@@ -2,6 +2,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
 import { GenomeMapListDialog } from './genomeMapListDialog';
 import { GenomeMapListApp } from './genomeMapList';
 import { GenomeMapInfoDialog } from './genomeMapInfoDialog';
@@ -20,6 +22,7 @@ export const GenomeMapRoutes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(GenomeMapRoutes),
+        BsDropdownModule.forRoot(),
         JS44DModule, ModalModule,
         MGModule
     ],

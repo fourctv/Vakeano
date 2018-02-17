@@ -6,14 +6,14 @@ import { DataGrid } from 'js44d';
 import { TasteProfilesEx } from '../moviegenome/customDataModels/TasteProfilesEx';
 
 @Component({
-    selector: 'analyze-feature',
+    selector: 'analyze-season',
     template: `
     <div class="formPanel">
-        <h1>Vakeano Feature Analyzer</h1>
+        <h1>Vakeano Series Season Analyzer</h1>
         <br/>
         <div class="row" style="padding-left:10px;">
-            <h4>Select the Taste Profile to use for analyzing: <span style="color:green;">{{inputData.featureName}}</span></h4>
-            <button class="regularButton" style="width:120px;margin-left:380px" (click)="checkFeature()">Analyze</button>
+            <h4>Select the Taste Profile to use for analyzing: <span style="color:green;">{{inputData.seasonName}}</span></h4>
+            <button class="regularButton" style="width:120px;margin-left:380px" (click)="checkSeason()">Analyze</button>
         </div>
         <div style="margin-bottom:15px;">
             <h3>Results:</h3>
@@ -32,11 +32,11 @@ import { TasteProfilesEx } from '../moviegenome/customDataModels/TasteProfilesEx
      `
 })
 
-export class AnalyzeFeatureComponent implements AfterViewInit {
+export class AnalyzeSeasonComponent implements AfterViewInit {
     public static dialogConfig: ModalConfig = <ModalConfig>{
         size: 'lg',
         actions: ['Maximize', 'Minimize', 'Close'], position: { top: 50, left: 50 }, selfCentered: true,
-        title: 'Analyze Feature',
+        title: 'Analyze Season',
         isResizable: false,
         width: 1000, height: 700
     };
@@ -72,11 +72,11 @@ export class AnalyzeFeatureComponent implements AfterViewInit {
         this.theGrid.loadData({query:['All']});
     }
 
-    public checkFeature() {
+    public checkSeason() {
         this.analyzeResponse = '';
         if (this.theGrid && this.theGrid.currentRecord) {
             let body = {
-                featureID: (<any>this.inputData).featureID,
+                seasonID: (<any>this.inputData).seasonID,
                 profileID: (<TasteProfilesEx>this.theGrid.currentRecord).ProfileID
             };
             this.fourD.call4DRESTMethod('MGRErestCheckFeature', body, {responseType:'text'})

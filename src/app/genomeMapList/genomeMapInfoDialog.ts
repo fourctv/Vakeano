@@ -2,7 +2,7 @@ import { Component, AfterViewInit } from '@angular/core';
 
 import { RecordEditWindow } from 'js44d';
 import { ModalConfig } from 'js44d';
-import { GenomeMap } from '../moviegenome/index';
+import { GenomeMap } from '../moviegenome/DB/GenomeMap';
 
 @Component({
     moduleId: module.id,

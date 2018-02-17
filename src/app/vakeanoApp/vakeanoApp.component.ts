@@ -13,6 +13,8 @@ import { BlankPage } from './blankPage';
 export const routes: Routes = [
     {path: 'login', component: BlankPage},
     {path: 'featureList', loadChildren:'app/featureList/featureListModule#FeatureListModule'},
+    {path: 'seriesList', loadChildren:'app/seriesList/seriesListModule#SeriesListModule'},
+    {path: 'seasonList', loadChildren:'app/seasonList/seasonListModule#SeasonListModule'},
     {path: 'userProfileList', loadChildren:'app/userProfileList/userProfileListModule#UserProfileListModule'},
     {path: 'genomeMapList', loadChildren:'app/genomeMapList/genomeMapListModule#GenomeMapListModule'},
     {path: 'userRating', loadChildren:'app/userRating/userRatingModule#UserRatingModule'},
@@ -51,6 +53,18 @@ export class VakeanoAppComponent implements AfterContentInit {
             roles: ['Curator', 'Admin'],
             hideMenu: false,
             title: 'Features'
+        },
+        {
+            routePath: '/seriesList',
+            roles: ['Curator', 'Admin'],
+            hideMenu: false,
+            title: 'Series'
+        },
+        {
+            routePath: '/seasonList',
+            roles: ['Curator', 'Admin'],
+            hideMenu: false,
+            title: 'Seasons'
         },
         {
             routePath: '/userProfileList',
