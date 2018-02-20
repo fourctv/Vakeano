@@ -2,7 +2,7 @@ import { Component, ViewChild, AfterViewInit, ElementRef, Input } from '@angular
 
 import { FourDInterface } from 'js44d';
 import { DataGrid } from 'js44d';
-import { TasteProfilesEx, ViewerContent } from '../moviegenome/index';
+import { TasteProfilesEx, ViewerContent, ViewerContentEx } from '../moviegenome/index';
 
 @Component({
     selector: 'viewercontent-info',
@@ -44,8 +44,8 @@ export class ViewerContentInfo implements AfterViewInit {
         { title: 'Prod.Year', width:80, field: 'ProdYear' },
         { title: 'Directors', width:200, field: 'DirectorsList' },
         { title: 'Score', width:80, field: 'UserScore', filterable: { multi: true }  },
-        { title: 'Score Date', width:100, field: 'ScoreDate' },
-        { title: 'Recom.Date', width:100, field: 'RecommendationDate' },
+        { title: 'Score Date', width:100, field: 'ScoreDate', template:function (dataItem){return (isNaN(dataItem.ScoreDate))?'':kendo.format('{0:d}',dataItem.ScoreDate)} },
+        { title: 'Recom.Date', width:100, field: 'RecommendationDate', template:function (dataItem){return (isNaN(dataItem.RecommendationDate))?'':kendo.format('{0:d}',dataItem.RecommendationDate)} },
         { title: 'Is Rejected?', width:80, field: 'IsRejected' },
         { title: 'MGCCI', width:80, field: 'MGCCI', filterable: false },
         { title: 'MGPEI', width:80, field: 'MGPEI', filterable: false },
@@ -95,6 +95,17 @@ export class ViewerContentInfo implements AfterViewInit {
     }
 
     public refreshGrid() {
-        if (this.record && this.theGrid) this.theGrid.setDataSource(<any>this.record.viewerContentList);
+        if (this.record && this.theGrid) {
+            if (this.record.viewerContentList.length > 0) {
+                let data = [];
+                this.record.viewerContentList.forEach(element => {
+                    let item:ViewerContentEx = new ViewerContentEx();
+                    item.populateModelData(element);
+                    data.push(item.extractModelData());
+                });
+
+                this.theGrid.setDataSource(data);
+            }
+        }
     }
 }

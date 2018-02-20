@@ -18,15 +18,15 @@ export class TasteProfilesEx extends TasteProfiles {
     set UserName(v: string) { this.set('UserName', v); }
 
     // children records
-    get profileGenesList(): Array<ProfileGenes> {
+    get profileGenesList(): Array<ProfileGenesEx> {
         return this.get('profileGenesList');
     }
-    set profileGenesList(v: Array<ProfileGenes>) { this.set('profileGenesList', v); }
+    set profileGenesList(v: Array<ProfileGenesEx>) { this.set('profileGenesList', v); }
 
-    get viewerContentList(): Array<ViewerContent> {
+    get viewerContentList(): Array<ViewerContentEx> {
         return this.get('viewerContentList');
     }
-    set viewerContentList(v: Array<ViewerContent>) { this.set('viewerContentList', v); }
+    set viewerContentList(v: Array<ViewerContentEx>) { this.set('viewerContentList', v); }
 
 }
 

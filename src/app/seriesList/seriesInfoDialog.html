@@ -50,7 +50,7 @@
 
         <tabs class="nav nav-tabs">
             <tab [title]="'Series Info'" style="height:475px">
-                <series-info [record]="currentRecord" [tmdb]="tmdb"></series-info>
+                <series-info [record]="currentRecord" [tmdb]="tmdb" (refreshSeasonList)="refreshSeasons()"></series-info>
             </tab>
 
             <tab [title]="'Edit Profile'" style="height:475px" *ngIf="currentRecord.isRecordLoaded()">
@@ -59,6 +59,10 @@
 
             <tab [title]="'Profile Records'" style="height:475px" *ngIf="currentRecord.isRecordLoaded()">
                 <seriescontentprofile-info [record]="currentRecord"></seriescontentprofile-info>
+            </tab>
+
+            <tab #seasonList [title]="'Seasons'" style="height:475px" *ngIf="currentRecord.isRecordLoaded()">
+                <series-season-list [record]="currentRecord"></series-season-list>
             </tab>
 
         </tabs>

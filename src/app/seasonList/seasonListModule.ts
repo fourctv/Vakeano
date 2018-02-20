@@ -5,11 +5,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { SeasonListDialog } from './seasonListDialog';
 import { SeasonListApp } from './seasonList';
 import { SeasonQueryBand } from './seasonQueryBand';
-import { SeasonInfoDialog } from './seasonInfoDialog';
-import { SeasonInfo } from './seasonInfo';
-import { SeasonProfile } from './seasonProfile';
-import { SeasonContentProfileInfo } from './seasonContentProfileInfo';
 import { AnalyzeSeasonComponent } from './analyzeSeason';
+
+import { SeasonInfoModule } from './seasonInfoModule';
+import { FeatureInfoModule } from '../featureList/featureInfoModule';
+
 
 import { JS44DModule, ModalModule } from 'js44d';
 import { MGModule } from '../moviegenome/mg.module';
@@ -24,6 +24,8 @@ export const SeasonListAppRoute: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(SeasonListAppRoute),
+        SeasonInfoModule,
+        FeatureInfoModule,
         JS44DModule, ModalModule,
         MGModule
     ],
@@ -31,14 +33,10 @@ export const SeasonListAppRoute: Routes = [
         SeasonListDialog,
         SeasonListApp,
         SeasonQueryBand,
-        SeasonInfo,
-        SeasonProfile,
-        AnalyzeSeasonComponent,
-        SeasonContentProfileInfo,
-        SeasonInfoDialog
+        AnalyzeSeasonComponent
     ],
     entryComponents: [
-        SeasonListDialog, SeasonListApp, SeasonInfoDialog, SeasonInfo,
+        SeasonListDialog, SeasonListApp,
         AnalyzeSeasonComponent
     ]
 })

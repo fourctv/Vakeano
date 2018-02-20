@@ -16,16 +16,16 @@
         
         <div style="display:block;float:left;width:1080px;height:calc(100% - 160px);padding-top:15px;overflow:scroll;">
             <fieldset *ngFor="let currentFeature of controlList.models" class="product">
-                <label style="text-overflow:ellipsis;font-size: 16px !important; height:47px; color:#0076db" (click)="showMovieSite(currentFeature.TMDBID)">{{currentFeature.IMDBTitle}}</label>
+                <label style="text-overflow:ellipsis;font-size: 16px !important; height:47px; color:#0076db" (click)="showMovieSite(currentFeature)">{{currentFeature.IMDBTitle}}</label>
                 <img src="http://www.vakeano.com/4DAction/REST_GetWebImage?image={{currentFeature.PosterURL}}" alt="Image preview" (click)="showMovieSite(currentFeature.TMDBID)"/>
                 
                 <div  class="rating">
-                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="5"/><label title="Rocks!" (click)="rateThis(currentFeature,5)">5 stars</label>
-                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="4"/><label title="Pretty good" (click)="rateThis(currentFeature,4)">4 stars</label>
-                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="3"/><label title="Meh" (click)="rateThis(currentFeature,3)">3 stars</label>
-                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="2"/><label title="Kinda bad" (click)="rateThis(currentFeature,2)">2 stars</label>
-                    <input type="radio" name="{{'rating'+currentFeature.FeatureID}}" value="1"/><label title="Sucks big time" (click)="rateThis(currentFeature,1)">1 star</label>
-                    <a role="button" class="jw-icon" style="background-size: 24px; height: 24px;width: 24px;float:right;margin-right:20px;" *ngIf="currentFeature.JustWatchID != ''" (click)="showJustWatch(currentFeature.JustWatchID)" title="show JustWatch page for this title"></a>
+                    <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="5"/><label title="Rocks!" (click)="rateThis(currentFeature,5)">5 stars</label>
+                    <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="4"/><label title="Pretty good" (click)="rateThis(currentFeature,4)">4 stars</label>
+                    <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="3"/><label title="Meh" (click)="rateThis(currentFeature,3)">3 stars</label>
+                    <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="2"/><label title="Kinda bad" (click)="rateThis(currentFeature,2)">2 stars</label>
+                    <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="1"/><label title="Sucks big time" (click)="rateThis(currentFeature,1)">1 star</label>
+                    <a role="button" class="jw-icon" style="background-size: 24px; height: 24px;width: 24px;float:right;margin-right:20px;" *ngIf="currentFeature.JustWatchID != ''" (click)="showJustWatch(currentFeature)" title="show JustWatch page for this title"></a>
                 </div>
                 <p (click)="showMovieSite(currentFeature.TMDBID)"><span class="formHeaderSmall" style="color:red;">Predicted Score: {{currentFeature.MGPVR}}</span><br/>
                     CCI: {{currentFeature.MGCCI}}<br/>

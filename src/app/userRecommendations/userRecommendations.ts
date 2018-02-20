@@ -42,18 +42,27 @@ export class UserRecommendations implements AfterViewInit {
     /**
      * Rate a feature, called from the stars under a movie poster
      */
-    rateThis(feature: ViewerContentEx, stars: number) {
+    rateThis(viewerContent: ViewerContentEx, stars: number) {
+        let type = 'Feature';
+        let contentID = viewerContent.FeatureID;
+        if (viewerContent.SeriesID > 0) {
+            type = 'Series';
+            contentID = viewerContent.SeriesID;
+        } else if (viewerContent.SeasonID > 0) {
+            type = 'Season';
+            contentID = viewerContent.SeasonID;
+        }
         let body = {
-            type: 'Feature',
-            contentID: feature.FeatureID,
+            type: type,
+            contentID: contentID,
             rating: stars,
-            viewer: feature.UserID
+            viewer: viewerContent.UserID
         };
         this.fourD.call4DRESTMethod('MGLErestUpdateViewerProfile', body)
             .subscribe(response => {
                 if (response.result === 'OK') {
                     let list: Array<ViewerContentEx> = this.controlList.models;
-                    this.controlList.models = list.filter((item) => { return item.RecordID !== feature.RecordID; });
+                    this.controlList.models = list.filter((item) => { return item.RecordID !== viewerContent.RecordID; });
                 } else alert('Error:' + response.message);
             }, error => { console.log(error); alert('Error:' + error); });
 
@@ -79,14 +88,7 @@ export class UserRecommendations implements AfterViewInit {
         }
 
         //this.log.debug('query:'+queryType);
-        this.controlList.getRecords(query,
-            <any>[ViewerContent.kRecordID, ViewerContent.kFeatureID, ViewerContent.kUserID,
-            Features.kIMDBTitle, Features.kPosterURL, Features.kJustWatchID, Features.kTMDBID,
-            ViewerContent.kMGCCI, ViewerContent.kMGEQI, ViewerContent.kMGPAI,
-            ViewerContent.kMGPEI, ViewerContent.kMGPVR, ViewerContent.kMGNQI,
-            ViewerContent.kFeedback_Content, ViewerContent.kFeedback_Style, ViewerContent.kFeedback_Theme,
-            ViewerContent.kFeedback_Narrative, ViewerContent.kFeedback_Execution],
-            0, -1, '', '<' + ViewerContent.kMGPVR);
+        this.controlList.getRecords(query,null,0, -1, '', '<' + ViewerContent.kMGPVR);
 
 
     }
@@ -119,9 +121,9 @@ export class UserRecommendations implements AfterViewInit {
      * 
      * @param jwID selected feature JW ID
      */
-    public showJustWatch(jwID) {
-        if (jwID && jwID != '') {
-            this.justWatch.getJustWatchItem(jwID)
+    public showJustWatch(viewerContent:ViewerContentEx) {
+        if (viewerContent.JustWatchID && viewerContent.JustWatchID != '') {
+            this.justWatch.getJustWatchItem(viewerContent.JustWatchID,(viewerContent.FeatureID > 0)?'movie':'show')
                 .then(jw => {
                     if (this.justWatch.movieURL != '') window.open(this.justWatch.movieURL, '_blank');
                 });
@@ -133,9 +135,9 @@ export class UserRecommendations implements AfterViewInit {
      * 
      * @param jwID selected feature JW ID
      */
-    public showMovieSite(tmdbID) {
-        if (tmdbID && tmdbID != '') {
-            this.tmdb.getTMDBDetails(tmdbID)
+    public showMovieSite(viewerContent:ViewerContentEx) {
+        if (viewerContent.TMDBID && viewerContent.TMDBID != '') {
+            this.tmdb.getTMDBDetails(viewerContent.TMDBID,(viewerContent.FeatureID > 0)?'movie':'tv')
                 .then(jw => {
                     if (this.tmdb.movieURL != '') window.open(this.tmdb.movieURL, '_blank');
                 });

@@ -1,13 +1,15 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { HttpClient }      from '@angular/common/http';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { RecordEditWindow } from 'js44d';
 import { ModalConfig } from 'js44d';
 import { ListSelectorDialog } from 'js44d';
+import { Tab, Tabs} from 'js44d';
 
 import { SeriesEx } from '../moviegenome/index';
 import { JustWatchItem, TMDB } from '../moviegenome/index';
+import { SeriesSeasonList } from './seriesSeasonList';
 
 
 @Component({
@@ -33,7 +35,11 @@ export class SeriesInfoDialog extends RecordEditWindow implements AfterViewInit 
     public onHBONowURL: string = '';
     public onFandangoURL: string = '';
 
-    constructor(public justWatch:JustWatchItem, public tmdb:TMDB, private http: HttpClient, private selector:ListSelectorDialog) {
+    @ViewChild(SeriesSeasonList) private seasonList: SeriesSeasonList;
+    @ViewChild(Tabs) private tabList: Tabs;
+    @ViewChild('seasonList') private seasonListTab: Tab;
+
+    constructor(public justWatch: JustWatchItem, public tmdb: TMDB, private http: HttpClient, private selector: ListSelectorDialog) {
         super();
     }
 
@@ -41,23 +47,29 @@ export class SeriesInfoDialog extends RecordEditWindow implements AfterViewInit 
         this.dialog.setTitle('Series Details: ' + this.currentRecord.IMDBTitle);
         if (this.currentRecord.JustWatchID && this.currentRecord.JustWatchID != '') {
             this.justWatch.getJustWatchItem(this.currentRecord.JustWatchID, 'show')
-            .then(jw => {
-                this.analyzeJW();
-            })
+                .then(jw => {
+                    this.analyzeJW();
+                })
         }
 
         if (this.currentRecord.TMDBID && this.currentRecord.TMDBID != '') {
-            this.tmdb.getTMDBDetails(this.currentRecord.TMDBID,'tv').then(v => {});
+            this.tmdb.getTMDBDetails(this.currentRecord.TMDBID, 'tv').then(v => { });
         }
     }
+
+    public refreshSeasons() {
+        this.seasonList.refreshList();
+        this.tabList.selectThisTab(this.seasonListTab);
+    }
+
 
     public queryTMDB() {
         if (this.currentRecord.IMDBTitle && this.currentRecord.IMDBTitle != '') {
             this.tmdb.queryTMDBSeries(this.currentRecord.IMDBTitle, this.currentRecord.ProdYear)
                 .then(recjw => {
-                     if (this.tmdb.tmdbRecord) {
+                    if (this.tmdb.tmdbRecord) {
                         this.tmdb.grabTMDBSeriesData(this.currentRecord).then(() => this.queryJustWatch());
-                    } else  if (this.tmdb.tmdbList && this.tmdb.tmdbList.length > 0) {
+                    } else if (this.tmdb.tmdbList && this.tmdb.tmdbList.length > 0) {
                         // we got a list back...let user select
                         let titleList = [];
                         let tipsList = [];
@@ -68,10 +80,10 @@ export class SeriesInfoDialog extends RecordEditWindow implements AfterViewInit 
                         this.selector.title = 'Select Series...';
                         this.selector.width = 600;
                         this.selector.show(titleList, tipsList)
-                        .then(index => {
-                            this.tmdb.tmdbRecord = this.tmdb.tmdbList[index];
-                            this.tmdb.grabTMDBSeriesData(this.currentRecord).then(() => this.queryJustWatch());
-                        })
+                            .then(index => {
+                                this.tmdb.tmdbRecord = this.tmdb.tmdbList[index];
+                                this.tmdb.grabTMDBSeriesData(this.currentRecord).then(() => this.queryJustWatch());
+                            })
                     } else {
                         alert('not found');
                     }
@@ -84,7 +96,7 @@ export class SeriesInfoDialog extends RecordEditWindow implements AfterViewInit 
         if (this.currentRecord.IMDBTitle && this.currentRecord.IMDBTitle != '' && this.currentRecord.ProdYear && this.currentRecord.ProdYear > 0) {
             this.justWatch.queryJW(this.currentRecord.IMDBTitle, this.currentRecord.ProdYear)
                 .then(jw => {
-                     if (this.justWatch.jwItem) {
+                    if (this.justWatch.jwItem) {
                         //console.log(this.jwItem);
                         this.currentRecord.JustWatchID = this.justWatch.justWatchID.toString();
                         //this.currentRecord.PosterURL = this.justWatch.posterURL;
@@ -135,7 +147,7 @@ export class SeriesInfoDialog extends RecordEditWindow implements AfterViewInit 
     }
 
     public showTMDB() {
-        if (this.currentRecord.TMDBID && this.currentRecord.TMDBID != '') window.open('https://www.themoviedb.org/tv/'+this.currentRecord.TMDBID, '_blank');
+        if (this.currentRecord.TMDBID && this.currentRecord.TMDBID != '') window.open('https://www.themoviedb.org/tv/' + this.currentRecord.TMDBID, '_blank');
     }
 
     public showMovieSite() {

@@ -1,13 +1,15 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { HttpClient }      from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { RecordEditWindow } from 'js44d';
 import { ModalConfig } from 'js44d';
 import { ListSelectorDialog } from 'js44d';
+import { Tab, Tabs} from 'js44d';
 
 import { SeasonEx } from '../moviegenome/index';
 import { JustWatchItem, TMDB } from '../moviegenome/index';
+import { SeasonEpisodeList } from './seasonEpisodeList';
 
 
 @Component({
@@ -33,6 +35,10 @@ export class SeasonInfoDialog extends RecordEditWindow implements AfterViewInit 
     public onHBONowURL: string = '';
     public onFandangoURL: string = '';
 
+    @ViewChild(SeasonEpisodeList) private episodeList:SeasonEpisodeList;
+    @ViewChild(Tabs) private tabList: Tabs;
+    @ViewChild('episodeList') private episodeListTab: Tab;
+
     constructor(public justWatch:JustWatchItem, public tmdb:TMDB, private http: HttpClient, private selector:ListSelectorDialog) {
         super();
     }
@@ -49,6 +55,11 @@ export class SeasonInfoDialog extends RecordEditWindow implements AfterViewInit 
         if (this.currentRecord.TMDBID && this.currentRecord.TMDBID != '') {
             this.tmdb.getTMDBDetails(this.currentRecord.TMDBID,'tv',this.currentRecord.SeasonNumber).then(v => {});
         }
+    }
+
+    public refreshEpisodes() {
+        this.episodeList.refreshList();
+        this.tabList.selectThisTab(this.episodeListTab);
     }
 
     public queryTMDB() {

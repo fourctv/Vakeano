@@ -5,11 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { FeatureListDialog } from './featureListDialog';
 import { FeatureListApp } from './featureList';
 import { FeatureQueryBand } from './featureQueryBand';
-import { FeatureInfoDialog } from './featureInfoDialog';
-import { FeatureInfo } from './featureInfo';
-import { EditProfile } from './editProfile';
-import { ContentProfileInfo } from './contentProfileInfo';
 import { AnalyzeFeatureComponent } from './analyzeFeature';
+
+import { FeatureInfoModule } from './featureInfoModule';
 
 import { JS44DModule, ModalModule } from 'js44d';
 import { MGModule } from '../moviegenome/mg.module';
@@ -24,6 +22,7 @@ export const FeatureListAppRoute: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(FeatureListAppRoute),
+        FeatureInfoModule,
         JS44DModule, ModalModule,
         MGModule
     ],
@@ -31,14 +30,10 @@ export const FeatureListAppRoute: Routes = [
         FeatureListDialog,
         FeatureListApp,
         FeatureQueryBand,
-        FeatureInfo,
-        EditProfile,
-        AnalyzeFeatureComponent,
-        ContentProfileInfo,
-        FeatureInfoDialog
+        AnalyzeFeatureComponent
     ],
     entryComponents: [
-        FeatureListDialog, FeatureListApp, FeatureInfoDialog, FeatureInfo,
+        FeatureListDialog, FeatureListApp,
         AnalyzeFeatureComponent
     ]
 })

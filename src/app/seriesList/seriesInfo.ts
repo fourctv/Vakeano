@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { SeriesEx, Seasons, Series } from '../moviegenome/index';
 import { JustWatchItem, TMDB } from '../moviegenome/index';
+import { SeriesSeasonList } from './seriesSeasonList';
 
 @Component({
     moduleId: module.id,
@@ -12,6 +13,8 @@ import { JustWatchItem, TMDB } from '../moviegenome/index';
 export class SeriesInfo {
     @Input() public record: SeriesEx;
     @Input() public tmdb: TMDB;
+
+    @Output() public refreshSeasonList:EventEmitter<any> = new EventEmitter(); 
 
     public get showCreateSeasons():boolean {
         return(this.record.isRecordLoaded() && this.tmdb && this.tmdb.tmdbDetails && this.tmdb.tmdbDetails.seasons && this.tmdb.tmdbDetails.seasons.length > 0);
@@ -54,43 +57,55 @@ export class SeriesInfo {
      */
     public createSeasons() {
         if (this.tmdb && this.tmdb.tmdbDetails && this.tmdb.tmdbDetails.seasons && this.tmdb.tmdbDetails.seasons.length > 0) {
+            this.seasonCount = this.tmdb.tmdbDetails.seasons.length;
             for (let index = 0; index < this.tmdb.tmdbDetails.seasons.length; index++) {
                 const element = this.tmdb.tmdbDetails.seasons[index];
-                let season:Seasons = new Seasons();
-                season.getRecords({query:[Seasons.kSeriesID+';=;'+this.record.SeriesId,Seasons.kSeasonNumber+';=;'+element.season_number]})
-                    .then(recs => {
-                        if (recs.models.length === 0) {
-                            season = new Seasons();
-                            season.SeriesID = this.record.SeriesId;
-                            season.TMDBID = this.record.TMDBID;
-                            season.IMDBTitle = this.record.IMDBTitle;
-                            season.ProdYear = element.air_date.substr(0, 4);
-                            season.ProductionTitle = this.record.ProductionTitle + ' - Season '+element.season_number;
-                            season.SeasonNumber = element.season_number;
-                            season.PosterURL = 'http://image.tmdb.org/t/p/w500' + element.poster_path;
-                            season.Episodes= element.episode_count;
-                            season.IMDBID = this.record.IMDBID;
-                            season.JustWatchID = this.record.JustWatchID;
-                            season.ActingType = this.record.ActingType;
-                            season.NarrativeType = this.record.NarrativeType;
-
-                            season.insertRecord();
-                        } else if (recs.models.length === 1) {
-                            season = recs.models[0];
-                            season.SeriesID = this.record.SeriesId;
-                            season.TMDBID = this.record.TMDBID;
-                            season.IMDBTitle = this.record.IMDBTitle;
-                            season.ProdYear = element.air_date.substr(0, 4);
-                            season.ProductionTitle = this.record.ProductionTitle + ' - Season '+element.season_number;
-                            season.SeasonNumber = element.season_number;
-                            season.PosterURL = 'http://image.tmdb.org/t/p/w500' + element.poster_path;
-                            season.Episodes= element.episode_count;
-
-                            season.updateRecord();
-
-                        }
-                    })
+                if (element.air_date && element.episode_count >0) {
+                    let season:Seasons = new Seasons();
+                    season.getRecords({query:[Seasons.kSeriesID+';=;'+this.record.SeriesId,Seasons.kSeasonNumber+';=;'+element.season_number]})
+                        .then(recs => {
+                            if (recs.models.length === 0) {
+                                season = new Seasons();
+                                season.SeriesID = this.record.SeriesId;
+                                season.TMDBID = this.record.TMDBID;
+                                season.IMDBTitle = this.record.IMDBTitle;
+                                season.ProdYear = element.air_date.substr(0, 4);
+                                season.ProductionTitle = this.record.ProductionTitle + ' - Season '+element.season_number;
+                                season.SeasonNumber = element.season_number;
+                                season.PosterURL = 'http://image.tmdb.org/t/p/w500' + element.poster_path;
+                                season.Episodes= element.episode_count;
+                                season.IMDBID = this.record.IMDBID;
+                                season.JustWatchID = this.record.JustWatchID;
+                                season.ActingType = this.record.ActingType;
+                                season.NarrativeType = this.record.NarrativeType;
+    
+                                season.insertRecord().then(rec => {this.createdSeason()});
+                            } else if (recs.models.length === 1) {
+                                season = recs.models[0];
+                                season.SeriesID = this.record.SeriesId;
+                                season.TMDBID = this.record.TMDBID;
+                                season.IMDBTitle = this.record.IMDBTitle;
+                                season.ProdYear = element.air_date.substr(0, 4);
+                                season.ProductionTitle = this.record.ProductionTitle + ' - Season '+element.season_number;
+                                season.SeasonNumber = element.season_number;
+                                season.PosterURL = 'http://image.tmdb.org/t/p/w500' + element.poster_path;
+                                season.Episodes= element.episode_count;
+    
+                                season.updateRecord().then(rec => {this.createdSeason()});
+                            }
+                        })
+                } else {this.createdSeason();}
             }
+
+
+        }
+    }
+
+    private seasonCount = 0;
+    private createdSeason() {
+        if (--this.seasonCount <= 0) {
+            alert(this.tmdb.tmdbDetails.seasons.length + ' Season records created/updated.');
+            this.refreshSeasonList.emit(); // refresh season list        
         }
     }
 }

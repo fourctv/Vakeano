@@ -34,7 +34,7 @@ export class ProfileRecommendationsInfo implements AfterViewInit {
     public get recordCount(): string { return (this.controlList.models) ? this.controlList.models.length.toString() + ' items' : '0'; }
 
     public columnDefs = [
-        { title: 'ID', width: 50, field: 'FeatureID' },
+    //    { title: 'ID', width: 50, field: 'FeatureID' },
         { title: 'Title', width: 250, field: 'IMDBTitle' },
         { title: 'e-Score', width: 80, field: 'EScore' },
         { title: 'Feedback Content', width: 350, field: 'Feedback_Content', attributes: { style: 'vertical-align: top; font-size: 9px' } },
@@ -70,14 +70,7 @@ export class ProfileRecommendationsInfo implements AfterViewInit {
             }
 
             //this.log.debug('query:'+queryType);
-            this.controlList.getRecords(query,
-                [ViewerContent.kRecordID, ViewerContent.kFeatureID, ViewerContent.kUserID,
-                Features.kIMDBTitle, Features.kPosterURL,
-                ViewerContent.kMGCCI, ViewerContent.kMGEQI, ViewerContent.kMGPAI,
-                ViewerContent.kMGPEI, ViewerContent.kMGPVR, ViewerContent.kMGNQI,
-                ViewerContent.kFeedback_Content, ViewerContent.kFeedback_Style, ViewerContent.kFeedback_Theme,
-                ViewerContent.kFeedback_Narrative, ViewerContent.kFeedback_Execution],
-                0, -1, '', '<' + ViewerContent.kMGPVR)
+            this.controlList.getRecords(query,null,0, -1, '', '<' + ViewerContent.kMGPVR)
                 .then(recs => {
                     //this.log.debug('length:'+recs.length);
                     if (recs.length > 0) {

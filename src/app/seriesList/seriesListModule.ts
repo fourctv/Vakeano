@@ -10,6 +10,11 @@ import { SeriesInfo } from './seriesInfo';
 import { SeriesProfile } from './seriesProfile';
 import { SeriesContentProfileInfo } from './seriesContentProfileInfo';
 import { AnalyzeSeriesComponent } from './analyzeSeries';
+import { SeriesSeasonList } from './seriesSeasonList';
+
+import { SeasonInfoModule } from '../seasonList/seasonInfoModule';
+import { FeatureInfoModule } from '../featureList/featureInfoModule';
+
 
 import { JS44DModule, ModalModule } from 'js44d';
 import { MGModule } from '../moviegenome/mg.module';
@@ -24,6 +29,8 @@ export const SeriesListAppRoute: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(SeriesListAppRoute),
+        SeasonInfoModule,
+        FeatureInfoModule,
         JS44DModule, ModalModule,
         MGModule
     ],
@@ -34,6 +41,7 @@ export const SeriesListAppRoute: Routes = [
         SeriesInfo,
         SeriesProfile,
         AnalyzeSeriesComponent,
+        SeriesSeasonList,
         SeriesContentProfileInfo,
         SeriesInfoDialog
     ],
