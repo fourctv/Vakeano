@@ -27,6 +27,8 @@ export class UserRecommendations implements AfterViewInit {
     @Input() profileUser: number;
     @Input() showCuratedList: Boolean = false;
 
+    @Input() public recommendationType = 'Features';
+
     constructor(private fourD: FourDInterface, private justWatch: JustWatchItem, private tmdb: TMDB) {
     }
 
@@ -36,7 +38,8 @@ export class UserRecommendations implements AfterViewInit {
     ngAfterViewInit() {
         this.userIsAdmin = FourDInterface.authentication.options.isAdmin === 'true';
         this.controlList.model = ViewerContentEx;
-        this.refreshList();
+        this.refreshList(this.recommendationType);
+        this.loadCuratedProfileList();
     }
 
     /**
@@ -78,9 +81,10 @@ export class UserRecommendations implements AfterViewInit {
     /**
      * Refresh Recommendations list
      */
-    refreshList() {
+    refreshList(type:string='Features') {
         this.currentRecommendation = 'your viewer/rating profile';
-        let query = { custom: 'MGSEFilterViewerContent', tableName: 'ViewerContent', filter: 'recommend', userID: FourDInterface.currentUserID };
+        this.recommendationType = type;
+        let query = { custom: 'MGSEFilterViewerContent', tableName: 'ViewerContent', filter: 'recommend', userID: FourDInterface.currentUserID, type:type };
         if (this.profileID && this.profileID > 0) {
             query['profileID'] = this.profileID;
             query.userID = this.profileUser;
@@ -96,24 +100,26 @@ export class UserRecommendations implements AfterViewInit {
     /**
      * let user select a curated profile 
      */
-    useCurated() {
-        var profs: FourDCollection = new FourDCollection();
-        profs.model = TasteProfiles;
-        profs.getRecords({ query: [TasteProfiles.kOrigin + ';=;Curator'] }, [TasteProfiles.kProfileID, TasteProfiles.kName])
-            .then(recs => {
-                this.curatedProfiles = [{ ProfileID: 0, Name: 'Your Viewer Profile' }].concat(profs.models);
-                this.showCuratedList = true;
-            });
+    loadCuratedProfileList() {
+        if (this.curatedProfiles.length === 0) {
+            var profs: FourDCollection = new FourDCollection();
+            profs.model = TasteProfiles;
+            profs.getRecords({ query: [TasteProfiles.kOrigin + ';=;Curator'] }, [TasteProfiles.kProfileID, TasteProfiles.kName])
+                .then(recs => {
+                    this.curatedProfiles = [{ ProfileID: 0, Name: 'Your Viewer Profile' }].concat(profs.models);
+                    this.showCuratedList = true;
+                });
+        }
     }
 
     /**
      * Show Curated Profile Recommendations
      */
-    selectCurated(itemIndex) {
-        this.profileID = this.curatedProfiles[itemIndex].ProfileID;
-        this.profileName = this.curatedProfiles[itemIndex].Name;
+    selectCurated(item) {
+        this.profileID = item.ProfileID;
+        this.profileName = item.Name;
         this.showCuratedList = false;
-        this.refreshList();
+        this.refreshList(this.recommendationType);
     }
 
     /**
@@ -136,12 +142,18 @@ export class UserRecommendations implements AfterViewInit {
      * @param jwID selected feature JW ID
      */
     public showMovieSite(viewerContent:ViewerContentEx) {
+        console.log("show:"+viewerContent.TMDBID)
         if (viewerContent.TMDBID && viewerContent.TMDBID != '') {
             this.tmdb.getTMDBDetails(viewerContent.TMDBID,(viewerContent.FeatureID > 0)?'movie':'tv')
                 .then(jw => {
                     if (this.tmdb.movieURL != '') window.open(this.tmdb.movieURL, '_blank');
                 });
         }
+    }
+
+    selectType(type) {
+        this.recommendationType = type;
+        this.refreshList(type);
     }
 
 }

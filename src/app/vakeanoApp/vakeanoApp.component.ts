@@ -46,7 +46,7 @@ export class VakeanoAppComponent implements AfterContentInit {
             routePath: '/userRecommendations',
             roles: ['Viewer', 'Admin'],
             hideMenu: false,
-            title: 'User Recommendations'
+            title: 'Recommendations'
         },
         {
             routePath: '/featureList',

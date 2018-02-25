@@ -8,6 +8,8 @@ import { CommonModule }      from '@angular/common';
 import { HttpClientModule }      from '@angular/common/http';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 // app
 import { VakeanoAppComponent } from './vakeanoApp/vakeanoApp.component';
@@ -33,6 +35,8 @@ let routerModule = RouterModule.forRoot(routes);
     CommonModule,
     HttpClientModule,
     BsDropdownModule.forRoot(),
+    ButtonsModule.forRoot(),
+    PopoverModule.forRoot(),
     routerModule,
     FourDModule, JS44DModule, ModalModule,
     MGModule

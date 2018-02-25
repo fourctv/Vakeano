@@ -6,13 +6,13 @@ import { Seasons } from '../DB/Seasons';
 
 export class ViewerContentEx extends ViewerContent {
     fields: Array<any> = [
-        { name: 'JustWatchID', type: 'text', related: true },
-        { name: 'TMDBID', type: 'text', related: true },
-        { name: 'IMDBID', type: 'text', related: true },
-        { name: 'IMDBTitle', type: 'text', related: true },
-        { name: 'PosterURL', type: 'text', related: true },
-        { name: 'ProdYear', type: 'text', related: true },
-        { name: 'DirectorsList', type: 'text', related: true },
+        { name: 'JustWatchID', type: 'text' },
+        { name: 'TMDBID', type: 'text' },
+        { name: 'IMDBID', type: 'text' },
+        { name: 'IMDBTitle', type: 'text'},
+        { name: 'PosterURL', type: 'text' },
+        { name: 'ProdYear', type: 'text' },
+        { name: 'DirectorsList', type: 'text' },
         { name: 'FeatureIMDBID', longname: Features.kIMDBID, type: 'text', related: true },
         { name: 'FeatureTMDBID', longname: Features.kTMDBID, type: 'text', related: true },
         { name: 'FeatureJWID', longname: Features.kJustWatchID, type: 'text', related: true },
@@ -20,8 +20,8 @@ export class ViewerContentEx extends ViewerContent {
         { name: 'FeaturePosterURL', longname: Features.kPosterURL, type: 'text', related: true },
         { name: 'FeatureProdYear', longname: Features.kProdYear, type: 'text', related: true },
         { name: 'FeatureDirectorsList', longname: Features.kDirectorsList, type: 'text', related: true },
-        { name: 'Series.IMDBID', longname: Series.kIMDBID, type: 'text', related: true },
-        { name: 'Series.TMDBID', longname: Series.kTMDBID, type: 'text', related: true },
+        { name: 'SeriesIMDBID', longname: Series.kIMDBID, type: 'text', related: true },
+        { name: 'SeriesTMDBID', longname: Series.kTMDBID, type: 'text', related: true },
         { name: 'SeriesJWID', longname: Series.kJustWatchID, type: 'text', related: true },
         { name: 'SeriesTitle', longname: Series.kIMDBTitle, type: 'text', related: true },
         { name: 'SeriesPosterURL', longname: Series.kPosterURL, type: 'text', related: true },
@@ -63,7 +63,7 @@ export class ViewerContentEx extends ViewerContent {
 
     set SeasonIMDBID(v: string) { if (v && v != '') this.set('IMDBID', v); }
 
-    set SeasontMDBID(v: string) { if (v && v != '') this.set('TMDBID', v); }
+    set SeasonTMDBID(v: string) { if (v && v != '') this.set('TMDBID', v); }
 
     set SeasonJWID(v: string) { if (v && v != '') this.set('JustWatchID', v); }
 

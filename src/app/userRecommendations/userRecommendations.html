@@ -1,51 +1,96 @@
 <web-application>
     <div class="container" style="height: calc(100% - 20px)">
         <div class="row" style="padding-left:10px;">
-            <h4>Here is a list of Recommended Features.<br/>For each picture, if you have seen it please give it 1-5 stars,<br/>or if you have not seen it, leave it on your recommendation list.</h4>
-            <h4>Recommended for you based on: <span style="color: red">{{currentRecommendation}}</span>
-                <span style="margin-left:20px;">
-                    <button style="width: 240px; font-style: italic;" (click)="useCurated()" [hidden]="showCuratedList">Select a Curated Profile</button>
-                    <select (change)='selectCurated($event.target.selectedIndex)' [hidden]="!showCuratedList">
-                        <option *ngFor='let item of curatedProfiles' value='{{item.Name}}' [selected]='(item.Name === profileName)?"selected":""'>{{item.Name}}</option>
-                    </select>
-               </span>
+            <h4>Here is a list of Recommended 
+                <div class="btn-group" dropdown>
+                    <button type="button" class="btn btn-success">{{recommendationType}}.</button>
+                    <button type="button" dropdownToggle class="btn btn-success dropdown-toggle dropdown-toggle-split">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                            <li role="menuitem"><a class="dropdown-item" (click)="selectType('Features')">Features</a></li>
+                            <li role="menuitem"><a class="dropdown-item" (click)="selectType('Episodes')">Episodes</a></li>
+                            <li role="menuitem"><a class="dropdown-item" (click)="selectType('Series')">Series</a></li>
+                            <li role="menuitem"><a class="dropdown-item" (click)="selectType('Season')">Season</a></li>
+                    </ul>
+                </div>
+
+                <br/>For each recommendation, if you have seen it please give it 1-5 stars,
+                <br/>or if you have not seen it, leave it on your recommendation list.</h4>
+                    <h4>Recommended for you based on:
+                <span style="color: red">{{currentRecommendation}}</span>
+
+                <div class="btn-group" dropdown>
+                        <button type="button" dropdownToggle class="btn btn-success">Select a Curated Profile</button>
+
+                        <ul *dropdownMenu class="dropdown-menu" role="menu">
+                            <li *ngFor='let item of curatedProfiles' role="menuitem"><a class="dropdown-item" (click)="selectCurated(item)">{{item.Name}}</a></li>
+                       </ul>
+                </div>
             </h4>
         </div>
-        
+
         <hr style="margin-top:0;width:1080px;" />
-        
+
         <div style="display:block;float:left;width:1080px;height:calc(100% - 160px);padding-top:15px;overflow:scroll;">
             <fieldset *ngFor="let currentFeature of controlList.models" class="product">
-                <label style="text-overflow:ellipsis;font-size: 16px !important; height:47px; color:#0076db" (click)="showMovieSite(currentFeature)">{{currentFeature.IMDBTitle}}</label>
-                <img src="http://www.vakeano.com/4DAction/REST_GetWebImage?image={{currentFeature.PosterURL}}" alt="Image preview" (click)="showMovieSite(currentFeature.TMDBID)"/>
-                
-                <div  class="rating">
-                    <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="5"/><label title="Rocks!" (click)="rateThis(currentFeature,5)">5 stars</label>
-                    <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="4"/><label title="Pretty good" (click)="rateThis(currentFeature,4)">4 stars</label>
-                    <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="3"/><label title="Meh" (click)="rateThis(currentFeature,3)">3 stars</label>
-                    <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="2"/><label title="Kinda bad" (click)="rateThis(currentFeature,2)">2 stars</label>
-                    <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="1"/><label title="Sucks big time" (click)="rateThis(currentFeature,1)">1 star</label>
-                    <a role="button" class="jw-icon" style="background-size: 24px; height: 24px;width: 24px;float:right;margin-right:20px;" *ngIf="currentFeature.JustWatchID != ''" (click)="showJustWatch(currentFeature)" title="show JustWatch page for this title"></a>
-                </div>
-                <p (click)="showMovieSite(currentFeature.TMDBID)"><span class="formHeaderSmall" style="color:red;">Predicted Score: {{currentFeature.MGPVR}}</span><br/>
-                    CCI: {{currentFeature.MGCCI}}<br/>
-                    EQI: {{currentFeature.MGEQI}}<br/>
-                    PAI: {{currentFeature.MGPAI}}<br/>
-                    PEI: {{currentFeature.MGPEI}}<br/>
-                    NQI: {{currentFeature.MGNQI}}<br/>
-                   <br/><span class="formHeaderSmall" style="color:red;">Theme:</span><br/>
+                <label style="text-overflow:ellipsis;font-size: 16px !important; height:47px; color:#0076db">{{currentFeature.IMDBTitle}}</label>
+                <img src="http://www.vakeano.com/4DAction/REST_GetWebImage?image={{currentFeature.PosterURL}}" alt="Image preview"/>
+
+                <div>
+                    <span style="float:left;margin-right:10px;margin-left:5px">
+                        <span  id="info" style="margin-right:5px;font-size: 18px;vertical-align: middle" (click)="showMovieSite(currentFeature)" class="glyphicon glyphicon-info-sign" title="show this title's web site"></span>
+                        <a role="button" class="jw-icon" style="background-size: 24px; height: 24px;width: 24px;" *ngIf="currentFeature.JustWatchID != ''"
+                            (click)="showJustWatch(currentFeature)" title="show JustWatch page for this title"></a>
+                    </span>
+                     <span class="rating">
+                        <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="5" />
+                        <label title="Rocks!" (click)="rateThis(currentFeature,5)">5 stars</label>
+                        <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="4" />
+                        <label title="Pretty good" (click)="rateThis(currentFeature,4)">4 stars</label>
+                        <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="3" />
+                        <label title="Meh" (click)="rateThis(currentFeature,3)">3 stars</label>
+                        <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="2" />
+                        <label title="Kinda bad" (click)="rateThis(currentFeature,2)">2 stars</label>
+                        <input type="radio" name="{{'rating'+currentFeature.TMDBID}}" value="1" />
+                        <label title="Sucks big time" (click)="rateThis(currentFeature,1)">1 star</label>
+                    </span>
+               </div>
+                <p>
+                    <span class="formHeaderSmall" style="color:red;">Predicted Score: {{currentFeature.MGPVR}}</span>
+                    <br/> CCI: {{currentFeature.MGCCI}}
+                    <br/> EQI: {{currentFeature.MGEQI}}
+                    <br/> PAI: {{currentFeature.MGPAI}}
+                    <br/> PEI: {{currentFeature.MGPEI}}
+                    <br/> NQI: {{currentFeature.MGNQI}}
+                    <br/>
+                    <br/>
+                    <span class="formHeaderSmall" style="color:red;">Theme:</span>
+                    <br/>
                     <span [innerHTML]="cleanUpText(currentFeature.Feedback_Theme)"></span>
-                    <br/><span class="formHeaderSmall" style="color:red;">Narrative:</span><br/>
-                    <span [innerHTML]="cleanUpText(currentFeature.Feedback_Narrative)"></span><br/>
-                    <br/><span class="formHeaderSmall" style="color:red;">Content:</span><br/>
-                    <span [innerHTML]="cleanUpText(currentFeature.Feedback_Content)"></span><br/>
-                    <br/><span class="formHeaderSmall" style="color:red;">Execution:</span><br/>
-                    <span [innerHTML]="cleanUpText(currentFeature.Feedback_Execution)"></span><br/>
-                    <br/><span class="formHeaderSmall" style="color:red;">Style:</span><br/>
+                    <br/>
+                    <span class="formHeaderSmall" style="color:red;">Narrative:</span>
+                    <br/>
+                    <span [innerHTML]="cleanUpText(currentFeature.Feedback_Narrative)"></span>
+                    <br/>
+                    <br/>
+                    <span class="formHeaderSmall" style="color:red;">Content:</span>
+                    <br/>
+                    <span [innerHTML]="cleanUpText(currentFeature.Feedback_Content)"></span>
+                    <br/>
+                    <br/>
+                    <span class="formHeaderSmall" style="color:red;">Execution:</span>
+                    <br/>
+                    <span [innerHTML]="cleanUpText(currentFeature.Feedback_Execution)"></span>
+                    <br/>
+                    <br/>
+                    <span class="formHeaderSmall" style="color:red;">Style:</span>
+                    <br/>
                     <span [innerHTML]="cleanUpText(currentFeature.Feedback_Style)"></span>
                 </p>
             </fieldset>
-		</div>
+        </div>
 
     </div>
 </web-application>
