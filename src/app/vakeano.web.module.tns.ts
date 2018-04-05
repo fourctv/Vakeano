@@ -10,7 +10,7 @@ import { NativeScriptRouterModule } from 'nativescript-angular';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 
 // plugins
-import { NativeScriptUISideDrawerModule } from "nativescript-pro-ui/sidedrawer/angular";
+import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
 
 
 // libs
