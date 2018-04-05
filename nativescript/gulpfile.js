@@ -19,6 +19,9 @@ const EXCLUDED = [
     '!**/userProfileList/*',
     '!**/theaterManagement/*',
     '!**/userManagement/*',
+    '!**/seriesList/*',
+    '!**/seasonList/*',
+    '!**/moviegenome/controls/*',
 ];
 
 function removeTns (path) {
@@ -44,7 +47,7 @@ gulp.task('resources.App_Resources', () => {
 });
 
 gulp.task('resources.Assets', () => {
-    return gulp.src([`${SRC}**/*`, `!${SRC}app/`, `!${SRC}test/`, '!**/*.spec.*', '!**/*.js', '!**/*.ts', '!**/*.scss', '!**/*.html'], {follow: true})
+    return gulp.src([`${SRC}**/*`, `!${SRC}app/`, `!${SRC}test/`, '!**/*.spec.*', '!**/*.js', '!**/*.ts', '!**/*.scss', '!**/*.html', ...EXCLUDED], {follow: true})
         // .pipe(debug({title: 'resources.Assets'}))
         .pipe(gulp.dest(DEST));
 });
