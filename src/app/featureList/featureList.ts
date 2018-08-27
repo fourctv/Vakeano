@@ -7,7 +7,7 @@ import { Modal, ModalDialogInstance } from 'js44d';
 import { FeatureInfoDialog } from './featureInfoDialog';
 import { AnalyzeFeatureComponent } from './analyzeFeature';
 
-import {FeaturesEx} from '../moviegenome/index';
+import {FeaturesEx, Features} from '../moviegenome/index';
 
 @Component({
     selector: 'feature-list',
@@ -19,6 +19,7 @@ import {FeaturesEx} from '../moviegenome/index';
                     <features-queryband #customQueryBand class="form-group"></features-queryband>
                 </queryband>
                 <custombuttonbar>
+                    <button class="regularButton" style="width:120px;" (click)="addNewReleases()">Add New Releases</button>
                     <button class="regularButton" style="width:120px;" (click)="checkFeature()">Analyse</button>
                 </custombuttonbar>
             </query-band>
@@ -77,7 +78,7 @@ export class FeatureListApp {
      //
     // We need access to a Modal dialog component, to open an associated Record Edit Form 
     //
-    constructor(private modal: Modal) {
+    constructor(private fourD:FourDInterface, private modal: Modal) {
     }
 
     public checkFeature() {
@@ -85,5 +86,12 @@ export class FeatureListApp {
             let theRec:FeaturesEx = <any>this.theGrid.currentRecord; 
             this.modal.openDialog(AnalyzeFeatureComponent, {featureID:theRec.FeatureId, featureName: theRec.IMDBTitle}); // open user recomendations dialog
         }
+    }
+
+    public addNewReleases() {
+        this.fourD.call4DRESTMethod("MGRErestGetNewFeatures",{}, {responseType:'text'})
+        .subscribe(r => {
+            this.theGrid.loadData({query: [Features.kCreationDate+';=;'+this.fourD.dateTo4DFormat(new Date())]});
+        })
     }
 }

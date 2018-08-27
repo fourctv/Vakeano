@@ -19,7 +19,7 @@
             "assets": [
               "src/assets",
               "src/favicon.ico"
-            ],
+            ], "preserveSymlinks":true,
             "styles": [
               "src/styles.scss"
             ],

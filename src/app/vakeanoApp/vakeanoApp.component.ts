@@ -193,7 +193,7 @@ export class VakeanoAppComponent implements AfterContentInit {
     }
 
     showAbout() {
-        window.open("/about.html", '_blank')
+        window.open('https://synkopeia.wixsite.com/aboutvakeano', '_blank')
     }
 
 }
