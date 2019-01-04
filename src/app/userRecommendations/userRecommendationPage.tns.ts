@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { ActivatedRoute }     from '@angular/router';
-import { Observable }         from 'rxjs/Observable';
+import { Observable }         from 'rxjs';
 import { RouterExtensions } from 'nativescript-angular';
 
 import * as app from "tns-core-modules/application";
