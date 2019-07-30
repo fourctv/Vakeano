@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { SeasonEx, Features } from '../moviegenome/index';
 import { JustWatchItem, TMDB } from '../moviegenome/index';
+import { FourDInterface } from 'js44d';
 
 @Component({
     moduleId: module.id,
@@ -34,7 +35,13 @@ export class SeasonInfo {
             let xOffset = 30;
             let yOffset = 180;
 
-            $('body').append('<img id="preview" src="http://www.vakeano.com/4DAction/REST_GetWebImage?image=' + this.record.PosterURL + '" alt="Image preview" />');
+            $("body").append(
+                '<img id="preview" src="' +
+                    FourDInterface.fourDUrl +
+                    "/4DAction/REST_GetWebImage?image=" +
+                    this.record.PosterURL +
+                    '" alt="Image preview" />'
+            );
             $('#preview').css({
                 'top': (e.pageY - yOffset) + 'px',
                 'left': (e.pageX + xOffset) + 'px',
@@ -77,7 +84,7 @@ export class SeasonInfo {
                                 episode.JustWatchID = this.record.JustWatchID;
                                 episode.ActingType = this.record.ActingType;
                                 episode.NarrativeType = this.record.NarrativeType;
-    
+
                                 episode.insertRecord().then(rec => { this.createdEpisode() });
                             } else if (recs.models.length === 1) {
                                 episode = recs.models[0];
@@ -87,7 +94,7 @@ export class SeasonInfo {
                                 episode.ProductionTitle = element.name;
                                 episode.EpisodeNumber = element.episode_number;
                                 episode.PosterURL = 'http://image.tmdb.org/t/p/w500' + element.still_path;
-    
+
                                 episode.updateRecord().then(rec => { this.createdEpisode() });
                             }
                         })
@@ -101,7 +108,7 @@ export class SeasonInfo {
     private createdEpisode() {
         if (--this.episodeCount <= 0) {
             alert(this.tmdb.tmdbDetails.episodes.length + ' Episode records created/updated.');
-            this.refreshEpisodeList.emit(); // refresh season list        
+            this.refreshEpisodeList.emit(); // refresh season list
         }
     }
 }

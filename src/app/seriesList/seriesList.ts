@@ -41,7 +41,7 @@ export class SeriesListApp {
     /**
      * get the associated Datagrid object instance
      */
-    @ViewChild(DataGrid) theGrid: DataGrid;
+    @ViewChild(DataGrid, {static: false}) theGrid: DataGrid;
 
     //
     // our Modal Dialog instance, populated by the Modal service, when running inside
@@ -56,7 +56,7 @@ export class SeriesListApp {
     //
     // Declare Datagrid properties
     //
-    public model = SeriesEx; // the record datamodel to use 
+    public model = SeriesEx; // the record datamodel to use
 
     // the columns for the datagrid
     public columnDefs = [
@@ -69,7 +69,7 @@ export class SeriesListApp {
     ];
 
     //
-    // We need access to a Modal dialog component, to open an associated Record Edit Form 
+    // We need access to a Modal dialog component, to open an associated Record Edit Form
     //
     constructor(private modal: Modal) {
     }

@@ -7,7 +7,7 @@ import { TasteProfilesEx, ViewerContent, ViewerContentEx } from '../moviegenome/
 @Component({
     selector: 'viewercontent-info',
     template: `
-        <div>   
+        <div>
             <div class="row" style="padding-left:10px;">
                 <button class="regularButton" style="width:120px;margin-left:380px" (click)="checkFeature()">Analyze</button>
                 <button class="regularButton" style="width:140px;margin-left:30px" (click)="recalcRecommendations()">Recalc Recommendations</button>
@@ -33,11 +33,11 @@ import { TasteProfilesEx, ViewerContent, ViewerContentEx } from '../moviegenome/
 
 export class ViewerContentInfo implements AfterViewInit {
     @Input() public record: TasteProfilesEx;
-    
+
     public analyzeResponse:string;
- 
+
     public get recordCount():string {return (this.record.viewerContentList)?this.record.viewerContentList.length.toString()+' items':'0';}
-    
+
     public columnDefs = [
         { title: 'IMDB ID', width:80, field: 'IMDBID' },
         { title: 'IMDB Title', width:250, field: 'IMDBTitle' },
@@ -55,10 +55,10 @@ export class ViewerContentInfo implements AfterViewInit {
         { title: 'MGPVR', width:80, field: 'MGPVR', filterable: false }
      ];
 
-    @ViewChild(DataGrid) private theGrid: DataGrid;
+    @ViewChild(DataGrid, {static: false}) private theGrid: DataGrid;
 
     constructor(private elementRef: ElementRef, private fourD:FourDInterface) {}
-    
+
     ngAfterViewInit() {
         this.refreshGrid();
     }

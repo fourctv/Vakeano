@@ -38,7 +38,7 @@ export class SeasonEpisodeList implements AfterViewInit {
         { title: 'Prod. Year', width: 80, field: 'ProdYear' }
     ];
 
-    @ViewChild(DataGrid) private theGrid: DataGrid;
+    @ViewChild(DataGrid, {static: false}) private theGrid: DataGrid;
 
     constructor(private modal: Modal, private viewRef: ViewContainerRef) {
     }
@@ -73,7 +73,7 @@ export class SeasonEpisodeList implements AfterViewInit {
 
     /**
      *  Show Episode Record
-     * 
+     *
      */
     showEpisode() {
         if (this.theGrid && this.theGrid.currentRecord) {

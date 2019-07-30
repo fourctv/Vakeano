@@ -1,7 +1,7 @@
 <web-application>
     <div class="container" style="height: calc(100% - 20px)">
         <div class="row" style="padding-left:10px;">
-            <h4>Here is a list of Recommended 
+            <h4>Here is a list of Recommended
                 <div class="btn-group" dropdown>
                     <button type="button" class="btn btn-success">{{recommendationType}}.</button>
                     <button type="button" dropdownToggle class="btn btn-success dropdown-toggle dropdown-toggle-split">
@@ -36,7 +36,7 @@
         <div style="display:block;float:left;width:1080px;height:calc(100% - 160px);padding-top:15px;overflow:scroll;">
             <fieldset *ngFor="let currentFeature of controlList.models" class="product">
                 <label style="text-overflow:ellipsis;font-size: 16px !important; height:47px; color:#0076db">{{currentFeature.IMDBTitle}}</label>
-                <img src="http://www.vakeano.com/4DAction/REST_GetWebImage?image={{currentFeature.PosterURL}}" alt="Image preview"/>
+                <img src="{{serverURL+'/4DAction/REST_GetWebImage?image='+currentFeature.PosterURL}}" alt="Image preview"/>
 
                 <div>
                     <span style="float:left;margin-right:10px;margin-left:5px">

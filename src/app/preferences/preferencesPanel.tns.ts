@@ -27,7 +27,7 @@ import { isAndroid, isIOS } from 'platform';
                 <Label text="My Recommendations List" class="p-t-5" (tap)="closeDrawer();showList()"></Label>
                 <Label text="Use Curated Profile..." class="p-t-5" (tap)="closeDrawer();useCuratedProfile()"></Label>
                 <Label text="I'm In the Mood for..." class="p-t-5" style="font-style: italic;color: gray;" (tap)="closeDrawer();buildProfile()"></Label>
-                
+
                 <StackLayout class="hr-dark"></StackLayout>
                 <StackLayout class="hr-dark"></StackLayout>
 
@@ -39,7 +39,7 @@ import { isAndroid, isIOS } from 'platform';
         <StackLayout tkMainContent style="background-color: deepskyblue;" width="100%" height="100%">
                 <ng-content></ng-content>
          </StackLayout>
-    </RadSideDrawer>        
+    </RadSideDrawer>
 `,
     changeDetection: ChangeDetectionStrategy.Default
 })
@@ -52,11 +52,11 @@ export class PreferencePanel implements OnInit {
 
     @Output() public onSwipe: EventEmitter<any> = new EventEmitter();
 
-    @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+    @ViewChild(RadSideDrawerComponent, {static: false}) public drawerComponent: RadSideDrawerComponent;
 
 
     constructor(private router:RouterExtensions) {
-       
+
     }
 
     ngOnInit() {

@@ -101,8 +101,8 @@ export class VakeanoAppComponent implements AfterContentInit {
 
     constructor (public router:Router, private modal: Modal, private hostViewRef: ViewContainerRef) {
         if (window.location.hostname === 'localhost' && window.location.port === '4200') {
-            FourDInterface.fourDUrl = 'http://www.vakeano.com';
-            // FourDInterface.fourDUrl = 'http://localhost:8080';   
+            // FourDInterface.fourDUrl = 'http://www.vakeano.com';
+            FourDInterface.fourDUrl = 'http://localhost:8080';
         } else {
             FourDInterface.fourDUrl = window.location.origin;
         }
@@ -114,13 +114,13 @@ export class VakeanoAppComponent implements AfterContentInit {
              // no predefined user, login...
         if (Config.PLATFORM_TARGET === Config.PLATFORMS.WEB) this.showLoginDialog();
     }
-    
+
     userHasLoggedIn(isNew:boolean = false) {
         // load current profile user functions
         if (this.userIsLoggedIn) {
-            this.userIsAdmin = FourDInterface.authentication.options.isAdmin === 'true';           
+            this.userIsAdmin = FourDInterface.authentication.options.isAdmin === 'true';
             FourDInterface.runningInsideWorkspace = true; // we are indeed running inside the workspace
- 
+
             // now we need to check user Roles and enable/disable menus accordingly
             if (FourDInterface.authentication.options.isAdmin !== 'true') {
                 this.menuList.forEach(element => {
@@ -130,7 +130,7 @@ export class VakeanoAppComponent implements AfterContentInit {
             } else {
                  this.menuList.forEach(element => {
                     element.hideMenu = false;
-                });               
+                });
             }
        }
 
@@ -152,12 +152,12 @@ export class VakeanoAppComponent implements AfterContentInit {
                     case 'loggedin':
                         this.userHasLoggedIn();
                         break;
-                
+
                     case 'signUp':
                         this.showSignUpDialog();
                         break;
                 }
-            });        
+            });
     }
 
     showSignUpDialog() {
@@ -167,13 +167,13 @@ export class VakeanoAppComponent implements AfterContentInit {
                     case 'signedUp':
                         this.userHasLoggedIn(true);
                         break;
-                
+
                     case 'login':
                         this.showLoginDialog();
                         break;
                 }
-            });        
-        
+            });
+
     }
 
 

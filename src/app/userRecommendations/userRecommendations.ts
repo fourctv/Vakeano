@@ -28,6 +28,7 @@ export class UserRecommendations implements AfterViewInit {
     @Input() showCuratedList: Boolean = false;
 
     @Input() public recommendationType = 'Features';
+    public serverURL = FourDInterface.fourDUrl;
 
     constructor(private fourD: FourDInterface, private justWatch: JustWatchItem, private tmdb: TMDB) {
     }
@@ -98,7 +99,7 @@ export class UserRecommendations implements AfterViewInit {
     }
 
     /**
-     * let user select a curated profile 
+     * let user select a curated profile
      */
     loadCuratedProfileList() {
         if (this.curatedProfiles.length === 0) {
@@ -124,7 +125,7 @@ export class UserRecommendations implements AfterViewInit {
 
     /**
      * Show JW page for a given Feature
-     * 
+     *
      * @param jwID selected feature JW ID
      */
     public showJustWatch(viewerContent:ViewerContentEx) {
@@ -138,7 +139,7 @@ export class UserRecommendations implements AfterViewInit {
 
     /**
      * Show JW page for a given Feature
-     * 
+     *
      * @param jwID selected feature JW ID
      */
     public showMovieSite(viewerContent:ViewerContentEx) {

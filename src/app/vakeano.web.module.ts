@@ -11,6 +11,10 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 
+// material
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { MatButtonModule } from "@angular/material/button";
+
 // app
 import { VakeanoAppComponent } from './vakeanoApp/vakeanoApp.component';
 import { routes } from './vakeanoApp/vakeanoApp.component';
@@ -23,6 +27,7 @@ import { SignUpComponent  } from './login/signUp.component';
 // feature modules
 import { FourDModule, JS44DModule, ModalModule } from 'js44d';
 import { MGModule } from './moviegenome/mg.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 let routerModule = RouterModule.forRoot(routes);
 
@@ -30,7 +35,7 @@ let routerModule = RouterModule.forRoot(routes);
 
 @NgModule({
   imports: [
-    BrowserModule,  
+    BrowserModule,
     FormsModule,
     CommonModule,
     HttpClientModule,
@@ -38,8 +43,10 @@ let routerModule = RouterModule.forRoot(routes);
     ButtonsModule.forRoot(),
     PopoverModule.forRoot(),
     routerModule,
+    MatButtonToggleModule, MatButtonModule,
     FourDModule, JS44DModule, ModalModule,
-    MGModule
+    MGModule,
+    BrowserAnimationsModule
   ],
   declarations: [ VakeanoAppComponent, BlankPage, LoginComponent, SignUpComponent ],
   exports: [JS44DModule, ModalModule, MGModule ],

@@ -35,7 +35,7 @@ export class ContentProfileInfo implements AfterViewInit {
         { title: 'Value', width:80, field: 'CoordinateValue' }
     ];
 
-    @ViewChild(DataGrid) private theGrid: DataGrid;
+    @ViewChild(DataGrid, {static: false}) private theGrid: DataGrid;
 
     ngAfterViewInit() {
         if (this.record && this.theGrid) this.theGrid.setDataSource(<any>this.record.contentProfileList);

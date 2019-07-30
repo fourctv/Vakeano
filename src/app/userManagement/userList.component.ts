@@ -35,27 +35,27 @@ import { UserInfoDialog } from './userInfo.dialog';
     `
 })
 
-export class UserListApp {  
-      
+export class UserListApp {
+
     /**
      * get the associated Datagrid object instance
      */
-    @ViewChild(DataGrid) theGrid: DataGrid;
+    @ViewChild(DataGrid, {static: false}) theGrid: DataGrid;
 
     //
     // our Modal Dialog instance, populated by the Modal service, when running inside
     //
     public dialog:ModalDialogInstance = null;
-    
+
     //
     // Declare Program edit Window
     //
     public editWindow = UserInfoDialog;
-    
+
     //
     // Declare Datagrid properties
     //
-    public model = ShellUsersEx; // the record datamodel to use 
+    public model = ShellUsersEx; // the record datamodel to use
     // the columns for the datagrid
     public columnDefs = [
         { title: 'User ID', field: 'ID', width:80},
@@ -68,7 +68,7 @@ export class UserListApp {
 
 
     //
-    // We need access to a Modal dialog component, to open an associated Record Edit Form 
+    // We need access to a Modal dialog component, to open an associated Record Edit Form
     //
     constructor(private modal: Modal, private viewref:ViewContainerRef, private fourD:FourDInterface) {
     }

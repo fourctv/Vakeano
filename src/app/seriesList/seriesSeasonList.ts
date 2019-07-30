@@ -37,7 +37,7 @@ export class SeriesSeasonList implements AfterViewInit {
         { title: 'Prod. Title', width: 250, field: 'ProductionTitle' }
     ];
 
-    @ViewChild(DataGrid) private theGrid: DataGrid;
+    @ViewChild(DataGrid, {static: false}) private theGrid: DataGrid;
 
     constructor(private modal: Modal, private viewRef: ViewContainerRef) {
     }
@@ -49,7 +49,7 @@ export class SeriesSeasonList implements AfterViewInit {
             this.refreshList();
         }
     }
-    
+
     refreshList() {
         const columns = ['SeasonId', 'JustWatchID', 'IMDBID', 'IMDBTitle', 'SeasonNumber', 'ProductionTitle'];
         this.seasonList.getRecords({ query: [Seasons.kSeriesID + ';=;' + this.record.SeriesId] }, null, 0, -1, '', '>' + Seasons.kSeasonNumber)
@@ -60,12 +60,12 @@ export class SeriesSeasonList implements AfterViewInit {
                         let item = element.extractModelData();
                         data.push(item);
                     });
-    
+
                     this.theGrid.setOptions({ pageable: { messages: { display: recs.length + ' seasons' } } });
                     this.theGrid.dataProvider = this.seasonList;
                     this.theGrid.setDataSource(data);
                 }
-    
+
             })
     }
 
@@ -73,7 +73,7 @@ export class SeriesSeasonList implements AfterViewInit {
 
     /**
      *  Show Episode Record
-     * 
+     *
      */
     showSeason() {
         if (this.theGrid && this.theGrid.currentRecord) {

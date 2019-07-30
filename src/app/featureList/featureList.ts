@@ -42,7 +42,7 @@ export class FeatureListApp {
     /**
      * get the associated Datagrid object instance
      */
-    @ViewChild(DataGrid) theGrid: DataGrid;
+    @ViewChild(DataGrid, {static: false}) theGrid: DataGrid;
 
     //
     // our Modal Dialog instance, populated by the Modal service, when running inside
@@ -53,12 +53,12 @@ export class FeatureListApp {
     // Declare Program edit Window
     //
     public editWindow = FeatureInfoDialog;
-       
+
     //
     // Declare Datagrid properties
     //
-    public model = FeaturesEx; // the record datamodel to use 
-     
+    public model = FeaturesEx; // the record datamodel to use
+
     // the columns for the datagrid
     public columnDefs = [
         { title: 'Feature ID', field: 'FeatureId'},
@@ -76,14 +76,14 @@ export class FeatureListApp {
     ];
 
      //
-    // We need access to a Modal dialog component, to open an associated Record Edit Form 
+    // We need access to a Modal dialog component, to open an associated Record Edit Form
     //
     constructor(private fourD:FourDInterface, private modal: Modal) {
     }
 
     public checkFeature() {
         if (this.theGrid && this.theGrid.currentRecord) {
-            let theRec:FeaturesEx = <any>this.theGrid.currentRecord; 
+            let theRec:FeaturesEx = <any>this.theGrid.currentRecord;
             this.modal.openDialog(AnalyzeFeatureComponent, {featureID:theRec.FeatureId, featureName: theRec.IMDBTitle}); // open user recomendations dialog
         }
     }

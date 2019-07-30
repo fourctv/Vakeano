@@ -31,10 +31,10 @@ export class ProfileGenesInfo implements AfterViewInit {
     @Input() public record: TasteProfilesEx;
 
     @Output() public profileUpdated:EventEmitter<any> = new EventEmitter();
-   
+
     public get recordCount():string {return (this.record.profileGenesList)?this.record.profileGenesList.length.toString()+' items':'0';}
-    
-    public model = ProfileGenes; // the record datamodel to use 
+
+    public model = ProfileGenes; // the record datamodel to use
     public columnDefs = [
         { title: 'Gene ID', width:80, field: 'GeneID'},
         { title: 'Gene Name', width:250, field: 'GeneName'},
@@ -47,12 +47,12 @@ export class ProfileGenesInfo implements AfterViewInit {
         { title: 'Cum Value', width:80, field: 'CumValue' },
         { title: 'Theme Gene', width:80, field: 'ThemeGeneID'},
         { title: 'Parent Vector', width:150, field: 'ParentVector', filterable: { multi: true }  }
-        
+
     ];
 
     private initialized:boolean = false;
 
-    @ViewChild(DataGrid) private theGrid: DataGrid;
+    @ViewChild(DataGrid, {static: false}) private theGrid: DataGrid;
 
     constructor(private modal: Modal, private viewref:ViewContainerRef) {
     }
@@ -82,12 +82,12 @@ export class ProfileGenesInfo implements AfterViewInit {
                 let profileRec:ProfileGenes = new ProfileGenes();
                 profileRec.getRecord(null, (<ProfileGenes>theRecord).RecordID.toString())
                     .then(rec => {
-                        profileRec.deleteRecord().then(()=> {                            
+                        profileRec.deleteRecord().then(()=> {
                             console.log('delete:',theRecord['RecordID'],', index:',this.theGrid.selectedRowIndex());
                             this.profileUpdated.emit();
                         });
                     });
-                
+
             }
         }
     }
@@ -106,7 +106,7 @@ export class ProfileGenesInfo implements AfterViewInit {
                     this.profileUpdated.emit();
                 });
             });
-            
+
         }
     }
 

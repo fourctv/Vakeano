@@ -41,27 +41,27 @@ import { UserRatingDialog } from '../userRating/userRatingDialog';
     `
 })
 
-export class UserProfileListApp {  
-      
+export class UserProfileListApp {
+
     /**
      * get the associated Datagrid object instance
      */
-    @ViewChild(DataGrid) theGrid: DataGrid;
+    @ViewChild(DataGrid, {static: false}) theGrid: DataGrid;
 
     //
     // our Modal Dialog instance, populated by the Modal service, when running inside
     //
     public dialog:ModalDialogInstance = null;
-    
+
     //
     // Declare Program edit Window
     //
     public editWindow = UserProfileInfoDialog;
-    
+
     //
     // Declare Datagrid properties
     //
-    public model = TasteProfilesEx; // the record datamodel to use 
+    public model = TasteProfilesEx; // the record datamodel to use
     // the columns for the datagrid
     public columnDefs = [
         { title: 'Profile ID', field: 'ProfileID', width:80},
@@ -77,18 +77,18 @@ export class UserProfileListApp {
 
 
     //
-    // We need access to a Modal dialog component, to open an associated Record Edit Form 
+    // We need access to a Modal dialog component, to open an associated Record Edit Form
     //
     constructor(private modal: Modal, private viewref:ViewContainerRef, private fourD:FourDInterface) {
     }
 
     public showRecommendations() {
         if (this.theGrid && this.theGrid.currentRecord && this.theGrid.currentRecord.isRecordLoaded()) {
-            let theRec:TasteProfilesEx = <any>this.theGrid.currentRecord; 
-            this.modal.openDialog(UserRecommendationsDialog, 
+            let theRec:TasteProfilesEx = <any>this.theGrid.currentRecord;
+            this.modal.openDialog(UserRecommendationsDialog,
                 {
-                    profileID:theRec.ProfileID, 
-                    profileName:theRec.Name, 
+                    profileID:theRec.ProfileID,
+                    profileName:theRec.Name,
                     profileUserID:theRec.UserID,
                     userName: theRec.UserName
                 }); // open user recomendations dialog
@@ -98,12 +98,12 @@ export class UserProfileListApp {
 
     public showRatings() {
         if (this.theGrid && this.theGrid.currentRecord && this.theGrid.currentRecord.isRecordLoaded()) {
-            let theRec:TasteProfilesEx = <any>this.theGrid.currentRecord; 
+            let theRec:TasteProfilesEx = <any>this.theGrid.currentRecord;
             this.modal.openDialog(UserRatingDialog, {currentProfile:theRec.ProfileID, profileUserID:theRec.UserID, userName: theRec.UserName}); // open user recomendations dialog
 
         }
     }
-    
+
     public recalcRecommendations() {
          let body = {};
             kendo.ui.progress($(this.viewref.element.nativeElement), true); // show loading progress icon
@@ -111,6 +111,6 @@ export class UserProfileListApp {
                 .subscribe(result => {
                        kendo.ui.progress($(this.viewref.element.nativeElement), false); // hide loading progress icon
                 }, error => { console.log(error); alert('Error:' + error); });
-        
+
     }
 }

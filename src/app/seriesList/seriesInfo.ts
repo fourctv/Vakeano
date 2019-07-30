@@ -3,6 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { SeriesEx, Seasons, Series } from '../moviegenome/index';
 import { JustWatchItem, TMDB } from '../moviegenome/index';
 import { SeriesSeasonList } from './seriesSeasonList';
+import { FourDInterface } from 'js44d';
 
 @Component({
     moduleId: module.id,
@@ -14,7 +15,7 @@ export class SeriesInfo {
     @Input() public record: SeriesEx;
     @Input() public tmdb: TMDB;
 
-    @Output() public refreshSeasonList:EventEmitter<any> = new EventEmitter(); 
+    @Output() public refreshSeasonList:EventEmitter<any> = new EventEmitter();
 
     public get showCreateSeasons():boolean {
         return(this.record.isRecordLoaded() && this.tmdb && this.tmdb.tmdbDetails && this.tmdb.tmdbDetails.seasons && this.tmdb.tmdbDetails.seasons.length > 0);
@@ -35,7 +36,13 @@ export class SeriesInfo {
             let xOffset = 30;
             let yOffset = 180;
 
-            $('body').append('<img id="preview" src="http://www.vakeano.com/4DAction/REST_GetWebImage?image=' + this.record.PosterURL + '" alt="Image preview" />');
+            $("body").append(
+                '<img id="preview" src="' +
+                    FourDInterface.fourDUrl +
+                    "/4DAction/REST_GetWebImage?image=" +
+                    this.record.PosterURL +
+                    '" alt="Image preview" />'
+            );
             $('#preview').css({
                 'top': (e.pageY - yOffset) + 'px',
                 'left': (e.pageX + xOffset) + 'px',
@@ -78,7 +85,7 @@ export class SeriesInfo {
                                 season.JustWatchID = this.record.JustWatchID;
                                 season.ActingType = this.record.ActingType;
                                 season.NarrativeType = this.record.NarrativeType;
-    
+
                                 season.insertRecord().then(rec => {this.createdSeason()});
                             } else if (recs.models.length === 1) {
                                 season = recs.models[0];
@@ -90,7 +97,7 @@ export class SeriesInfo {
                                 season.SeasonNumber = element.season_number;
                                 season.PosterURL = 'http://image.tmdb.org/t/p/w500' + element.poster_path;
                                 season.Episodes= element.episode_count;
-    
+
                                 season.updateRecord().then(rec => {this.createdSeason()});
                             }
                         })
@@ -105,7 +112,7 @@ export class SeriesInfo {
     private createdSeason() {
         if (--this.seasonCount <= 0) {
             alert(this.tmdb.tmdbDetails.seasons.length + ' Season records created/updated.');
-            this.refreshSeasonList.emit(); // refresh season list        
+            this.refreshSeasonList.emit(); // refresh season list
         }
     }
 }

@@ -2,7 +2,7 @@ import { Component, AfterViewInit, ViewChild } from '@angular/core';
 
 import { FourDInterface } from 'js44d';
 import { ModalConfig, ICustomModal } from 'js44d';
-import { DataGrid } from 'js44d';   
+import { DataGrid } from 'js44d';
 import { TasteProfilesEx } from '../moviegenome/customDataModels/TasteProfilesEx';
 
 @Component({
@@ -19,7 +19,7 @@ import { TasteProfilesEx } from '../moviegenome/customDataModels/TasteProfilesEx
             <h3>Results:</h3>
             <textarea style="width:950px;height:120px" class="fieldEntry" type="text" [(ngModel)]="analyzeResponse" disable></textarea>
         </div>
-       <div>   
+       <div>
                 <datagrid  [height]="340"
                     [columns]="columnDefs"
                     [model]="model"
@@ -42,11 +42,11 @@ export class AnalyzeSeasonComponent implements AfterViewInit {
     };
 
     public analyzeResponse:string;
-    
+
     //
     // Declare Datagrid properties
     //
-    public model = TasteProfilesEx; // the record datamodel to use 
+    public model = TasteProfilesEx; // the record datamodel to use
 
     // the columns for the datagrid
     public columnDefs = [
@@ -64,7 +64,7 @@ export class AnalyzeSeasonComponent implements AfterViewInit {
 
     public inputData: any;
 
-    @ViewChild(DataGrid) private theGrid: DataGrid;
+    @ViewChild(DataGrid, {static: false}) private theGrid: DataGrid;
 
     constructor(private fourD:FourDInterface) { }
 

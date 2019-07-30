@@ -45,7 +45,7 @@ export class ProfileRecommendationsInfo implements AfterViewInit {
 
     ];
 
-    @ViewChild(DataGrid) private theGrid: DataGrid;
+    @ViewChild(DataGrid, {static: false}) private theGrid: DataGrid;
 
     ngAfterViewInit() {
         if (this.record && this.theGrid) {
