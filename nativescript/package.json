@@ -4,11 +4,11 @@
   "repository": "<fill-your-repository-here>",
   "nativescript": {
     "id": "com.moviegenome.vakeano",
-    "tns-ios": {
-      "version": "5.1.0"
-    },
     "tns-android": {
-      "version": "5.1.0"
+      "version": "5.4.0"
+    },
+    "tns-ios": {
+      "version": "5.4.2"
     }
   },
   "dependencies": {
@@ -30,7 +30,7 @@
     "node-sass": "^4.11.0",
     "reflect-metadata": "~0.1.12",
     "rxjs": "^6.3.3",
-    "tns-core-modules": "^5.1.1",
+    "tns-core-modules": "^6.0.3",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
