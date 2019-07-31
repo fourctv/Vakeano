@@ -17,3 +17,6 @@ src/node_modules
 src/platforms
 
 times.html
+
+.migration_backup
+.update_backup
