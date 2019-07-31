@@ -9,8 +9,8 @@ import { SignUpComponent } from '../login/signUp.component';
 
 import { UserRecommendations } from '../userRecommendations/userRecommendations';
 import { UserRating } from '../userRating/userRating';
-import { UserRecommendationPage } from '../userRecommendations/userRecommendationPage'; 
-import { ProfileBuildingPage } from '../userRating/profileBuildingPage'; 
+import { UserRecommendationPage } from '../userRecommendations/userRecommendationPage';
+import { ProfileBuildingPage } from '../userRating/profileBuildingPage';
 import { CuratedProfiles } from '../userRecommendations/curatedProfile';
 
 export const routes: Route[] = [
@@ -23,7 +23,7 @@ export const routes: Route[] = [
       {path: 'curatedRecommendationPage/:profileID', component: UserRecommendationPage},
       {path: 'curatedProfile', component: CuratedProfiles},
       {path: 'profileBuildingPage', component: ProfileBuildingPage},
-  
+
   { path: '**', component: LoginComponent }
 ];
 
@@ -38,8 +38,8 @@ export const routes: Route[] = [
 export class VakeanoAppComponent {
 
   constructor() {
-    FourDInterface.fourDUrl = 'http://www.vakeano.com';
-
+    // FourDInterface.fourDUrl = 'http://www.vakeano.com';
+    FourDInterface.fourDUrl = "http://localhost:8080";
   }
 
 }
