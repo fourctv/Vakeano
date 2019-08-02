@@ -38,8 +38,8 @@ export const routes: Route[] = [
 export class VakeanoAppComponent {
 
   constructor() {
-    // FourDInterface.fourDUrl = 'http://www.vakeano.com';
-    FourDInterface.fourDUrl = "http://localhost:8080";
+    FourDInterface.fourDUrl = 'http://www.vakeano.com';
+    // FourDInterface.fourDUrl = "http://localhost:8080";
   }
 
 }

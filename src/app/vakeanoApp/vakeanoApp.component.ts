@@ -101,8 +101,8 @@ export class VakeanoAppComponent implements AfterContentInit {
 
     constructor (public router:Router, private modal: Modal, private hostViewRef: ViewContainerRef) {
         if (window.location.hostname === 'localhost' && window.location.port === '4200') {
-            // FourDInterface.fourDUrl = 'http://www.vakeano.com';
-            FourDInterface.fourDUrl = 'http://localhost:8080';
+            FourDInterface.fourDUrl = 'http://www.vakeano.com';
+            // FourDInterface.fourDUrl = 'http://localhost:8080';
         } else {
             FourDInterface.fourDUrl = window.location.origin;
         }
