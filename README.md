@@ -1,8 +1,8 @@
 # Vakeano
 
-[![Build Status](https://travis-ci.org/fourctv/Vakeano.svg?branch=master)](https://travis-ci.org/fourctv/Vakeano)
 [![Dependency Status](https://david-dm.org/fourctv/Vakeano.svg)](https://david-dm.org/fourctv/Vakeano)
 [![devDependency Status](https://david-dm.org/fourctv/Vakeano/dev-status.svg)](https://david-dm.org/fourctv/Vakeano#info=devDependencies)
+
 
 
 ## Credits
