@@ -4,6 +4,7 @@
 [![devDependency Status](https://david-dm.org/fourctv/Vakeano/dev-status.svg)](https://david-dm.org/fourctv/Vakeano#info=devDependencies)
 
 
+
 ## Credits
 
 Built using [TeamMaestro Native Seed](https://github.com/TeamMaestro/angular-native-seed), fantastic seed made by:
