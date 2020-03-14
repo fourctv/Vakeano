@@ -12,15 +12,15 @@ import { BlankPage } from './blankPage';
 
 export const routes: Routes = [
     {path: 'login', component: BlankPage},
-    {path: 'featureList', loadChildren:'app/featureList/featureListModule#FeatureListModule'},
-    {path: 'seriesList', loadChildren:'app/seriesList/seriesListModule#SeriesListModule'},
-    {path: 'seasonList', loadChildren:'app/seasonList/seasonListModule#SeasonListModule'},
-    {path: 'userProfileList', loadChildren:'app/userProfileList/userProfileListModule#UserProfileListModule'},
-    {path: 'genomeMapList', loadChildren:'app/genomeMapList/genomeMapListModule#GenomeMapListModule'},
-    {path: 'userRating', loadChildren:'app/userRating/userRatingModule#UserRatingModule'},
-    {path: 'userRecommendations', loadChildren:'app/userRecommendations/userRecommendationsModule#UserRecommendationsModule'},
-    {path: 'userManagement', loadChildren:'app/userManagement/userManagement.module#UserManagementModule'},
-    {path: 'theaterManagement', loadChildren:'app/theaterManagement/theaterManagement.module#TheaterManagementModule'},
+    {path: 'featureList', loadChildren:() => import('app/featureList/featureListModule').then(m => m.FeatureListModule)},
+    {path: 'seriesList', loadChildren:() => import('app/seriesList/seriesListModule').then(m => m.SeriesListModule)},
+    {path: 'seasonList', loadChildren:() => import('app/seasonList/seasonListModule').then(m => m.SeasonListModule)},
+    {path: 'userProfileList', loadChildren:() => import('app/userProfileList/userProfileListModule').then(m => m.UserProfileListModule)},
+    {path: 'genomeMapList', loadChildren:() => import('app/genomeMapList/genomeMapListModule').then(m => m.GenomeMapListModule)},
+    {path: 'userRating', loadChildren:() => import('app/userRating/userRatingModule').then(m => m.UserRatingModule)},
+    {path: 'userRecommendations', loadChildren:() => import('app/userRecommendations/userRecommendationsModule').then(m => m.UserRecommendationsModule)},
+    {path: 'userManagement', loadChildren:() => import('app/userManagement/userManagement.module').then(m => m.UserManagementModule)},
+    {path: 'theaterManagement', loadChildren:() => import('app/theaterManagement/theaterManagement.module').then(m => m.TheaterManagementModule)},
     {path: '**',  component: BlankPage}
 ];
 
